@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+
+/* Apply Arabic Font Globally */
+[dir="rtl"], [dir="rtl"] body, [dir="rtl"] button, [dir="rtl"] input, [dir="rtl"] select, [dir="rtl"] textarea {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+/* Sidebar Overrides */
+[dir="rtl"] .d-sidebar {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border) !important;
+}
+
+[dir="rtl"] .nav-badge {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .nav-item-group .nav-link .chev {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .nav-item-group.is-open .nav-link .chev {
+  transform: rotate(90deg) !important;
+}
+
+[dir="rtl"] .nav-submenu {
+  margin-left: 0 !important;
+  margin-right: 20px !important;
+  padding-left: 0 !important;
+  padding-right: 14px !important;
+}
+
+[dir="rtl"] .nav-submenu:before {
+  left: auto !important;
+  right: 0 !important;
+}
+
+[dir="rtl"] .nav-submenu a:hover {
+  padding-left: 10px !important;
+  padding-right: 13px !important;
+}
+
+[dir="rtl"] .workspace-chev {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  transform: rotate(180deg);
+}
+
+/* Header & Navigation Elements */
+[dir="rtl"] .hamburger {
+  margin-right: 0 !important;
+  margin-left: 4px !important;
+}
+
+[dir="rtl"] .cmd {
+  padding: 7px 12px 7px 10px !important;
+}
+
+[dir="rtl"] .cmd span {
+  text-align: right !important;
+}
+
+[dir="rtl"] .icon-btn .count {
+  right: auto !important;
+  left: 5px !important;
+}
+
+[dir="rtl"] .avatar {
+  margin-left: 0 !important;
+  margin-right: 6px !important;
+}
+
+[dir="rtl"] .dd-menu {
+  right: auto !important;
+  left: 0 !important;
+}
+
+/* Table Text Alignment */
+[dir="rtl"] .table thead th,
+[dir="rtl"] .data-table thead th,
+[dir="rtl"] .cal-weekdays > div {
+  text-align: right !important;
+}
+
+[dir="rtl"] .table .cell-price {
+  text-align: left !important;
+}
+
+/* Custom Select Dropdown Position */
+[dir="rtl"] .select {
+  background-position: left 10px center !important;
+  padding-right: 12px !important;
+  padding-left: 32px !important;
+}
+
+/* Input Icon Positions */
+[dir="rtl"] .input-icon .ico {
+  left: auto !important;
+  right: 11px !important;
+}
+
+[dir="rtl"] .input-icon .input {
+  padding-left: 12px !important;
+  padding-right: 34px !important;
+}
+
+/* Input Group Addon Placement */
+[dir="rtl"] .input-group .addon {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border) !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+[dir="rtl"] .input-group .input {
+  border-radius: 8px 0 0 8px !important;
+}
+
+/* Switch Alignment */
+[dir="rtl"] .switch .track:after {
+  left: auto !important;
+  right: 2px !important;
+}
+
+[dir="rtl"] .switch input:checked + .track:after {
+  transform: translateX(-14px) !important;
+}
+
+/* Alerts Borders */
+[dir="rtl"] .alert {
+  border-left: 0 !important;
+  border-right: 3px solid var(--t-muted) !important;
+}
+
+[dir="rtl"] .alert.success {
+  border-right-color: var(--success) !important;
+}
+
+[dir="rtl"] .alert.danger {
+  border-right-color: var(--danger) !important;
+}
+
+[dir="rtl"] .alert.warning {
+  border-right-color: var(--warning) !important;
+}
+
+[dir="rtl"] .alert.primary {
+  border-right-color: var(--primary) !important;
+}
+
+/* Progress Origin */
+[dir="rtl"] .progress-fill {
+  transform-origin: right !important;
+}
+
+/* Avatar Group Overlap */
+[dir="rtl"] .avatar-group .av {
+  margin-left: 0 !important;
+  margin-right: -8px !important;
+}
+
+[dir="rtl"] .avatar-group .av:first-child {
+  margin-right: 0 !important;
+}
+
+/* Auth UI Elements */
+[dir="rtl"] .auth-main-top .switch-link a {
+  margin-left: 0 !important;
+  margin-right: 4px !important;
+}
+
+[dir="rtl"] .auth-submit svg,
+[dir="rtl"] .auth-main-top svg,
+[dir="rtl"] .card-action svg,
+[dir="rtl"] .btn--ghost svg {
+  transform: scaleX(-1) !important;
+}
+
+/* Chat UI Elements */
+[dir="rtl"] .chat-rail {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border-soft) !important;
+}
+
+[dir="rtl"] .chat-search input {
+  padding: 8px 32px 8px 10px !important;
+}
+
+[dir="rtl"] .chat-search svg {
+  left: auto !important;
+  right: 10px !important;
+}
+
+[dir="rtl"] .chat-conv.is-active {
+  box-shadow: inset -3px 0 0 var(--primary) !important;
+}
+
+[dir="rtl"] .chat-conv-avatar .presence {
+  right: auto !important;
+  left: 0 !important;
+}
+
+[dir="rtl"] .chat-conv-badge {
+  right: auto !important;
+  left: 14px !important;
+}
+
+[dir="rtl"] .chat-msg.me {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[dir="rtl"] .chat-bub {
+  border-top-left-radius: 14px !important;
+  border-top-right-radius: 4px !important;
+}
+
+[dir="rtl"] .chat-msg.me .chat-bub {
+  border-top-left-radius: 4px !important;
+  border-top-right-radius: 14px !important;
+}
+
+/* Mail UI Elements */
+[dir="rtl"] .mail-rail,
+[dir="rtl"] .mail-list {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border-soft) !important;
+}
+
+[dir="rtl"] .mail-search input {
+  padding: 8px 32px 8px 10px !important;
+}
+
+[dir="rtl"] .mail-search svg {
+  left: auto !important;
+  right: 10px !important;
+}
+
+[dir="rtl"] .mail-row.is-active {
+  box-shadow: inset -3px 0 0 var(--primary) !important;
+}
+
+[dir="rtl"] .mail-row.is-unread:before {
+  left: auto !important;
+  right: 8px !important;
+}
+
+[dir="rtl"] .mail-star {
+  right: auto !important;
+  left: 16px !important;
+}
+
+[dir="rtl"] .reader-quote {
+  border-left: 0 !important;
+  border-right: 2px solid var(--border) !important;
+  border-radius: 8px 0 0 8px !important;
+}
+
+/* Calendar Overrides */
+[dir="rtl"] .cal-cell {
+  border-right: 0 !important;
+  border-left: 1px solid var(--border-soft) !important;
+}
+
+[dir="rtl"] .cal-cell:nth-child(7n) {
+  border-left: 0 !important;
+}
+
+[dir="rtl"] .cal-chip {
+  border-left: 0 !important;
+  border-right: 2px solid transparent !important;
+}
+
+[dir="rtl"] .cal-chip:hover {
+  transform: translateX(-1px) !important;
+}
+
+[dir="rtl"] .cal-chip.work { border-left-color: transparent !important; border-right-color: var(--primary) !important; }
+[dir="rtl"] .cal-chip.team { border-left-color: transparent !important; border-right-color: var(--success) !important; }
+[dir="rtl"] .cal-chip.personal { border-left-color: transparent !important; border-right-color: var(--purple) !important; }
+[dir="rtl"] .cal-chip.travel { border-left-color: transparent !important; border-right-color: var(--info) !important; }
+[dir="rtl"] .cal-chip.finance { border-left-color: transparent !important; border-right-color: var(--warning) !important; }
+
+/* Mirror arrows and indicators in navigation */
+[dir="rtl"] .cal-nav-btn svg,
+[dir="rtl"] .mail-tool svg,
+[dir="rtl"] .pager-btn svg {
+  transform: scaleX(-1) !important;
+}
+
+/* KPI Card background gradient shift */
+[dir="rtl"] .kpi-card:before {
+  inset: 0 auto auto 0 !important;
+}

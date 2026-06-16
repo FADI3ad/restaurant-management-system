@@ -32,6 +32,7 @@
 <body data-active="dashboard" data-crumbs="Workspace | Dashboard">
     <div class="@yield('shell-class')">
 
+
         @auth
             @include('parts.aside')
         @endauth

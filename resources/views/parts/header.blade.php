@@ -131,12 +131,12 @@
 
         <div class="dd-wrap">
             <div class="avatar" data-dropdown tabindex="0" role="button" aria-label="Account menu">
-                JD
+                {{ Auth::user()->name[0] }}
             </div>
             <div class="dd-menu dd-profile" role="menu">
                 <div class="dd-profile-head">
-                    <div class="dd-profile-name">John Doe</div>
-                    <div class="dd-profile-email">john@adminator.app</div>
+                    <div class="dd-profile-name">{{ Auth::user()->name }}</div>
+                    <div class="dd-profile-email">{{ Auth::user()->email }}</div>
                 </div>
                 <a class="dd-menu-item" href="#">
                     <svg viewBox="0 0 24 24">
@@ -161,11 +161,15 @@
                     الرسائل
                 </a>
                 <div class="dd-divider"></div>
-                <a class="dd-menu-item danger" href="#">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
-                    </svg>
-                    تسجيل الخروج
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dd-menu-item danger">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+                        </svg>
+                        تسجيل الخروج
+                    </button>
+                </form>
                 </a>
             </div>
         </div>

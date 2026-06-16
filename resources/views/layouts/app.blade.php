@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>لوحة التحكم · معاينة تصميم 2026</title>
+    <title>@yield('title')</title>
     <script>
         !(function() {
             try {
@@ -30,12 +30,18 @@
 
 
 <body data-active="dashboard" data-crumbs="Workspace | Dashboard">
-    <div class="shell">
-      
-        @include('parts.aside')
-        <div class="main">
-            @include('parts.header')
+    <div class="@yield('shell-class')">
 
+        @auth
+            @include('parts.aside')
+        @endauth
+
+        <div class="@yield('main-class')">
+            @auth
+                @include('parts.header')
+            @endauth
+
+            
             @yield('content')
 
             @include('parts.footer')

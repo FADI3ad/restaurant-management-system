@@ -161,14 +161,16 @@
                     الرسائل
                 </a>
                 <div class="dd-divider"></div>
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" class="dd-menu-item danger">
                     @csrf
-                    <button type="submit" class="dd-menu-item danger">
+                    
+                    <div class="dd-menu-item danger" style="cursor: pointer; margin:0px; padding:0px" onclick="this.closest('form').submit()">
                         <svg viewBox="0 0 24 24">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
                         </svg>
                         تسجيل الخروج
-                    </button>
+                    </div>
+
                 </form>
                 </a>
             </div>

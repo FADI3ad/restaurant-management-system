@@ -6,10 +6,10 @@
 
     <div class="auth-card">
         <h2>مرحباً بك مجدداً</h2>
-        <p class="sub">قم بتسجيل الدخول إلى مساحة عمل Adminator لمتابعة عملك.</p>
+        <p class="sub">قم بتسجيل الدخول لمتابعة عملك.</p>
         <form method="POST" action="{{ route('login.store') }} " class="auth-form">
             @csrf
-            <div class="field"><label class="field-label" for="email">Email</label>
+            <div class="field"><label class="field-label" for="email">الايميل</label>
                 <div class="input-icon">
                     <span class="ico">
                         <svg viewBox="0 0 24 24">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="field">
-                <div class="field-row"><label class="field-label" for="password">Password</label>
+                <div class="field-row"><label class="field-label" for="password">كلمة المرور</label>
                     <a href="#">نسيت كلمة المرور؟</a>
                 </div>
                 <div class="input-icon">

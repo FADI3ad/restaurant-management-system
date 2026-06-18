@@ -11,7 +11,10 @@
             <div class="brand-tag">v4.1.2 · preview</div>
         </div>
     </div>
-    <x-admin-tabs-component />
+    
+
+    <x-asidebar-tabs-component />
+  
     <div class="sidebar-footer">
         <div class="workspace">
             <div class="workspace-avatar">{{ Auth::user()->name[0] }}</div>

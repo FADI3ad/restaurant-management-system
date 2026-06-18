@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
-class AdminTabsComponent extends Component
+class AsidebarTabsComponent extends Component
 {
     private string $userType = '';
 
@@ -51,7 +51,7 @@ class AdminTabsComponent extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.sidebarTabs.admin-tabs-component')
+        return view('components.asidebar-tabs-component')
             ->with('tabs', $this->tabs);
     }
 }

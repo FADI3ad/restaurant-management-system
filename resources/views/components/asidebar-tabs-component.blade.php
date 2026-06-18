@@ -1,4 +1,3 @@
-
 <div>
     @foreach ($tabs as $key => $tab)
         <nav class="nav-section">

@@ -14,10 +14,10 @@
     <x-admin-tabs-component />
     <div class="sidebar-footer">
         <div class="workspace">
-            <div class="workspace-avatar">JD</div>
+            <div class="workspace-avatar">{{ Auth::user()->name[0] }}</div>
             <div class="workspace-text">
-                <div class="workspace-name">John Doe</div>
-                <div class="workspace-role">admin</div>
+                <div class="workspace-name">{{ Auth::user()->name }}</div>
+                <div class="workspace-role">{{ Auth::user()->type }}</div>
             </div>
             <svg class="workspace-chev" width="14" height="14" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="1.8">

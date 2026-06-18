@@ -4,23 +4,54 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class AdminTabsComponent extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    private string $userType = '';
+
+    private array $navigationPermissions = [];
+
+    private array $allNavigation = [];
+
+    protected array $tabs = [];
+
+
     public function __construct()
     {
-        //
+        $this->allNavigation = config('navigation');
+
+        $this->navigationPermissions = config('navigationPermissions');
+
+        $this->userType = $this->getUserType();
+
+        $this->setUserTabs();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
+    private function getUserType(): string
+    {
+        return Auth::user()->type;
+    }
+
+    private function setUserTabs(): void
+    {
+        $tabs = [];
+
+        $allowedUserNavigation = $this->navigationPermissions[$this->userType];
+
+        foreach ($allowedUserNavigation as $section => $allowedTabs) {
+            foreach ($allowedTabs as $tab) {
+                $tabs[$section][$tab] = $this->allNavigation[$section][$tab];
+            }
+        }
+
+        $this->tabs = $tabs;
+    }
+
     public function render(): View|Closure|string
     {
-        return view('components.admin-tabs-component');
+        return view('components.sidebarTabs.admin-tabs-component')
+            ->with('tabs', $this->tabs);
     }
 }

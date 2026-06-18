@@ -3557,8 +3557,8 @@ body.has-drawer-open .drawer-backdrop {
 
 .kpi-card {
     animation: rise-in .6s cubic-bezier(.2, .7, .2, 1) both;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--card-color-soft) 100%);
+    border: 1px solid color-mix(in srgb, var(--card-color) 15%, var(--border));
     border-radius: 14px;
     box-shadow: var(--shadow-card);
     display: flex;
@@ -3568,44 +3568,51 @@ body.has-drawer-open .drawer-backdrop {
     overflow: hidden;
     padding: 22px 22px 20px;
     position: relative;
-    transition: transform .22s cubic-bezier(.2, .7, .2, 1), box-shadow .22s ease, border-color .22s ease
+    transition: transform .25s cubic-bezier(.2, .7, .2, 1), box-shadow .25s ease, border-color .25s ease;
+    --card-color: var(--primary);
+    --card-color-soft: var(--primary-soft);
 }
 
 .kpi-card:before {
-    background: radial-gradient(circle at top right, currentColor, transparent 65%);
+    background: radial-gradient(circle at top right, var(--card-color), transparent 70%);
     content: "";
     height: 180px;
     inset: 0 0 auto auto;
-    opacity: .08;
+    opacity: .06;
     pointer-events: none;
     position: absolute;
-    transition: opacity .22s ease;
+    transition: opacity .25s ease;
     width: 180px
 }
 
 .kpi-card:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px)
+    box-shadow: 0 12px 24px -8px color-mix(in srgb, var(--card-color) 25%, transparent), var(--shadow-card);
+    border-color: color-mix(in srgb, var(--card-color) 40%, var(--border));
+    transform: translateY(-4px)
 }
 
 .kpi-card:hover:before {
-    opacity: .14
+    opacity: .12
 }
 
 .kpi-card.c-success {
-    color: var(--success)
+    --card-color: var(--success);
+    --card-color-soft: var(--success-soft);
 }
 
 .kpi-card.c-danger {
-    color: var(--danger)
+    --card-color: var(--danger);
+    --card-color-soft: var(--danger-soft);
 }
 
 .kpi-card.c-purple {
-    color: var(--purple)
+    --card-color: var(--purple);
+    --card-color-soft: var(--purple-soft);
 }
 
 .kpi-card.c-primary {
-    color: var(--primary)
+    --card-color: var(--primary);
+    --card-color-soft: var(--primary-soft);
 }
 
 .kpi-card:first-child {

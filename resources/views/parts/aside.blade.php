@@ -8,7 +8,6 @@
         </div>
         <div class="brand-text">
             <div class="brand-name">Adminator</div>
-            <div class="brand-tag">v4.1.2 · preview</div>
         </div>
     </div>
 

@@ -1,11 +1,15 @@
 <?php
 
-
+use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('home');
-    });
+    })->name('home');
+
+
+    Route::resource('sections', SectionController::class);
+
 });

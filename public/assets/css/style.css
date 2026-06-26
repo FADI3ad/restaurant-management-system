@@ -1214,21 +1214,21 @@ body.has-drawer-open .drawer-backdrop {
 }
 
 .table thead th {
-    border-bottom: 1px solid var(--border);
-    color: var(--t-light);
-    font-family: JetBrains Mono, monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    padding: 10px 0 12px;
+    border-bottom: 2px solid var(--border);
+    color: var(--t-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding: 14px 16px;
     text-align: left;
     text-transform: uppercase
 }
 
 .table tbody td {
     border-bottom: 1px solid var(--border-soft);
-    font-size: 13px;
-    padding: 11px 0
+    font-size: 14px;
+    padding: 14px 16px;
+    vertical-align: middle
 }
 
 .table tbody tr:last-child td {
@@ -1747,6 +1747,23 @@ body.has-drawer-open .drawer-backdrop {
 
 .btn--icon svg {
     margin: 0
+}
+
+.btn-action-icon {
+    align-items: center;
+    border: 0;
+    border-radius: 8px;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    padding: 0;
+    transition: all .2s ease;
+    width: 32px
+}
+
+.btn-action-icon svg {
+    height: 16px;
+    width: 16px
 }
 
 .btn-group {
@@ -3381,7 +3398,8 @@ body.has-drawer-open .drawer-backdrop {
 
 .data-cell-actions {
     display: flex;
-    gap: 2px
+    gap: 6px;
+    align-items: center
 }
 
 .data-cell-actions .btn--icon {
@@ -7149,5 +7167,270 @@ text {
 @keyframes jvm-line-animation {
     0% {
         stroke-dashoffset: 250
+    }
+}
+
+/* Modal Overlay and Window System */
+.modal-overlay {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(11, 17, 32, 0.4);
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.modal-overlay.is-active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    max-width: 520px;
+    width: 100%;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.25s ease;
+    margin: 16px;
+}
+
+.modal-overlay.is-active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-head {
+    align-items: center;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+}
+
+.modal-title {
+    color: var(--t-base);
+    font-size: 15.5px;
+    font-weight: 700;
+}
+
+.modal-close {
+    color: var(--t-light);
+    cursor: pointer;
+    transition: color 0.18s;
+}
+
+.modal-close:hover {
+    color: var(--t-base);
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-foot {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 14px 20px;
+}
+
+/* Modal form grid and fields stack */
+.modal-form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.detail-label {
+    color: var(--t-light);
+    font-size: 11.5px;
+    text-transform: uppercase;
+}
+
+.detail-value {
+    color: var(--t-base);
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.modal-close svg {
+    height: 18px;
+    width: 18px;
+}
+
+.modal-desc-text {
+    color: var(--t-base);
+    font-size: 13.5px;
+    margin: 0;
+}
+
+.table-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    margin-top: 8px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 12px;
+    color: var(--t-muted);
+}
+
+.txt-base {
+    color: var(--t-base);
+}
+
+.order-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge-order {
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    color: var(--t-base);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.order-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.btn-order-arrow {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--t-light);
+    cursor: pointer;
+    line-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+}
+
+.btn-order-arrow:hover {
+    color: var(--primary);
+}
+
+.btn-order-arrow svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* Smart Filter System */
+.smart-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-soft);
+    background: var(--bg-card);
+    border-radius: 12px 12px 0 0;
+    flex-wrap: wrap;
+}
+
+.filter-search {
+    flex: 1;
+    min-width: 260px;
+}
+
+.filter-search .input {
+    background: var(--bg-muted);
+    border-color: transparent;
+    transition: all 0.25s ease;
+}
+
+.filter-search .input:focus {
+    background: var(--bg-card);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter-select {
+    min-width: 140px;
+    background-color: var(--bg-muted);
+    border-color: transparent;
+}
+
+.filter-select:focus {
+    background-color: var(--bg-card);
+    border-color: var(--primary);
+}
+
+.btn-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-muted);
+    color: var(--t-base);
+    border: 1px solid transparent;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.btn-filter svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+}
+
+.btn-filter:hover {
+    background: var(--bg-hover);
+    border-color: var(--border);
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .smart-filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-actions {
+        flex-wrap: wrap;
+    }
+    
+    .filter-select {
+        flex: 1;
     }
 }

@@ -4,7 +4,7 @@ return [
     'Workspace' => [
 
         'Dashboard' => [
-            'route' => '',
+            'route' => 'home',
             'svg' => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
                     <path d="M3 12 12 3l9 9" />
@@ -31,7 +31,7 @@ return [
         ],
 
         'Categories' => [
-            'route' => 'categories.index',
+            'route' => 'sections.index',
 
             'svg' => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -42,7 +42,7 @@ return [
         ],
 
         'Subcategories' => [
-            'route' => 'subcategories.index',
+            'route' => 'sections.index',
 
             'svg' => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
@@ -56,7 +56,7 @@ return [
         ],
 
         'Items' => [
-            'route' => 'items.index',
+            'route' => 'sections.index',
 
             'svg' => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">

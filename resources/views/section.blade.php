@@ -70,6 +70,9 @@
     <!--Edit Section Modal-->
     <livewire:section.edit />
 
+    <!--Delete Section Modal-->
+    <livewire:section.delete />
+
 
 
 

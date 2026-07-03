@@ -26,6 +26,8 @@
     <script defer="defer" src="{{ asset('assets/js/2026.js') }}"></script>
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 
 
@@ -42,7 +44,7 @@
                 @include('parts.header')
             @endauth
 
-            
+
             @yield('content')
 
             @include('parts.footer')

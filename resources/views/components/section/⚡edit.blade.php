@@ -1,10 +1,20 @@
 <?php
 
+use App\Models\Section;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
     
     public Section $section;
+
+
+    #[On('edit-section-details')]
+    public function getSectionDetails($id)
+    {
+        $this->section = Section::findOrFail($id);
+        $this->reset();
+    }
 
     
 
@@ -13,13 +23,14 @@ new class extends Component {
 
 <div>
     <div id="modal-edit" class="modal-overlay">
-        <div class="modal-content">
+        <div class="modal-content modal-md">
             <x-modal-head-component title="تعديل القسم" />
+
             <form id="form-edit" onsubmit="event.preventDefault();  closeModal('modal-edit');">
                 <div class="modal-body modal-form-stack">
                     <div class="field">
                         <label class="field-label">اسم القسم <span class="req">*</span></label>
-                        <input type="text" class="input" id="edit-name" required>
+                        <input type="text" class="input" id="edit-name" required value="{{ $this->section->name ?? '' }}">
                     </div>
                     <div class="field">
                         <label class="field-label">ترتيب العرض</label>

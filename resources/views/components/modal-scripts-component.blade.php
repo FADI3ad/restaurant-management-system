@@ -7,7 +7,7 @@
                 modal.style.display = 'flex';
                 setTimeout(() => {
                     modal.classList.add('is-active');
-                }, 10);
+                }, 100);
             }
         }
 
@@ -27,6 +27,10 @@
 
         function editSection() {
             openModal('modal-edit');
+        }
+
+        function confirmDelete() {
+            openModal('modal-delete');
         }
 
         window.addEventListener('click', function(event) {

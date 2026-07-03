@@ -7286,7 +7286,7 @@ text {
     margin: 0;
 }
 
-.table-pagination {
+/* .table-pagination {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -7295,7 +7295,7 @@ text {
     border-top: 1px solid var(--border-soft);
     font-size: 12px;
     color: var(--t-muted);
-}
+} */
 
 .txt-base {
     color: var(--t-base);
@@ -7433,4 +7433,15 @@ text {
     .filter-select {
         flex: 1;
     }
+}
+
+/* Modal Size Modifiers */
+.modal-content.modal-sm {
+    max-width: 440px;
+}
+.modal-content.modal-md {
+    max-width: 580px;
+}
+.modal-content.modal-lg {
+    max-width: 780px;
 }

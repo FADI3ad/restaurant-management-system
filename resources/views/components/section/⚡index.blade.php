@@ -3,23 +3,45 @@
 use App\Models\Section;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
+
 new class extends Component {
-    public $sections;
-    
+    use WithPagination;
+
     public function mount()
     {
-        $this->loadSections();
+        $this->sections();
     }
 
-    public function loadSections()
+    #[Computed]
+    public function sections()
     {
-        $this->sections = Section::orderBy('display_order')->get();
+        return Section::orderBy('display_order')->paginate(3);
     }
 
-    #[On('section-changed')]
+    #[On('section-created')]
     public function refreshTable()
     {
-        $this->loadSections();
+        $this->sections();
+    }
+
+
+    // Make show event
+    public function makeShowEvent($id)
+    {
+        $this->dispatch('show-section-details', $id);
+    }
+
+    // Make edit event
+    public function makeEditEvent($id)
+    {
+        $this->dispatch('edit-section-details', $id);
+    }
+    // Make delete event
+    public function makeDeleteEvent($id)
+    {
+        $this->dispatch('confirm-section-delete', $id);
     }
 };
 ?>
@@ -38,7 +60,7 @@ new class extends Component {
             </thead>
 
             <tbody>
-                @foreach ($sections as $section)
+                @foreach ($this->sections() as $section)
                     <tr>
                         <td class="cell-name">{{ $section->name }}</td>
                         <td><span class="tag t-active">نشط</span></td>
@@ -51,7 +73,7 @@ new class extends Component {
                         <td>
                             <div class="data-cell-actions">
                                 <button type="button" class="btn-action-icon btn--soft-info" title="عرض التفاصيل"
-                                    onclick="showDetails()">
+                                    onclick="showDetails()" wire:click="makeShowEvent({{ $section->id }})">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -59,14 +81,15 @@ new class extends Component {
                                     </svg>
                                 </button>
                                 <button type="button" class="btn-action-icon btn--soft-primary" title="تعديل"
-                                    onclick="editSection()">
+                                    onclick="editSection()" wire:click="makeEditEvent({{ $section->id }})">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
                                 </button>
-                                <button type="button" class="btn-action-icon btn--soft-danger" title="حذف" >
+                                <button type="button" class="btn-action-icon btn--soft-danger" title="حذف"
+                                    onclick="confirmDelete()" wire:click="makeDeleteEvent({{ $section->id }})">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <polyline points="3 6 5 6 21 6"></polyline>
@@ -81,16 +104,9 @@ new class extends Component {
                         </td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>
-    <div class="table-pagination">
-        <span>عرض
-            <strong class="txt-base">3 من أصل 3</strong>
-            أقسام</span>
-        <a class="card-action" href="#">عرض الكل
-            <svg viewBox="0 0 24 24">
-                <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg></a>
-    </div>
+    {{ $this->sections()->links() }}
 </div>

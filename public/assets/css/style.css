@@ -7203,9 +7203,6 @@ text {
     margin: 16px;
 }
 
-.modal-overlay.is-active .modal-content {
-    transform: translateY(0);
-}
 
 .modal-head {
     align-items: center;

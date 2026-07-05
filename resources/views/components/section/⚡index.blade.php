@@ -9,40 +9,41 @@ use Livewire\WithPagination;
 new class extends Component {
     use WithPagination;
 
+    public $id = '';
+
     public function mount()
     {
         $this->sections();
     }
 
+
+    //get paginated sections
     #[Computed]
     public function sections()
     {
         return Section::orderBy('display_order')->paginate(3);
     }
 
-    #[On('section-created')]
+
+    
+    #[On('section-changed')]
     public function refreshTable()
     {
         $this->sections();
     }
 
-
-    // Make show event
-    public function makeShowEvent($id)
-    {
+    //Handle Show Section Details
+    public function makeShowEvent($id) {
         $this->dispatch('show-section-details', $id);
     }
 
-    // Make edit event
-    public function makeEditEvent($id)
-    {
+    //Handle Edit Section
+    public function makeEditEvent($id) {
         $this->dispatch('edit-section-details', $id);
     }
-    // Make delete event
-    public function makeDeleteEvent($id)
-    {
-        $this->dispatch('confirm-section-delete', $id);
-    }
+
+
+
 };
 ?>
 
@@ -73,15 +74,17 @@ new class extends Component {
                         <td>
                             <div class="data-cell-actions">
                                 <button type="button" class="btn-action-icon btn--soft-info" title="عرض التفاصيل"
-                                    onclick="showDetails()" wire:click="makeShowEvent({{ $section->id }})">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                    @click="await $wire.makeShowEvent({{ $section->id }}); showOpen = true;">
+                                    <svg viewBox="0
+                                    0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </button>
                                 <button type="button" class="btn-action-icon btn--soft-primary" title="تعديل"
-                                    onclick="editSection()" wire:click="makeEditEvent({{ $section->id }})">
+                                    @click="await $wire.makeEditEvent({{ $section->id }}); editOpen = true;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>

@@ -3,15 +3,22 @@
 @section('shell-class', 'shell')
 @section('main-class', 'main')
 @section('content')
-    <main class="content">
 
+    <main class="content" x-data="{
+        addOpen: false,
+        showOpen: false,
+        editOpen: false,
+        deleteOpen: false
+        }">
 
-        <x-hero-section-component title="أقسام المينيو الأساسية" des="إدارة أقسام المنيو والوجبات الأساسية وتعديل حالتها وترتيب ظهورها." />
+        <x-hero-section-component title="أقسام المينيو الأساسية"
+            des="إدارة أقسام المنيو والوجبات الأساسية وتعديل حالتها وترتيب ظهورها." 
+        />
 
 
         <div class="grid">
             <section class="col-12 card">
-                
+
                 <!--Filter System -->
                 <div class="smart-filter-bar">
                     <div class="filter-search">
@@ -47,36 +54,33 @@
                     </div>
                 </div>
 
-                
+
                 <!-- Table -->
                 <livewire:section.index />
 
             </section>
         </div>
 
+        <!--Add Section Modal-->
+        <livewire:section.create />
+
+        <!--Show Section Modal-->
+        <livewire:section.show />
+
+        <!--Edit Section Modal-->
+        <livewire:section.edit />
+
+        <!--Delete Section Modal-->
+        <livewire:section.delete />
+
+
 
 
     </main>
 
 
-    
-
-    <!--Add Section Modal-->
-    <livewire:section.create />
-
-    <!--Show Section Modal-->
-    <livewire:section.show />
-
-    <!--Edit Section Modal-->
-    <livewire:section.edit />
-
-    <!--Delete Section Modal-->
-    <livewire:section.delete />
 
 
 
 
-    
-    <!-- Modal Scripts -->
-    <x-modal-scripts-component />
 @endsection

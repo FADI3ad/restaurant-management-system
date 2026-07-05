@@ -4,8 +4,6 @@ use App\Models\Section;
 use Livewire\Component;
 
 new class extends Component {
-    public $isOpen = 0;
-
     public $name = '';
 
     public $display_order = 0;
@@ -17,22 +15,24 @@ new class extends Component {
     public function save()
     {
         $validated = $this->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|min:3|unique:sections,name',
             'description' => 'nullable|max:1000',
             'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
         ]);
 
-        $section = Section::create($validated);
+        Section::create($validated);
 
+        $this->dispatch('close-add-modal');
+
+        $this->dispatch('section-changed');
         
-        $this->dispatch('section-created');
         $this->reset();
     }
 };
 ?>
 
-<div id="modal-add" class="modal-overlay" >
+<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
     <div class="modal-content modal-md">
         <x-modal-head-component title="إضافة قسم جديد" />
         <form id="form-add" wire:submit.prevent="save">
@@ -72,8 +72,10 @@ new class extends Component {
                 </div>
             </div>
             <div class="modal-foot">
-                <button type="button" class="btn btn--ghost" onclick="closeModal('modal-add')">إلغاء</button>
-                <button class="btn btn--primary">حفظ</button>
+                <button type="button" class="btn btn--ghost" @click="addOpen = false">إلغاء</button>
+                <button type="submit" class="btn btn--primary" @close-add-modal.window="addOpen = false">
+                    حفظ
+                </button>
             </div>
         </form>
     </div>

@@ -15,7 +15,7 @@
             </svg>
             تصدير
         </button>
-        <button class="btn btn--primary" onclick="openModal('modal-add')">
+        <button class="btn btn--primary" @click="addOpen = true">
             <svg viewBox="0 0 24 24">
                 <path d="M12 5v14M5 12h14" />
             </svg>

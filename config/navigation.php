@@ -31,7 +31,7 @@ return [
         ],
 
         'Categories' => [
-            'route' => 'sections.index',
+            'route' => 'categories.index',
 
             'svg' => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">

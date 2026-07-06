@@ -1303,6 +1303,11 @@ body.has-drawer-open .drawer-backdrop {
     color: var(--success)
 }
 
+.tag.t-inactive {
+    background: var(--danger-soft);
+    color: var(--danger)
+}
+
 .tag.t-info {
     background: var(--info-soft);
     color: var(--info)

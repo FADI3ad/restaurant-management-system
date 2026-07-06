@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Section;
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
@@ -13,38 +13,38 @@ new class extends Component {
 
     public function mount()
     {
-        $this->sections();
+        $this->categories();
     }
 
-    //get paginated sections
+    //get paginated categories
     #[Computed]
-    public function sections()
+    public function categories()
     {
-        return Section::orderBy('display_order')->paginate(3);
+        return Category::orderBy('display_order')->paginate(3);
     }
 
-    #[On('section-changed')]
+    #[On('category-changed')]
     public function refreshTable()
     {
-        $this->sections();
+        $this->categories();
     }
 
-    //Handle Show Section Details
+    //Handle Show Category Details
     public function makeShowEvent($id)
     {
-        $this->dispatch('show-section-details', $id);
+        $this->dispatch('show-category-details', $id);
     }
 
-    //Handle Edit Section
+    //Handle Edit Category
     public function makeEditEvent($id)
     {
-        $this->dispatch('edit-section-details', $id);
+        $this->dispatch('edit-category-details', $id);
     }
 
-    //Handle Delete Section
+    //Handle Delete Category
     public function makeDeleteEvent($id)
     {
-        $this->dispatch('confirm-section-delete', $id);
+        $this->dispatch('confirm-category-delete', $id);
     }
 };
 ?>
@@ -54,8 +54,9 @@ new class extends Component {
         <table class="table">
             <thead>
                 <tr>
+                    <th>الفئة</th>
                     <th>القسم</th>
-                    <th>عدد الفئات</th>
+                    <th>عدد العناصر</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
                     <th>العمليات</th>
@@ -63,17 +64,18 @@ new class extends Component {
             </thead>
 
             <tbody>
-                @foreach ($this->sections() as $section)
+                @foreach ($this->categories() as $category)
                     <tr>
-                        <td class="cell-name">{{ $section->name }}</td>
+                        <td class="cell-name">{{ $category->name }}</td>
+                        <td>{{ $category->section }}</td>
 
-                        <td> فئة</td>
+                        <td>{{ $category->items_count }} عنصر</td>
                         <td>
                             <div class="order-controls">
-                                <span class="badge-order">{{ $section->display_order }}</span>
+                                <span class="badge-order">{{ $category->display_order }}</span>
                             </div>
                         </td>
-                        @if ($section->status)
+                        @if ($category->status)
                             <td><span class="tag t-active">نشط</span></td>
                         @else
                             <td><span class="tag t-inactive">غير نشط</span></td>
@@ -81,7 +83,7 @@ new class extends Component {
                         <td>
                             <div class="data-cell-actions">
                                 <button type="button" class="btn-action-icon btn--soft-info" title="عرض التفاصيل"
-                                    @click="await $wire.makeShowEvent({{ $section->id }}); showOpen = true;">
+                                    @click="await $wire.makeShowEvent({{ $category->id }}); showOpen = true;">
                                     <svg viewBox="0
                                     0 24 24" fill="none"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -91,7 +93,7 @@ new class extends Component {
                                     </svg>
                                 </button>
                                 <button type="button" class="btn-action-icon btn--soft-primary" title="تعديل"
-                                    @click="await $wire.makeEditEvent({{ $section->id }}); editOpen = true;">
+                                    @click="await $wire.makeEditEvent({{ $category->id }}); editOpen = true;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -99,7 +101,7 @@ new class extends Component {
                                     </svg>
                                 </button>
                                 <button type="button" class="btn-action-icon btn--soft-danger" title="حذف"
-                                    @click="await $wire.makeDeleteEvent({{ $section->id }}); deleteOpen = true;">
+                                    @click="await $wire.makeDeleteEvent({{ $category->id }}); deleteOpen = true;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
                                         <polyline points="3 6 5 6 21 6"></polyline>
@@ -118,5 +120,5 @@ new class extends Component {
             </tbody>
         </table>
     </div>
-    {{ $this->sections()->links() }}
+    {{ $this->categories()->links() }}
 </div>

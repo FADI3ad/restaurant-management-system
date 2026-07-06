@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
-
 #[Guarded(['id'])]
-#[Table('sections')]
-class Section extends Model
+#[Table('categories')]
+class Category extends Model
 {
     protected function casts(): array
     {
@@ -18,8 +17,9 @@ class Section extends Model
         ];
     }
 
-    protected function categories()
+
+    protected function section()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Section::class);
     }
 }

@@ -1,45 +1,51 @@
 <?php
 
-use App\Models\Section;
+use App\Models\Category;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
-    public $section = '';
+    public $category = '';
 
     public $name = '';
+    public $section = '';
+    public $items_count = 0;
     public $display_order = 0;
     public $description = '';
     public $status = 1;
 
-    #[On('edit-section-details')]
-    public function getSectionDetails($id)
+    #[On('edit-category-details')]
+    public function getCategoryDetails($id)
     {
-        $section = Section::findOrfail($id);
-        $this->section = $section;
+        $category = Category::findOrfail($id);
+        $this->category = $category;
         $this->setData();
     }
 
     public function setData()
     {
-        $this->name = $this->section->name;
-        $this->display_order = $this->section->display_order;
-        $this->description = $this->section->description;
-        $this->status = (int) $this->section->status;
+        $this->name = $this->category->name;
+        $this->section = $this->category->section;
+        $this->items_count = $this->category->items_count;
+        $this->display_order = $this->category->display_order;
+        $this->description = $this->category->description;
+        $this->status = (int) $this->category->status;
     }
 
     public function update()
     {
         $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:sections,name' . ($this->section->id ? ',' . $this->section->id : ''),
+            'name' => 'required|max:255|min:3|unique:categories,name' . ($this->category->id ? ',' . $this->category->id : ''),
+            'section' => 'nullable|string|max:255',
+            'items_count' => 'nullable|integer|min:0',
             'description' => 'nullable|max:1000',
             'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
         ]);
 
-        $this->section->update($validated);
+        $this->category->update($validated);
         $this->dispatch('close-edit-modal');
-        $this->dispatch('section-changed');
+        $this->dispatch('category-changed');
     }
 };
 ?>
@@ -47,15 +53,31 @@ new class extends Component {
 
 <div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false">
     <div class="modal-content modal-md">
-        <x-modal-head-component title="تعديل القسم" />
+        <x-modal-head-component title="تعديل الفئة" />
 
         <form id="form-edit" wire:submit.prevent="update">
             <div class="modal-body modal-form-stack">
                 <div class="field">
-                    <label class="field-label">اسم القسم <span class="req">*</span></label>
+                    <label class="field-label">اسم الفئة <span class="req">*</span></label>
                     <input type="text" class="input" id="edit-name" required value="{{ $this->name }}"
                         wire:model.defer="name">
                     @error('name')
+                        <span style="color: red;">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="field">
+                    <label class="field-label">القسم</label>
+                    <input type="text" class="input" id="edit-section" value="{{ $this->section }}"
+                        wire:model.defer="section">
+                    @error('section')
+                        <span style="color: red;">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="field">
+                    <label class="field-label">عدد العناصر</label>
+                    <input type="number" class="input" id="edit-items-count" min="0" value="{{ $this->items_count }}"
+                        wire:model.defer="items_count">
+                    @error('items_count')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>

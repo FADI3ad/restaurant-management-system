@@ -1,24 +1,24 @@
 <?php
 
-use App\Models\Section;
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 new class extends Component {
-    public ?Section $section = null;
+    public ?Category $category = null;
 
-    #[On('confirm-section-delete')]
-    public function getSectionForDeletion($id)
+    #[On('confirm-category-delete')]
+    public function getCategoryForDeletion($id)
     {
-        $this->section = Section::findOrFail($id);
+        $this->category = Category::findOrFail($id);
     }
 
     public function delete()
     {
-        $this->section->delete();
+        $this->category->delete();
         $this->dispatch('close-delete-modal');
-        $this->dispatch('section-changed');
-        $this->section = null;
+        $this->dispatch('category-changed');
+        $this->category = null;
     }
 };
 ?>
@@ -27,7 +27,7 @@ new class extends Component {
 
 <div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
     <div class="modal-content modal-sm">
-        <x-modal-head-component title="تأكيد حذف القسم" />
+        <x-modal-head-component title="تأكيد حذف الفئة" />
 
         <form wire:submit.prevent="delete">
             <div class="modal-body modal-form-stack">
@@ -44,10 +44,10 @@ new class extends Component {
                         </svg>
                     </div>
                     <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
-                        من حذف القسم؟</h4>
+                        من حذف الفئة؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف القسم <strong style="color: var(--t-base);">"{{ $this->section?->name }}"</strong>
-                        نهائياً. جميع الوجبات والفئات التابعة له قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
+                        سيتم حذف الفئة <strong style="color: var(--t-base);">"{{ $this->category?->name }}"</strong>
+                        نهائياً. جميع العناصر التابعة لها قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>
             </div>

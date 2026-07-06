@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Section;
+
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Computed;
@@ -8,8 +10,6 @@ use Livewire\WithPagination;
 
 new class extends Component {
     use WithPagination;
-
-    public $id = '';
 
     public function mount()
     {
@@ -20,7 +20,7 @@ new class extends Component {
     #[Computed]
     public function categories()
     {
-        return Category::orderBy('display_order')->paginate(3);
+        return Category::with('section')->orderBy('display_order')->paginate(3);
     }
 
     #[On('category-changed')]
@@ -64,10 +64,10 @@ new class extends Component {
             </thead>
 
             <tbody>
-                @foreach ($this->categories() as $category)
+                @foreach ($this->categories as $category)
                     <tr>
                         <td class="cell-name">{{ $category->name }}</td>
-                        <td>{{ $category->section }}</td>
+                        <td>{{ $category->section->name }}</td>
 
                         <td>{{ $category->items_count }} عنصر</td>
                         <td>

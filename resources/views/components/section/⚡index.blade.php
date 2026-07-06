@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 new class extends Component {
     use WithPagination;
 
-    public $id = '';
 
     public function mount()
     {
@@ -20,7 +19,7 @@ new class extends Component {
     #[Computed]
     public function sections()
     {
-        return Section::orderBy('display_order')->paginate(3);
+        return Section::withCount('categories')->orderBy('display_order')->paginate(3);
     }
 
     #[On('section-changed')]
@@ -63,11 +62,11 @@ new class extends Component {
             </thead>
 
             <tbody>
-                @foreach ($this->sections() as $section)
+                @foreach ($this->sections as $section)
                     <tr>
                         <td class="cell-name">{{ $section->name }}</td>
 
-                        <td> فئة</td>
+                        <td>{{ $section->categories_count }}</td>
                         <td>
                             <div class="order-controls">
                                 <span class="badge-order">{{ $section->display_order }}</span>

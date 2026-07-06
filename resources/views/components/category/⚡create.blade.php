@@ -1,12 +1,12 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Section;
 use Livewire\Component;
 
 new class extends Component {
     public $name = '';
-    public $section = '';
-    public $items_count = 0;
+    public $section_id = '';
     public $display_order = 0;
     public $description = '';
     public $status = 1;
@@ -15,11 +15,10 @@ new class extends Component {
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:categories,name',
-            'section' => 'nullable|string|max:255',
-            'items_count' => 'nullable|integer|min:0',
             'description' => 'nullable|max:1000',
             'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
+            'section_id' => 'required|exists:sections,id',
         ]);
 
         Category::create($validated);
@@ -27,8 +26,13 @@ new class extends Component {
         $this->dispatch('close-add-modal');
 
         $this->dispatch('category-changed');
-        
+
         $this->reset();
+    }
+
+    public function sections()
+    {
+        return Section::orderBy('display_order')->get();
     }
 };
 ?>
@@ -47,21 +51,28 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">القسم</label>
-                    <input wire:model="section" type="text" class="input" placeholder="القسم الخاص بالفئة...">
-                    @error('section')
+                    <select wire:model="section_id" class="select">
+                        <option value="">اختر القسم</option>
+                        @foreach ($this->sections() as $section)
+                            <option value="{{ $section->id }}">{{ $section->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('section_id')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">عدد العناصر</label>
-                    <input wire:model="items_count" type="number" class="input" placeholder="0" min="0" value="0">
+                    <input wire:model="items_count" type="number" class="input" placeholder="0" min="0"
+                        value="0">
                     @error('items_count')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">ترتيب العرض</label>
-                    <input wire:model="display_order" type="number" class="input" placeholder="0" min="0" value="0">
+                    <input wire:model="display_order" type="number" class="input" placeholder="0" min="0"
+                        value="0">
                     @error('display_order')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror

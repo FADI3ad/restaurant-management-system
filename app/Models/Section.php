@@ -18,7 +18,7 @@ class Section extends Model
         ];
     }
 
-    protected function categories()
+    public function categories()
     {
         return $this->hasMany(Category::class);
     }

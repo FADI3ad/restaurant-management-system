@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
             $table->unsignedInteger('display_order')->default(0);
             $table->boolean('status')->default(true);
-            $table->foreignId('section_id')->constrained('sections')->cascadeOnDelete();
+            $table->foreignId('section_id')->constrained()->cascadeOnDelete();
+            $table->unique(['section_id', 'name']);
             $table->timestamps();
         });
     }

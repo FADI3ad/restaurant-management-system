@@ -10,11 +10,12 @@ return new class extends Migration
     {
         Schema::create('subcategories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('description')->nullable();
             $table->unsignedInteger('display_order')->default(0);
             $table->boolean('status')->default(true);
-            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->unique(['category_id', 'name']);
             $table->timestamps();
         });
     }

@@ -5,14 +5,15 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
-    public $category = '';
+
+    public $section = '';
 
     public $name = '';
-    public $section = '';
-    public $items_count = 0;
+    public $section_id = '';
     public $display_order = 0;
     public $description = '';
     public $status = 1;
+
 
     #[On('edit-category-details')]
     public function getCategoryDetails($id)
@@ -24,9 +25,9 @@ new class extends Component {
 
     public function setData()
     {
+
         $this->name = $this->category->name;
-        $this->section = $this->category->section;
-        $this->items_count = $this->category->items_count;
+        $this->section_id = $this->category->section_id;
         $this->display_order = $this->category->display_order;
         $this->description = $this->category->description;
         $this->status = (int) $this->category->status;
@@ -35,13 +36,13 @@ new class extends Component {
     public function update()
     {
         $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:categories,name' . ($this->category->id ? ',' . $this->category->id : ''),
-            'section' => 'nullable|string|max:255',
-            'items_count' => 'nullable|integer|min:0',
+            'name' => 'required|max:255|min:3|unique:categories,name',
             'description' => 'nullable|max:1000',
             'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
+            'section_id' => 'required|exists:sections,id',
         ]);
+
 
         $this->category->update($validated);
         $this->dispatch('close-edit-modal');
@@ -73,14 +74,7 @@ new class extends Component {
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="field">
-                    <label class="field-label">عدد العناصر</label>
-                    <input type="number" class="input" id="edit-items-count" min="0" value="{{ $this->items_count }}"
-                        wire:model.defer="items_count">
-                    @error('items_count')
-                        <span style="color: red;">{{ $message }}</span>
-                    @enderror
-                </div>
+
                 <div class="field">
                     <label class="field-label">ترتيب العرض</label>
                     <input type="number" class="input" id="edit-order" min="0"

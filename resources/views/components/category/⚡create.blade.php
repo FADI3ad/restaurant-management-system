@@ -5,6 +5,7 @@ use App\Models\Section;
 use Livewire\Component;
 
 new class extends Component {
+    
     public $name = '';
     public $section_id = '';
     public $display_order = 0;
@@ -58,14 +59,6 @@ new class extends Component {
                         @endforeach
                     </select>
                     @error('section_id')
-                        <span style="color: red;">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="field">
-                    <label class="field-label">عدد العناصر</label>
-                    <input wire:model="items_count" type="number" class="input" placeholder="0" min="0"
-                        value="0">
-                    @error('items_count')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>

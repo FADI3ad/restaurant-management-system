@@ -50,6 +50,7 @@ new class extends Component {
                 <tr>
                     <th>الفئة الفرعية</th>
                     <th>الفئة الأساسية</th>
+                    <th>القسم</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
                     <th>العمليات</th>
@@ -61,6 +62,7 @@ new class extends Component {
                     <tr>
                         <td class="cell-name">{{ $subcategory->name }}</td>
                         <td>{{ $subcategory->category->name ?? '-' }}</td>
+                        <td>{{ $subcategory->category->section->name ?? '-' }}</td>
                         <td>
                             <div class="order-controls">
                                 <span class="badge-order">{{ $subcategory->display_order }}</span>

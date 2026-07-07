@@ -1,20 +1,25 @@
 <?php
 
-use App\Models\Subcategory;
 use App\Models\Category;
+use App\Models\Section;
+use App\Models\Subcategory;
 use Livewire\Component;
 
 new class extends Component {
     public $name = '';
-    public $category_id = '';
+    public $section_id = '';
+    public $category_id = null;
     public $display_order = 0;
     public $description = '';
     public $status = 1;
 
+
+    
     public function save()
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:subcategories,name',
+            'section_id' =>'required|exists:sections,id',
             'description' => 'nullable|max:1000',
             'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
@@ -28,11 +33,16 @@ new class extends Component {
         $this->reset();
     }
 
-    public function categories()
+    public function sections()
     {
-        return Category::orderBy('display_order')->get();
+        return Section::all();
     }
-};
+
+    public function categories($id)
+    {
+       return Category::where('section_id', $id)->get();
+    }
+}
 ?>
 
 <div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
@@ -48,20 +58,37 @@ new class extends Component {
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="field-label">الفئة الأساسية <span class="req">*</span></label>
-                    <select wire:model="category_id" class="select">
-                        <option value="">اختر الفئة الأساسية</option>
-                        @foreach ($this->categories() as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <label class="field-label">القسم</label>
+                    <select wire:model.live="section_id" class="select" >
+                        <option value="" wire:click="section_id = null">اختر القسم</option>
+                        @foreach ($this->sections() as $section)
+                            <option value="{{ $section->id }}">{{ $section->name }}</option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('section_id')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror
                 </div>
+                @if ($this->section_id)
+                    <div class="field">
+                        <label class="field-label">الفئة الأساسية</label>
+                        <select wire:model="category_id" class="select" >
+                            <option value="" wire:click="category_id = null">اختر الفئة الأساسية</option>
+                            @foreach ($this->categories($this->section_id) as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <span style="color: red;">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    
+                @endif
+
                 <div class="field">
                     <label class="field-label">ترتيب العرض</label>
-                    <input wire:model="display_order" type="number" class="input" placeholder="0" min="0" value="0">
+                    <input wire:model="display_order" type="number" class="input" placeholder="0" min="0"
+                        value="0">
                     @error('display_order')
                         <span style="color: red;">{{ $message }}</span>
                     @enderror

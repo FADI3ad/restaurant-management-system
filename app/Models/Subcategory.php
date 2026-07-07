@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Section;
+use App\Models\Category;
 
 #[Guarded(['id'])]
-#[Table('categories')]
-class Category extends Model
+#[Table('subcategories')]
+class Subcategory extends Model
 {
     protected function casts(): array
     {
@@ -18,14 +18,8 @@ class Category extends Model
         ];
     }
 
-
-    public function section()
+    public function category()
     {
-        return $this->belongsTo(Section::class);
-    }
-
-    public function subcategories()
-    {
-        return $this->hasMany(Subcategory::class);
+        return $this->belongsTo(Category::class);
     }
 }

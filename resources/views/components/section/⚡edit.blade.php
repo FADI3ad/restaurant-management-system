@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Section;
+use App\Services\Section\UpdateSectionAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -28,7 +29,7 @@ new class extends Component {
         $this->status = (int) $this->section->status;
     }
 
-    public function update()
+    public function update(UpdateSectionAction $updateSection)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:sections,name' . ($this->section->id ? ',' . $this->section->id : ''),
@@ -37,7 +38,7 @@ new class extends Component {
             'status' => 'required|boolean',
         ]);
 
-        $this->section->update($validated);
+        $updateSection($this->section, $validated);
         $this->dispatch('close-edit-modal');
         $this->dispatch('section-changed');
     }

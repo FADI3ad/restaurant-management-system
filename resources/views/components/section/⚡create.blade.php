@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Section;
+use App\Services\Section\CreateSectionAction;
 use Livewire\Component;
 
 new class extends Component {
@@ -14,7 +15,7 @@ new class extends Component {
     public $status = 1;
 
     
-    public function save()
+    public function save(CreateSectionAction $createSection)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:sections,name',
@@ -22,8 +23,8 @@ new class extends Component {
             'display_order' => 'required|integer|min:0|unique:sections,display_order',
             'status' => 'required|boolean',
         ]);
-
-        Section::create($validated);
+        
+        $createSection($validated);
 
         $this->dispatch('close-add-modal');
 

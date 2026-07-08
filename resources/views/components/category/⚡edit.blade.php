@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Services\Category\UpdateCategoryAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -33,7 +34,7 @@ new class extends Component {
         $this->status = (int) $this->category->status;
     }
 
-    public function update()
+    public function update(UpdateCategoryAction $updateCategory)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:categories,name',
@@ -44,7 +45,7 @@ new class extends Component {
         ]);
 
 
-        $this->category->update($validated);
+        $updateCategory($this->category, $validated);
         $this->dispatch('close-edit-modal');
         $this->dispatch('category-changed');
     }

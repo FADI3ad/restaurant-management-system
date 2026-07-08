@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Section;
+use App\Services\Category\CreateCategoryAction;
 use Livewire\Component;
 
 new class extends Component {
@@ -12,7 +13,7 @@ new class extends Component {
     public $description = '';
     public $status = 1;
 
-    public function save()
+    public function save(CreateCategoryAction $createCategory)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:categories,name',
@@ -22,7 +23,7 @@ new class extends Component {
             'section_id' => 'required|exists:sections,id',
         ]);
 
-        Category::create($validated);
+        $createCategory($validated);
 
         $this->dispatch('close-add-modal');
 

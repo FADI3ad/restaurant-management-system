@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Section;
 use App\Models\Subcategory;
+use App\Services\Subcategory\CreateSubcategoryAction;
 use Livewire\Component;
 
 new class extends Component {
@@ -15,7 +16,7 @@ new class extends Component {
 
 
     
-    public function save()
+    public function save(CreateSubcategoryAction $createSubcategory)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:subcategories,name',
@@ -26,7 +27,7 @@ new class extends Component {
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        Subcategory::create($validated);
+        $createSubcategory($validated);
 
         $this->dispatch('close-add-modal');
         $this->dispatch('subcategory-changed');

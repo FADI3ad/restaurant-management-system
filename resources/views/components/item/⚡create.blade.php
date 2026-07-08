@@ -4,6 +4,7 @@ use App\Models\Section;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Item;
+use App\Services\Item\CreateItemAction;
 use Livewire\Component;
 
 new class extends Component {
@@ -18,7 +19,7 @@ new class extends Component {
 
 
     
-    public function save()
+    public function save(CreateItemAction $createItem)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:items,name',
@@ -31,7 +32,7 @@ new class extends Component {
             'status' => 'required|boolean',
         ]);
 
-        Item::create($validated);
+        $createItem($validated);
 
         $this->dispatch('close-add-modal');
         $this->dispatch('item-changed');

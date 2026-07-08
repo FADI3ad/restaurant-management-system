@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Subcategory;
+use App\Services\Subcategory\DeleteSubcategoryAction;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -13,9 +14,9 @@ new class extends Component {
         $this->subcategory = Subcategory::findOrFail($id);
     }
 
-    public function delete()
+    public function delete(DeleteSubcategoryAction $deleteSubcategory)
     {
-        $this->subcategory->delete();
+        $deleteSubcategory($this->subcategory);
         $this->dispatch('close-delete-modal');
         $this->dispatch('subcategory-changed');
         $this->subcategory = null;

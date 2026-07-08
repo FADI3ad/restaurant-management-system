@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Section;
+use App\Services\Section\DeleteSectionAction;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -13,9 +14,9 @@ new class extends Component {
         $this->section = Section::findOrFail($id);
     }
 
-    public function delete()
+    public function delete(DeleteSectionAction $deleteSection)
     {
-        $this->section->delete();
+        $deleteSection($this->section);
         $this->dispatch('close-delete-modal');
         $this->dispatch('section-changed');
         $this->section = null;

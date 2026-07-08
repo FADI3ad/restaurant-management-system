@@ -4,6 +4,7 @@ use App\Models\Section;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Item;
+use App\Services\Item\UpdateItemAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -39,11 +40,11 @@ new class extends Component {
         $this->status = (int) $this->item->status;
     }
 
-    public function update()
+    public function update(UpdateItemAction $updateItem)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:items,name' . ($this->item->id ? ',' . $this->item->id : ''),
-            'section_id' =>'required|exists:sections,id',
+            'section_id' => 'required|exists:sections,id',
             'category_id' => 'required|exists:categories,id',
             'subcategory_id' => 'required|exists:subcategories,id',
             'price' => 'required|numeric|min:0',
@@ -52,7 +53,7 @@ new class extends Component {
             'status' => 'required|boolean',
         ]);
 
-        $this->item->update($validated);
+        $updateItem($this->item, $validated);
         $this->dispatch('close-edit-modal');
         $this->dispatch('item-changed');
     }
@@ -64,14 +65,18 @@ new class extends Component {
 
     public function categories($id)
     {
-       if(!$id) return [];
-       return Category::where('section_id', $id)->get();
+        if (!$id) {
+            return [];
+        }
+        return Category::where('section_id', $id)->get();
     }
 
     public function subcategories($id)
     {
-       if(!$id) return [];
-       return Subcategory::where('category_id', $id)->get();
+        if (!$id) {
+            return [];
+        }
+        return Subcategory::where('category_id', $id)->get();
     }
 };
 ?>
@@ -88,54 +93,84 @@ new class extends Component {
                     <input type="text" class="input" id="edit-name" required value="{{ $this->name }}"
                         wire:model="name">
                     @error('name')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">السعر <span class="req">*</span></label>
-                    <input type="number" step="0.01" class="input" id="edit-price" required value="{{ $this->price }}"
-                        wire:model="price">
+                    <input type="number" step="0.01" class="input" id="edit-price" required
+                        value="{{ $this->price }}" wire:model="price">
                     @error('price')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">القسم</label>
-                    <select wire:model.live="section_id" class="select" id="edit-section" >
+                    <select wire:model.live="section_id" class="select" id="edit-section">
                         <option value="" wire:click="section_id = null">اختر القسم</option>
                         @foreach ($this->sections() as $section)
                             <option value="{{ $section->id }}">{{ $section->name }}</option>
                         @endforeach
                     </select>
                     @error('section_id')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
                 @if ($this->section_id)
                     <div class="field">
                         <label class="field-label">الصنف الرئيسي</label>
-                        <select wire:model.live="category_id" class="select" id="edit-category" >
+                        <select wire:model.live="category_id" class="select" id="edit-category">
                             <option value="" wire:click="category_id = null">اختر الصنف الرئيسي</option>
                             @foreach ($this->categories($this->section_id) as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category_id')
-                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                    height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg> {{ $message }}</div>
                         @enderror
                     </div>
                 @endif
                 @if ($this->category_id)
                     <div class="field">
                         <label class="field-label">الصنف الفرعي</label>
-                        <select wire:model="subcategory_id" class="select" id="edit-subcategory" >
+                        <select wire:model="subcategory_id" class="select" id="edit-subcategory">
                             <option value="" wire:click="subcategory_id = null">اختر الصنف الفرعي</option>
                             @foreach ($this->subcategories($this->category_id) as $subcategory)
                                 <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                             @endforeach
                         </select>
                         @error('subcategory_id')
-                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                    height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg> {{ $message }}</div>
                         @enderror
                     </div>
                 @endif
@@ -145,14 +180,26 @@ new class extends Component {
                     <input type="number" class="input" id="edit-order" min="0"
                         value="{{ $this->display_order }}" wire:model="display_order">
                     @error('display_order')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
                     <textarea class="textarea" id="edit-description" wire:model="description">{{ $this->description }}</textarea>
                     @error('description')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -162,7 +209,13 @@ new class extends Component {
                         <option value="0">غير نشط</option>
                     </select>
                     @error('status')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
                     @enderror
                 </div>
             </div>

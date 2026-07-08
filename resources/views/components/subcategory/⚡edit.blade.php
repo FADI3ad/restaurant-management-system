@@ -2,6 +2,7 @@
 
 use App\Models\Subcategory;
 use App\Models\Category;
+use App\Services\Subcategory\UpdateSubcategoryAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -31,7 +32,7 @@ new class extends Component {
         $this->status = (int) $this->subcategory->status;
     }
 
-    public function update()
+    public function update(UpdateSubcategoryAction $updateSubcategory)
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:subcategories,name' . ($this->subcategory->id ? ',' . $this->subcategory->id : ''),
@@ -41,7 +42,7 @@ new class extends Component {
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        $this->subcategory->update($validated);
+        $updateSubcategory($this->subcategory, $validated);
         $this->dispatch('close-edit-modal');
         $this->dispatch('subcategory-changed');
     }

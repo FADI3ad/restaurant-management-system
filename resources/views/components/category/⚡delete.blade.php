@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Services\Category\DeleteCategoryAction;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -13,9 +14,9 @@ new class extends Component {
         $this->category = Category::findOrFail($id);
     }
 
-    public function delete()
+    public function delete(DeleteCategoryAction $deleteCategory)
     {
-        $this->category->delete();
+        $deleteCategory($this->category);
         $this->dispatch('close-delete-modal');
         $this->dispatch('category-changed');
         $this->category = null;

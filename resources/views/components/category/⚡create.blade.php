@@ -15,7 +15,7 @@ new class extends Component {
 
     public function save(CreateCategoryAction $createCategory)
     {
-        $validated = $this->validate(\App\Http\Requests\StoreCategoryRequest::rulesArray());
+        $validated = $this->validate(\App\Http\Requests\Category\StoreCategoryRequest::rulesArray());
 
         $createCategory($validated);
 

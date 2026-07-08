@@ -42,7 +42,7 @@ new class extends Component {
 
     public function update(UpdateItemAction $updateItem)
     {
-        $validated = $this->validate(\App\Http\Requests\UpdateItemRequest::rulesArray($this->item->id ?? null));
+        $validated = $this->validate(\App\Http\Requests\Item\UpdateItemRequest::rulesArray($this->item->id ?? null));
 
         $updateItem($this->item, $validated);
         $this->dispatch('close-edit-modal');

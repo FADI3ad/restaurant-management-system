@@ -12,6 +12,8 @@ return [
     "Categories" => "الاصناف الاساسية",
     "Subcategories" => "الاصناف الفرعية",
     "Items" => "عناصر المينيو",
+    "Restaurant" => "ادارة المطعم",
+    "Tables" => "الطاولات",
 
 
 

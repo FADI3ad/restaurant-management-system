@@ -258,33 +258,7 @@
   border-radius: 8px 0 0 8px !important;
 }
 
-/* Calendar Overrides */
-[dir="rtl"] .cal-cell {
-  border-right: 0 !important;
-  border-left: 1px solid var(--border-soft) !important;
-}
-
-[dir="rtl"] .cal-cell:nth-child(7n) {
-  border-left: 0 !important;
-}
-
-[dir="rtl"] .cal-chip {
-  border-left: 0 !important;
-  border-right: 2px solid transparent !important;
-}
-
-[dir="rtl"] .cal-chip:hover {
-  transform: translateX(-1px) !important;
-}
-
-[dir="rtl"] .cal-chip.work { border-left-color: transparent !important; border-right-color: var(--primary) !important; }
-[dir="rtl"] .cal-chip.team { border-left-color: transparent !important; border-right-color: var(--success) !important; }
-[dir="rtl"] .cal-chip.personal { border-left-color: transparent !important; border-right-color: var(--purple) !important; }
-[dir="rtl"] .cal-chip.travel { border-left-color: transparent !important; border-right-color: var(--info) !important; }
-[dir="rtl"] .cal-chip.finance { border-left-color: transparent !important; border-right-color: var(--warning) !important; }
-
 /* Mirror arrows and indicators in navigation */
-[dir="rtl"] .cal-nav-btn svg,
 [dir="rtl"] .mail-tool svg,
 [dir="rtl"] .pager-btn svg {
   transform: scaleX(-1) !important;
@@ -295,3 +269,24 @@
   inset: 0 auto auto 0 !important;
   background: radial-gradient(circle at top left, var(--card-color), transparent 70%) !important;
 }
+
+/* ─── Table Management Page — RTL fixes ─────────────────── */
+
+/* Flip accent gradients so they start from inline-start */
+[dir="rtl"] .table-card-accent--available {
+  background: linear-gradient(to left, var(--success), #34d399) !important;
+}
+
+[dir="rtl"] .table-card-accent--occupied {
+  background: linear-gradient(to left, var(--danger), #f87171) !important;
+}
+
+[dir="rtl"] .table-card-accent--reserved {
+  background: linear-gradient(to left, var(--warning), #fbbf24) !important;
+}
+
+/* Stats bar icon/text direction is already correct with logical props */
+
+/* Toolbar separator stays vertical — no override needed */
+/* Filter chips already use gap which works in RTL automatically */
+

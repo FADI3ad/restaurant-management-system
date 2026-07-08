@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\StoreSectionRequest;
+use App\Http\Requests\Section\StoreSectionRequest;
 use App\Models\Section;
 use App\Services\Section\CreateSectionAction;
 use Livewire\Component;

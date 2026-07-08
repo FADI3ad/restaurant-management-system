@@ -35,7 +35,7 @@ new class extends Component {
 
     public function update(UpdateSectionAction $updateSection)
     {
-        $validated = $this->validate(\App\Http\Requests\UpdateSectionRequest::rulesArray($this->section->id ?? null));
+        $validated = $this->validate(\App\Http\Requests\Section\UpdateSectionRequest::rulesArray($this->section->id ?? null));
 
         $updateSection($this->section, $validated);
         $this->dispatch('close-edit-modal');

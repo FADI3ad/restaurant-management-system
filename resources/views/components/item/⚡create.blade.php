@@ -21,7 +21,7 @@ new class extends Component {
     
     public function save(CreateItemAction $createItem)
     {
-        $validated = $this->validate(\App\Http\Requests\StoreItemRequest::rulesArray());
+        $validated = $this->validate(\App\Http\Requests\Item\StoreItemRequest::rulesArray());
 
         $createItem($validated);
 

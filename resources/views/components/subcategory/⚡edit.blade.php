@@ -34,7 +34,7 @@ new class extends Component {
 
     public function update(UpdateSubcategoryAction $updateSubcategory)
     {
-        $validated = $this->validate(\App\Http\Requests\UpdateSubcategoryRequest::rulesArray($this->subcategory->id ?? null));
+        $validated = $this->validate(\App\Http\Requests\Subcategory\UpdateSubcategoryRequest::rulesArray($this->subcategory->id ?? null));
 
         $updateSubcategory($this->subcategory, $validated);
         $this->dispatch('close-edit-modal');

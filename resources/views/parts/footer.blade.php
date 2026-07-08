@@ -4,7 +4,8 @@
         <span>نسخة تجريبية</span>
     </div>
     <div>
-        © 2026 · تصميم
+    © 2026 ·
+         تصميم
         <a href="https://colorlib.com" target="_blank" rel="nofollow noopener noreferrer">Colorlib</a>
     </div>
 

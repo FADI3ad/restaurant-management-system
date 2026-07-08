@@ -36,7 +36,7 @@ new class extends Component {
 
     public function update(UpdateCategoryAction $updateCategory)
     {
-        $validated = $this->validate(\App\Http\Requests\UpdateCategoryRequest::rulesArray($this->category->id ?? null));
+        $validated = $this->validate(\App\Http\Requests\Category\UpdateCategoryRequest::rulesArray($this->category->id ?? null));
 
 
         $updateCategory($this->category, $validated);

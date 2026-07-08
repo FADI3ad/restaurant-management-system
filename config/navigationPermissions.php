@@ -12,5 +12,9 @@ return [
             'Subcategories',
             'Items',
         ],
+
+        'Restaurant' => [
+            'Tables',
+        ],
     ],
 ];

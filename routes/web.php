@@ -17,5 +17,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('items', ItemController::class);
+    Route::resource('tables', \App\Http\Controllers\TableController::class);
 
 });

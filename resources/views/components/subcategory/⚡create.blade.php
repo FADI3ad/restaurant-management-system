@@ -18,7 +18,7 @@ new class extends Component {
     
     public function save(CreateSubcategoryAction $createSubcategory)
     {
-        $validated = $this->validate(\App\Http\Requests\StoreSubcategoryRequest::rulesArray());
+        $validated = $this->validate(\App\Http\Requests\Subcategory\StoreSubcategoryRequest::rulesArray());
 
         $createSubcategory($validated);
 

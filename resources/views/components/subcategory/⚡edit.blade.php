@@ -34,13 +34,7 @@ new class extends Component {
 
     public function update(UpdateSubcategoryAction $updateSubcategory)
     {
-        $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:subcategories,name' . ($this->subcategory->id ? ',' . $this->subcategory->id : ''),
-            'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
-            'status' => 'required|boolean',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+        $validated = $this->validate(\App\Http\Requests\UpdateSubcategoryRequest::rulesArray($this->subcategory->id ?? null));
 
         $updateSubcategory($this->subcategory, $validated);
         $this->dispatch('close-edit-modal');

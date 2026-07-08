@@ -6,11 +6,15 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
+
     public $section = '';
 
     public $name = '';
+
     public $display_order = 0;
+
     public $description = '';
+    
     public $status = 1;
 
     #[On('edit-section-details')]
@@ -31,12 +35,7 @@ new class extends Component {
 
     public function update(UpdateSectionAction $updateSection)
     {
-        $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:sections,name' . ($this->section->id ? ',' . $this->section->id : ''),
-            'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
-            'status' => 'required|boolean',
-        ]);
+        $validated = $this->validate(\App\Http\Requests\UpdateSectionRequest::rulesArray($this->section->id ?? null));
 
         $updateSection($this->section, $validated);
         $this->dispatch('close-edit-modal');

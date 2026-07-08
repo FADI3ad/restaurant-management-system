@@ -36,13 +36,7 @@ new class extends Component {
 
     public function update(UpdateCategoryAction $updateCategory)
     {
-        $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:categories,name',
-            'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
-            'status' => 'required|boolean',
-            'section_id' => 'required|exists:sections,id',
-        ]);
+        $validated = $this->validate(\App\Http\Requests\UpdateCategoryRequest::rulesArray($this->category->id ?? null));
 
 
         $updateCategory($this->category, $validated);

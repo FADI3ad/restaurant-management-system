@@ -21,16 +21,7 @@ new class extends Component {
     
     public function save(CreateItemAction $createItem)
     {
-        $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:items,name',
-            'section_id' =>'required|exists:sections,id',
-            'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => 'required|exists:subcategories,id',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
-            'status' => 'required|boolean',
-        ]);
+        $validated = $this->validate(\App\Http\Requests\StoreItemRequest::rulesArray());
 
         $createItem($validated);
 

@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSectionRequest extends FormRequest
+class StoreSubcategoryRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -20,10 +19,12 @@ class StoreSectionRequest extends FormRequest
     public static function rulesArray(): array
     {
         return [
-            'name' => 'required|max:255|min:3|unique:sections,name',
+            'name' => 'required|max:255|min:3|unique:subcategories,name',
+            'section_id' =>'required|exists:sections,id',
             'description' => 'nullable|max:1000',
-            'display_order' => 'required|integer|min:0|unique:sections,display_order',
+            'display_order' => 'nullable|integer|min:0',
             'status' => 'required|boolean',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 }

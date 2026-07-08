@@ -15,13 +15,7 @@ new class extends Component {
 
     public function save(CreateCategoryAction $createCategory)
     {
-        $validated = $this->validate([
-            'name' => 'required|max:255|min:3|unique:categories,name',
-            'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
-            'status' => 'required|boolean',
-            'section_id' => 'required|exists:sections,id',
-        ]);
+        $validated = $this->validate(\App\Http\Requests\StoreCategoryRequest::rulesArray());
 
         $createCategory($validated);
 

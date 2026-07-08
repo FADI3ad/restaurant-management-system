@@ -24,19 +24,13 @@
 
         <div class="dd-wrap">
             <button class="icon-btn" data-dropdown aria-label="Notifications">
-                <svg viewBox="0 0 24 24">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20"/><path d="M12 2a9 9 0 0 0-9 9c0 4 9 8 9 8s9-4 9-8a9 9 0 0 0-9-9z"/><path d="M12 2v2"/></svg>
                 <span class="count danger">3</span>
             </button>
             <div class="dd-menu" role="menu">
                 <div class="dd-head">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                    </svg>
-                    الإشعارات
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21h20"/><path d="M12 2a9 9 0 0 0-9 9c0 4 9 8 9 8s9-4 9-8a9 9 0 0 0-9-9z"/><path d="M12 2v2"/></svg>
+                    طلبات الإشعارات
                 </div>
                 <div class="dd-list">
                     <a class="dd-item" href="#">
@@ -68,25 +62,19 @@
                         </div>
                     </a>
                 </div>
-                <a class="dd-footer" href="#">عرض جميع الإشعارات ←</a>
+                <a class="dd-footer" href="#">عرض جميع طلبات الإشعارات ←</a>
             </div>
         </div>
 
         <div class="dd-wrap">
             <button class="icon-btn" data-dropdown aria-label="Messages">
-                <svg viewBox="0 0 24 24">
-                    <rect x="3" y="5" width="18" height="14" rx="2" />
-                    <path d="m3 7 9 6 9-6" />
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                 <span class="count info">3</span>
             </button>
             <div class="dd-menu" role="menu">
                 <div class="dd-head">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                        <path d="m3 7 9 6 9-6" />
-                    </svg>
-                    الرسائل
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    طلبات المطعم
                 </div>
                 <div class="dd-list">
                     <a class="dd-item" href="#">
@@ -123,7 +111,7 @@
                         </div>
                     </a>
                 </div>
-                <a class="dd-footer" href="#">عرض جميع الرسائل ←</a>
+                <a class="dd-footer" href="#">عرض جميع طلبات المطعم ←</a>
             </div>
         </div>
 
@@ -154,11 +142,8 @@
                     الملف الشخصي
                 </a>
                 <a class="dd-menu-item" href="email.html">
-                    <svg viewBox="0 0 24 24">
-                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                        <path d="m3 7 9 6 9-6" />
-                    </svg>
-                    الرسائل
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    طلبات المطعم
                 </a>
                 <div class="dd-divider"></div>
                 <form action="{{ route('logout') }}" method="POST" class="dd-menu-item danger">

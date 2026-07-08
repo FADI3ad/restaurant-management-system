@@ -47,7 +47,7 @@ new class extends Component {
                         من حذف الفئة؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
                         سيتم حذف الفئة <strong style="color: var(--t-base);">"{{ $this->category?->name }}"</strong>
-                        نهائياً. جميع العناصر التابعة لها قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
+                        نهائياً. جميع الوجبات التابعة لها قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>
             </div>

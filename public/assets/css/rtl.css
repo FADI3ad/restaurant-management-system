@@ -60,7 +60,7 @@
 }
 
 [dir="rtl"] .cmd span {
-  text-align: right !important;
+  text-align: right;
 }
 
 [dir="rtl"] .icon-btn .count {
@@ -82,11 +82,11 @@
 [dir="rtl"] .table thead th,
 [dir="rtl"] .data-table thead th,
 [dir="rtl"] .cal-weekdays > div {
-  text-align: right !important;
+  text-align: right;
 }
 
 [dir="rtl"] .table .cell-price {
-  text-align: left !important;
+  text-align: left;
 }
 
 /* Custom Select Dropdown Position */

@@ -19,7 +19,7 @@ new class extends Component {
     #[Computed]
     public function sections()
     {
-        return Section::withCount('categories')->orderBy('display_order')->paginate(3);
+        return Section::withCount('categories')->orderBy('display_order')->paginate(15);
     }
 
     #[On('section-changed')]
@@ -50,11 +50,11 @@ new class extends Component {
 
 <div>
     <div class="table-scroll">
-        <table class="table">
+        <div style="overflow-x: auto; width: 100%;"><table class="table">
             <thead>
                 <tr>
                     <th>القسم</th>
-                    <th>عدد الفئات</th>
+                    <th>عدد الأصناف الرئيسية</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
                     <th>العمليات</th>
@@ -115,7 +115,7 @@ new class extends Component {
                 @endforeach
 
             </tbody>
-        </table>
+        </table></div>
     </div>
     {{ $this->sections()->links() }}
 </div>

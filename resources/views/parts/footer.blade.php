@@ -1,5 +1,5 @@
 <footer class="d-footer">
-        <div class="d-footer-meta">
+    <div class="d-footer-meta">
         <span>v4.1.2</span>
         <span>نسخة تجريبية</span>
     </div>

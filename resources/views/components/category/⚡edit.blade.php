@@ -54,16 +54,16 @@ new class extends Component {
 
 <div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false">
     <div class="modal-content modal-md">
-        <x-modal-head-component title="تعديل الفئة" />
+        <x-modal-head-component title="تعديل الصنف الرئيسي" />
 
         <form id="form-edit" wire:submit.prevent="update">
             <div class="modal-body modal-form-stack">
                 <div class="field">
-                    <label class="field-label">اسم الفئة <span class="req">*</span></label>
+                    <label class="field-label">اسم الصنف <span class="req">*</span></label>
                     <input type="text" class="input" id="edit-name" required value="{{ $this->name }}"
                         wire:model.defer="name">
                     @error('name')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -71,7 +71,7 @@ new class extends Component {
                     <input type="text" class="input" id="edit-section" value="{{ $this->section }}"
                         wire:model.defer="section">
                     @error('section')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
 
@@ -80,14 +80,14 @@ new class extends Component {
                     <input type="number" class="input" id="edit-order" min="0"
                         value="{{ $this->display_order }}" wire:model.defer="display_order">
                     @error('display_order')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
                     <textarea class="textarea" id="edit-description" wire:model.defer="description">{{ $this->description }}</textarea>
                     @error('description')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -97,7 +97,7 @@ new class extends Component {
                         <option value="0">غير نشط</option>
                     </select>
                     @error('status')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
             </div>

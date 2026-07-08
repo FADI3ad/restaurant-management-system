@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'Workspace' => [
+    "Workspace" => [
 
-        'Dashboard' => [
-            'route' => 'home',
-            'svg' => '
+        "Dashboard" => [
+            "route" => "home",
+            "svg" => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
                     <path d="M3 12 12 3l9 9" />
                     <path d="M5 10v10h14V10" />
@@ -15,54 +15,47 @@ return [
 
     ],
 
-    'Resources' => [
+    "Resources" => [
 
-        'Sections' => [
-            'route' => 'sections.index',
-
-            'svg' => '
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <rect x="4" y="4" width="7" height="7" rx="1"/>
-                    <rect x="13" y="4" width="7" height="7" rx="1"/>
-                    <rect x="4" y="13" width="7" height="7" rx="1"/>
-                    <rect x="13" y="13" width="7" height="7" rx="1"/>
+        "Sections" => [
+            "route" => "sections.index",
+            "svg" => '
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                 </svg>
             ',
         ],
 
-        'Categories' => [
-            'route' => 'categories.index',
-
-            'svg' => '
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M4 12V5h7l9 9-7 7-9-9z"/>
-                    <circle cx="8" cy="8" r="1"/>
+        "Categories" => [
+            "route" => "categories.index",
+            "svg" => '
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                    <line x1="6" y1="2" x2="6" y2="4"></line>
+                    <line x1="10" y1="2" x2="10" y2="4"></line>
+                    <line x1="14" y1="2" x2="14" y2="4"></line>
                 </svg>
             ',
         ],
 
-        'Subcategories' => [
-            'route' => 'subcategories.index',
-
-            'svg' => '
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M6 6v12"/>
-                    <path d="M6 9h12"/>
-                    <path d="M18 9v9"/>
-                    <circle cx="6" cy="6" r="2"/>
-                    <circle cx="18" cy="18" r="2"/>
+        "Subcategories" => [
+            "route" => "subcategories.index",
+            "svg" => '
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v20"></path>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
             ',
         ],
 
-        'Items' => [
-            'route' => 'sections.index',
-
-            'svg' => '
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
-                    <path d="M7 4v8a3 3 0 0 0 6 0V4"/>
-                    <path d="M16 4v16"/>
-                    <path d="M16 10c2 0 3-2 3-4V4"/>
+        "Items" => [
+            "route" => "items.index",
+            "svg" => '
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path>
+                    <path d="M7 2v20"></path>
+                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path>
                 </svg>
             ',
         ],

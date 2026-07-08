@@ -4,20 +4,22 @@ use App\Models\Section;
 use Livewire\Component;
 
 new class extends Component {
+
     public $name = '';
 
-    public $display_order = 0;
+    public $display_order = '';
 
     public $description = '';
 
     public $status = 1;
 
+    
     public function save()
     {
         $validated = $this->validate([
             'name' => 'required|max:255|min:3|unique:sections,name',
             'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
+            'display_order' => 'required|integer|min:0|unique:sections,display_order',
             'status' => 'required|boolean',
         ]);
 
@@ -26,38 +28,38 @@ new class extends Component {
         $this->dispatch('close-add-modal');
 
         $this->dispatch('section-changed');
-        
+
         $this->reset();
     }
 };
 ?>
-
-<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
+    
+<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false;"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
-        <x-modal-head-component title="إضافة قسم جديد" />
+        <x-modal-head-component title="إضافة قسم منيو جديد" />
         <form id="form-add" wire:submit.prevent="save">
             <div class="modal-body modal-form-stack">
                 <div class="field">
-                    <label class="field-label">اسم القسم <span class="req">*</span></label>
+                    <label class="field-label">اسم قسم المنيو <span class="req">*</span></label>
                     <input wire:model="name" type="text" class="input"
                         placeholder="مثال: قسم المأكولات، المشروبات...">
                     @error('name')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="field-label">ترتيب العرض</label>
-                    <input wire:model="display_order" type="number" class="input" placeholder="0" min="0"
-                        value="0">
+                    <label class="field-label">ترتيب العرض<span class="req">*</span></label>
+                    <input wire:model="display_order" type="number" class="input" placeholder="0" >
                     @error('display_order')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
                     <textarea wire:model="description" class="textarea" placeholder="اكتب وصفاً مختصراً للقسم..."></textarea>
                     @error('description')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -67,12 +69,14 @@ new class extends Component {
                         <option value="0">غير نشط</option>
                     </select>
                     @error('status')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
             </div>
             <div class="modal-foot">
-                <button type="button" class="btn btn--ghost" @click="addOpen = false">إلغاء</button>
+                <button type="button" class="btn btn--ghost" @click="addOpen = false" > 
+                    إلغاء
+                </button>
                 <button type="submit" class="btn btn--primary" @close-add-modal.window="addOpen = false">
                     حفظ
                 </button>

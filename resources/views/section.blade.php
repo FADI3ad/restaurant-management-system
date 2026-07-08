@@ -1,18 +1,12 @@
 @extends('layouts.app')
-@section('title', 'الاقسام الاساسية')
+@section('title', 'اقسام المطعم الاساسية')
 @section('shell-class', 'shell')
 @section('main-class', 'main')
 @section('content')
+    <main class="content" x-data="{ addOpen: false, showOpen: false, editOpen: false, deleteOpen: false }">
 
-    <main class="content" x-data="{
-        addOpen: false,
-        showOpen: false,
-        editOpen: false,
-        deleteOpen: false
-        }">
-
-        <x-hero-section-component title="أقسام المينيو الأساسية"
-            des="إدارة أقسام المنيو والوجبات الأساسية وتعديل حالتها وترتيب ظهورها." 
+        <x-hero-section-component title="إدارة أقسام المطعم"
+            des="قسّم عناصر المينيو إلى أقسام منظمة، وأدر ترتيبها وحالتها لتسهيل إدارة القائمة وتحسين تجربة العملاء." 
         />
 
 
@@ -20,7 +14,7 @@
             <section class="col-12 card">
 
                 <!--Filter System -->
-                <div class="smart-filter-bar">
+                {{-- <div class="smart-filter-bar">
                     <div class="filter-search">
                         <div class="input-icon">
                             <span class="ico">
@@ -52,7 +46,7 @@
                             تصفية
                         </button>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <!-- Table -->
@@ -61,7 +55,10 @@
             </section>
         </div>
 
-        <!--Add Section Modal-->
+
+
+
+        <!--Create Section Modal-->
         <livewire:section.create />
 
         <!--Show Section Modal-->
@@ -73,14 +70,5 @@
         <!--Delete Section Modal-->
         <livewire:section.delete />
 
-
-
-
     </main>
-
-
-
-
-
-
 @endsection

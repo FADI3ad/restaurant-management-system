@@ -43,7 +43,7 @@ new class extends Component {
         <div class="modal-body modal-form-stack">
             <div class="modal-details-grid">
                 <div class="detail-item">
-                    <span class="detail-label">اسم الفئة</span>
+                    <span class="detail-label">اسم الصنف</span>
                     <span class="detail-value" id="show-name">{{ $this->name }}</span>
                 </div>
                 <div class="detail-item">
@@ -55,7 +55,7 @@ new class extends Component {
                     <span class="detail-value" id="show-section">{{ $this->section }}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">عدد العناصر</span>
+                    <span class="detail-label">عدد الوجبات</span>
                     <span class="detail-value" id="show-items-count">{{ $this->items_count }}</span>
                 </div>
                 <div class="detail-item">

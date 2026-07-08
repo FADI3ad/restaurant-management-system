@@ -25,9 +25,10 @@ new class extends Component {
 
 
 
-<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
+<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-sm">
-        <x-modal-head-component title="تأكيد حذف القسم" />
+        <x-modal-head-component title="تأكيد حذف قسم المنيو" />
 
         <form wire:submit.prevent="delete">
             <div class="modal-body modal-form-stack">
@@ -44,10 +45,10 @@ new class extends Component {
                         </svg>
                     </div>
                     <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
-                        من حذف القسم؟</h4>
+                        من حذف قسم المنيو؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف القسم <strong style="color: var(--t-base);">"{{ $this->section?->name }}"</strong>
-                        نهائياً. جميع الوجبات والفئات التابعة له قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
+                        سيتم حذف قسم المنيو <strong style="color: var(--t-base);">"{{ $this->section?->name }}"</strong>
+                        نهائياً. جميع الوجبات والأصناف الرئيسية التابعة له قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>
             </div>

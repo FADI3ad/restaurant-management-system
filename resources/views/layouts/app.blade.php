@@ -24,6 +24,9 @@
     <script defer="defer" src="{{ asset('assets/js/vendor-chartjs.js') }}"></script>
     <script defer="defer" src="{{ asset('assets/js/vendors.js') }}"></script>
     <script defer="defer" src="{{ asset('assets/js/2026.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet" />
 </head>

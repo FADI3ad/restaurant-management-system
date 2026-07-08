@@ -335,7 +335,7 @@
                     </div>
                     <div class="sales-summary-total"><sup>$</sup>6,000</div>
                 </div>
-                <table class="table">
+                <div style="overflow-x: auto; width: 100%;"><table class="table">
                     <thead>
                         <tr>
                             <th>الاسم</th>
@@ -388,7 +388,7 @@
                             <td class="cell-price pos">٥٦ $</td>
                         </tr>
                     </tbody>
-                </table>
+                </table></div>
                 <div class="sales-all">
                     <a href="#">التحقق من جميع المبيعات
                         <svg viewBox="0 0 24 24">

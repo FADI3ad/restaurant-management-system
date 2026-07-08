@@ -51,12 +51,12 @@ new class extends Component {
 
 <div>
     <div class="table-scroll">
-        <table class="table">
+        <div style="overflow-x: auto; width: 100%;"><table class="table">
             <thead>
                 <tr>
                     <th>الفئة</th>
                     <th>القسم</th>
-                    <th>عدد العناصر</th>
+                    <th>عدد الوجبات</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
                     <th>العمليات</th>
@@ -118,7 +118,7 @@ new class extends Component {
                 @endforeach
 
             </tbody>
-        </table>
+        </table></div>
     </div>
     {{ $this->categories()->links() }}
 </div>

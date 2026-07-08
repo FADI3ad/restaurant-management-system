@@ -34,12 +34,12 @@ new class extends Component {
 
 <div id="modal-show" class="modal-overlay is-active" x-show="showOpen" x-cloak @click.self="showOpen = false">
     <div class="modal-content modal-md">
-        <x-modal-head-component title="تفاصيل الفئة الفرعية" />
+        <x-modal-head-component title="تفاصيل الصنف الفرعي" />
 
         <div class="modal-body modal-form-stack">
             <div class="modal-details-grid">
                 <div class="detail-item">
-                    <span class="detail-label">اسم الفئة الفرعية</span>
+                    <span class="detail-label">اسم الصنف الفرعي</span>
                     <span class="detail-value" id="show-name">{{ $this->name }}</span>
                 </div>
                 <div class="detail-item">
@@ -47,7 +47,7 @@ new class extends Component {
                     <span class="detail-value" id="show-status">{{ $this->status ? 'نشط' : 'غير نشط' }}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">الفئة الأساسية</span>
+                    <span class="detail-label">الصنف الرئيسي</span>
                     <span class="detail-value" id="show-category">{{ $this->category_name }}</span>
                 </div>
                 <div class="detail-item">

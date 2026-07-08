@@ -1,19 +1,13 @@
 @extends('layouts.app')
-@section('title', 'العناصر')
+@section('title', 'الوجبات')
 @section('shell-class', 'shell')
 @section('main-class', 'main')
 @section('content')
 
-    <main class="content" x-data="{
-        addOpen: false,
-        showOpen: false,
-        editOpen: false,
-        deleteOpen: false
-        }">
+    <main class="content" x-data="{ addOpen: false, showOpen: false, editOpen: false, deleteOpen: false }">
 
-        <x-hero-section-component title="إدارة العناصر"
-            des="إدارة العناصر وتعديل حالتها وترتيب ظهورها." 
-        />
+
+        <x-hero-section-component title="إدارة الوجبات" des="إدارة الوجبات وتعديل حالتها وترتيب ظهورها." />
 
 
         <div class="grid">

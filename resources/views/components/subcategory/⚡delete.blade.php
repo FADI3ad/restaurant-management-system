@@ -25,7 +25,7 @@ new class extends Component {
 
 <div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
     <div class="modal-content modal-sm">
-        <x-modal-head-component title="تأكيد حذف الفئة الفرعية" />
+        <x-modal-head-component title="تأكيد حذف الصنف الفرعي" />
 
         <form wire:submit.prevent="delete">
             <div class="modal-body modal-form-stack">
@@ -42,9 +42,9 @@ new class extends Component {
                         </svg>
                     </div>
                     <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
-                        من حذف الفئة الفرعية؟</h4>
+                        من حذف الصنف الفرعي؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف الفئة الفرعية <strong style="color: var(--t-base);">"{{ $this->subcategory?->name }}"</strong>
+                        سيتم حذف الصنف الفرعي <strong style="color: var(--t-base);">"{{ $this->subcategory?->name }}"</strong>
                         نهائياً. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>

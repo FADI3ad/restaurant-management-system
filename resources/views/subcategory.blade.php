@@ -1,18 +1,13 @@
 @extends('layouts.app')
-@section('title', 'الفئات الفرعية')
+@section('title', 'الأصناف الرئيسية الفرعية')
 @section('shell-class', 'shell')
 @section('main-class', 'main')
 @section('content')
 
-    <main class="content" x-data="{
-        addOpen: false,
-        showOpen: false,
-        editOpen: false,
-        deleteOpen: false
-        }">
+    <main class="content" x-data="{addOpen: false,showOpen: false,editOpen: false,deleteOpen: false}">
 
-        <x-hero-section-component title="إدارة الفئات الفرعية"
-            des="إدارة الفئات الفرعية وتعديل حالتها وترتيب ظهورها." 
+        <x-hero-section-component title="إدارة الأصناف الرئيسية الفرعية"
+            des="إدارة الأصناف الرئيسية الفرعية وتعديل حالتها وترتيب ظهورها." 
         />
 
 
@@ -20,7 +15,7 @@
             <section class="col-12 card">
 
                 <!--Filter System -->
-                <div class="smart-filter-bar">
+                {{-- <div class="smart-filter-bar">
                     <div class="filter-search">
                         <div class="input-icon">
                             <span class="ico">
@@ -52,7 +47,7 @@
                             تصفية
                         </button>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <!-- Table -->

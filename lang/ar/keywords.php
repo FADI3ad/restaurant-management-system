@@ -7,11 +7,11 @@ declare(strict_types=1);
 return [
     "Workspace" => "مساحة العمل",
     "Dashboard" => "لوحة التحكم",
-    "Resources" => "الموارد",
-    "Sections" => "الأقسام",
-    "Categories" => "الفئات",
-    "Subcategories" => "الفئات الفرعية",
-    "Items" => "العناصر"
+    "Resources" => "ادارة المينيو",
+    "Sections" => "اقسام المينيو",
+    "Categories" => "الاصناف الاساسية",
+    "Subcategories" => "الاصناف الفرعية",
+    "Items" => "عناصر المينيو",
 
 
 

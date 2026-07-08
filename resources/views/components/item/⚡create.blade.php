@@ -57,21 +57,21 @@ new class extends Component {
 
 <div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
     <div class="modal-content modal-md">
-        <x-modal-head-component title="إضافة عنصر جديد" />
+        <x-modal-head-component title="إضافة وجبة جديد" />
         <form id="form-add" wire:submit.prevent="save">
             <div class="modal-body modal-form-stack">
                 <div class="field">
-                    <label class="field-label">اسم العنصر <span class="req">*</span></label>
-                    <input wire:model="name" type="text" class="input" placeholder="اسم العنصر...">
+                    <label class="field-label">اسم الوجبة <span class="req">*</span></label>
+                    <input wire:model="name" type="text" class="input" placeholder="اسم الوجبة...">
                     @error('name')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">السعر <span class="req">*</span></label>
                     <input wire:model="price" type="number" step="0.01" class="input" placeholder="السعر...">
                     @error('price')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -83,34 +83,34 @@ new class extends Component {
                         @endforeach
                     </select>
                     @error('section_id')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 @if ($this->section_id)
                     <div class="field">
-                        <label class="field-label">الفئة الأساسية</label>
+                        <label class="field-label">الصنف الرئيسي</label>
                         <select wire:model.live="category_id" class="select" >
-                            <option value="" wire:click="category_id = null">اختر الفئة الأساسية</option>
+                            <option value="" wire:click="category_id = null">اختر الصنف الرئيسي</option>
                             @foreach ($this->categories($this->section_id) as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category_id')
-                            <span style="color: red;">{{ $message }}</span>
+                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                         @enderror
                     </div>
                 @endif
                 @if ($this->category_id)
                     <div class="field">
-                        <label class="field-label">الفئة الفرعية</label>
+                        <label class="field-label">الصنف الفرعي</label>
                         <select wire:model="subcategory_id" class="select" >
-                            <option value="" wire:click="subcategory_id = null">اختر الفئة الفرعية</option>
+                            <option value="" wire:click="subcategory_id = null">اختر الصنف الفرعي</option>
                             @foreach ($this->subcategories($this->category_id) as $subcategory)
                                 <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                             @endforeach
                         </select>
                         @error('subcategory_id')
-                            <span style="color: red;">{{ $message }}</span>
+                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                         @enderror
                     </div>
                 @endif
@@ -120,14 +120,14 @@ new class extends Component {
                     <input wire:model="display_order" type="number" class="input" placeholder="0" min="0"
                         value="0">
                     @error('display_order')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
                     <textarea wire:model="description" class="textarea" placeholder="اكتب وصفاً للعنصر..."></textarea>
                     @error('description')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
@@ -137,7 +137,7 @@ new class extends Component {
                         <option value="0">غير نشط</option>
                     </select>
                     @error('status')
-                        <span style="color: red;">{{ $message }}</span>
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
             </div>

@@ -1,18 +1,14 @@
 <header class="d-topbar">
-    <div class="crumbs">
-        <button class="hamburger" data-drawer-open aria-label="Open navigation">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-        </button>
-        <span>Workspace</span><svg class="sep" width="10" height="10" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2">
-            <path d="m9 18 6-6-6-6" />
-        </svg><span class="current">Dashboard</span>
-    </div>
+    <button class="hamburger" data-drawer-open aria-label="Open navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+    </button>
+
     <div class="topbar-actions">
+        
         {{-- <button class="cmd" data-palette-open>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="11" cy="11" r="7" />
@@ -162,3 +158,12 @@
         </div>
     </div>
 </header>
+
+<div class="sub-header" style="padding: 12px 32px; border-bottom: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: flex-end; background: var(--bg-body);">
+    <div class="crumbs">
+        <span>Workspace</span><svg class="sep" width="10" height="10" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="m9 18 6-6-6-6" />
+        </svg><span class="current">Dashboard</span>
+    </div>
+</div>

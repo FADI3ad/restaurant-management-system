@@ -200,7 +200,7 @@ body {
 
 .shell {
     display: grid;
-    grid-template-columns: 248px 1fr;
+    grid-template-columns: 230px 1fr;
     min-height: 100vh
 }
 
@@ -594,17 +594,18 @@ body.has-drawer-open .drawer-backdrop {
     transition: background-color 0.3s ease;
 }
 
-.crumbs,
 .d-topbar {
     align-items: center;
     display: flex
 }
 
 .crumbs {
+    align-items: center;
     color: var(--t-muted);
+    display: flex;
     font-size: 13px;
     font-weight: 500;
-    gap: 10px
+    gap: 10px;
 }
 
 .crumbs .sep {
@@ -619,7 +620,8 @@ body.has-drawer-open .drawer-backdrop {
 .topbar-actions {
     align-items: center;
     display: flex;
-    gap: 6px
+    gap: 6px;
+    margin-inline-start: auto;
 }
 
 .cmd {
@@ -5807,33 +5809,87 @@ body.has-drawer-open .drawer-backdrop {
 }
 
 .table-card:hover {
-    border-color: var(--border);
     box-shadow: 0 8px 24px -6px rgba(15,23,42,.12), 0 2px 8px -2px rgba(15,23,42,.06);
-    transform: translateY(-2px)
+    transform: translateY(-3px)
 }
 
-.table-card-accent {
-    height: 4px;
-    width: 100%
+/* Card Header — colored band with icon + title */
+.table-card-header {
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    display: flex;
+    gap: 10px;
+    padding: 11px 16px
 }
 
-.table-card-accent--available {
-    background: linear-gradient(to right, var(--success), #34d399)
+.table-card-header--available {
+    background: var(--success-soft);
+    border-bottom-color: color-mix(in oklab, var(--success) 20%, transparent)
 }
 
-.table-card-accent--occupied {
-    background: linear-gradient(to right, var(--danger), #f87171)
+.table-card-header--occupied {
+    background: var(--danger-soft);
+    border-bottom-color: color-mix(in oklab, var(--danger) 20%, transparent)
 }
 
-.table-card-accent--reserved {
-    background: linear-gradient(to right, var(--warning), #fbbf24)
+.table-card-header--reserved {
+    background: var(--warning-soft);
+    border-bottom-color: color-mix(in oklab, var(--warning) 20%, transparent)
+}
+
+.table-card-header--maintenance {
+    background: var(--secondary-soft);
+    border-bottom-color: color-mix(in oklab, var(--secondary) 20%, transparent)
+}
+
+.table-card-header-icon {
+    align-items: center;
+    border-radius: 8px;
+    display: flex;
+    flex-shrink: 0;
+    height: 30px;
+    justify-content: center;
+    width: 30px
+}
+
+.table-card-header--available .table-card-header-icon {
+    background: color-mix(in oklab, var(--success) 18%, transparent);
+    color: var(--success)
+}
+
+.table-card-header--occupied .table-card-header-icon {
+    background: color-mix(in oklab, var(--danger) 18%, transparent);
+    color: var(--danger)
+}
+
+.table-card-header--reserved .table-card-header-icon {
+    background: color-mix(in oklab, var(--warning) 18%, transparent);
+    color: var(--warning)
+}
+
+.table-card-header--maintenance .table-card-header-icon {
+    background: color-mix(in oklab, var(--secondary) 18%, transparent);
+    color: var(--secondary)
+}
+
+.table-card-header-icon svg {
+    height: 16px;
+    width: 16px
+}
+
+.table-card-header-title {
+    color: var(--t-base);
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -.01em
 }
 
 .table-card-body {
     align-items: center;
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 10px;
     padding: 14px 16px 12px
 }
 
@@ -5913,8 +5969,8 @@ body.has-drawer-open .drawer-backdrop {
     align-items: center;
     border-top: 1px solid var(--border-soft);
     display: flex;
-    justify-content: space-between;
-    padding: 10px 18px 12px
+    justify-content: flex-end;
+    padding: 8px 14px 10px
 }
 
 .table-card-actions {

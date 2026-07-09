@@ -9,11 +9,12 @@ return [
     "Dashboard" => "لوحة التحكم",
     "Resources" => "ادارة المينيو",
     "Sections" => "اقسام المينيو",
-    "Categories" => "الاصناف الاساسية",
+    "Categories" => "الاصناف الرئيسية",
     "Subcategories" => "الاصناف الفرعية",
     "Items" => "عناصر المينيو",
     "Restaurant" => "ادارة المطعم",
     "Tables" => "الطاولات",
+    
 
 
 

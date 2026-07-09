@@ -6,20 +6,48 @@
     <main class="content" x-data="{ addOpen: false, editOpen: false, deleteOpen: false }">
 
         <x-hero-section-component title="إدارة الطاولات"
-            des="قم بإدارة طاولات المطعم، وأضف طاولات جديدة، وحدد سعتها وحالتها الحالية." 
-        />
+            des="قم بإدارة طاولات المطعم، وأضف طاولات جديدة، وحدد سعتها وحالتها الحالية." />
 
         <div class="grid">
             <section class="col-12 card">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
-                    <button type="button" class="btn btn--primary" @click="addOpen = true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        إضافة طاولة
-                    </button>
-                </div>
+                {{-- <div class="tables-toolbar" id="tables-toolbar" role="toolbar" aria-label="فلاتر الطاولات">
+                    <span class="tables-toolbar-label">النوع</span>
+                    <div class="tables-toolbar-group" role="group">
+                        <button class="filter-chip is-active" id="chip-type-all" type="button">
+                            <span class="filter-chip-dot" style="background:var(--primary)"></span>الكل
+                        </button>
+                        <button class="filter-chip" id="chip-type-private" type="button">
+                            <span class="filter-chip-dot" style="background:var(--purple)"></span>خاص
+                        </button>
+                        <button class="filter-chip" id="chip-type-public" type="button">
+                            <span class="filter-chip-dot" style="background:var(--info)"></span>عام
+                        </button>
+                    </div>
+                    <div class="tables-toolbar-sep" aria-hidden="true"></div>
+                    <span class="tables-toolbar-label">الحالة</span>
+                    <div class="tables-toolbar-group" role="group">
+                        <button class="filter-chip is-active" id="chip-status-all" type="button">
+                            <span class="filter-chip-dot" style="background:var(--primary)"></span>الكل
+                        </button>
+                        <button class="filter-chip" id="chip-status-available" type="button">
+                            <span class="filter-chip-dot" style="background:var(--success)"></span>متاح
+                        </button>
+                        <button class="filter-chip" id="chip-status-occupied" type="button">
+                            <span class="filter-chip-dot" style="background:var(--danger)"></span>مشغول
+                        </button>
+                        <button class="filter-chip" id="chip-status-reserved" type="button">
+                            <span class="filter-chip-dot" style="background:var(--warning)"></span>محجوز
+                        </button>
+                        <button class="filter-chip" id="chip-status-maintenance" type="button">
+                            <span class="filter-chip-dot" style="background:var(--secondary)"></span>صيانة
+                        </button>
+                    </div>
+                </div> --}}
+
+
+
+
+                
                 <!-- Table Index -->
                 <livewire:table.index />
             </section>

@@ -1,23 +1,16 @@
 <?php
 
 use App\Http\Requests\Section\StoreSectionRequest;
-use App\Models\Section;
+use App\Livewire\Forms\SectionForm;
 use App\Services\Section\CreateSectionAction;
 use Livewire\Component;
 
 new class extends Component {
-    public $name = '';
-
-    public $display_order = '';
-
-    public $description = '';
-
-    public $status = 1;
+    public SectionForm $form;
 
     public function save(CreateSectionAction $createSection)
     {
- 
-        $validated = $this->validate(StoreSectionRequest::rulesArray());
+        $validated = $this->form->validate(StoreSectionRequest::rulesArray());
 
         $createSection($validated);
 
@@ -25,7 +18,7 @@ new class extends Component {
 
         $this->dispatch('section-changed');
 
-        $this->reset();
+        $this->form->reset();
     }
 };
 ?>
@@ -38,9 +31,9 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">اسم قسم المنيو <span class="req">*</span></label>
-                    <input wire:model="name" type="text" class="input"
+                    <input wire:model="form.name" type="text" class="input"
                         placeholder="مثال: قسم المأكولات، المشروبات...">
-                    @error('name')
+                    @error('form.name')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -52,9 +45,9 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">ترتيب العرض<span class="req">*</span></label>
-                    <input wire:model="display_order" type="number" class="input" placeholder="0">
-                    @error('display_order')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                    <input wire:model="form.display_order" type="number" class="input" placeholder="0">
+                    @error('form.display_order')
+                        <div class="field-error"><svg xmlns="h[]ttp://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
@@ -65,8 +58,8 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
-                    <textarea wire:model="description" class="textarea" placeholder="اكتب وصفاً مختصراً للقسم..."></textarea>
-                    @error('description')
+                    <textarea wire:model="form.description" class="textarea" placeholder="اكتب وصفاً مختصراً للقسم..."></textarea>
+                    @error('form.description')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -78,11 +71,11 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">حالة التنشيط</label>
-                    <select wire:model="status" class="select">
+                    <select wire:model="form.status" class="select">
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>
-                    @error('status')
+                    @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">

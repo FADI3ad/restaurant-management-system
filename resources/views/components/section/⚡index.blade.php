@@ -18,8 +18,7 @@ new class extends Component {
     //get paginated sections
     #[Computed]
     public function sections()
-    {
-       
+    {  
         return Section::withCount('categories')->orderBy('display_order')->paginate(15);
     }
 

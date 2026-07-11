@@ -1,28 +1,23 @@
 <?php
 
 use App\Http\Requests\Table\StoreTableRequest;
+use App\Livewire\Forms\TableForm;
 use App\Models\Table;
 use App\Services\Table\CreateTableAction;
 use Livewire\Component;
 
 new class extends Component {
-
-    public $table_number = '';
-    public $type = 'Public';
-    public $min_capacity = 1;
-    public $max_capacity = 4;
-    public $status = 'Available';
-    public $notes = '';
+    public TableForm $form;
 
     public function save(CreateTableAction $createTable)
     {
-        $validated = $this->validate(StoreTableRequest::rulesArray());
+        $validated = $this->form->validate(StoreTableRequest::rulesArray());
 
         $createTable($validated);
 
         $this->dispatch('close-add-modal');
         $this->dispatch('table-changed');
-        $this->reset();
+        $this->form->reset();
     }
 };
 ?>
@@ -35,19 +30,19 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">رقم/اسم الطاولة <span class="req">*</span></label>
-                    <input wire:model="table_number" type="text" class="input" placeholder="مثال: 1, A1...">
-                    @error('table_number')
+                    <input wire:model="form.table_number" type="text" class="input" placeholder="مثال: 1, A1...">
+                    @error('form.table_number')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 
                 <div class="field">
                     <label class="field-label">نوع الطاولة <span class="req">*</span></label>
-                    <select wire:model="type" class="select">
+                    <select wire:model="form.type" class="select">
                         <option value="Public">عام (Public)</option>
                         <option value="Private">خاص (Private)</option>
                     </select>
-                    @error('type')
+                    @error('form.type')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
@@ -55,15 +50,15 @@ new class extends Component {
                 <div class="field" style="display: flex; gap: 1rem;">
                     <div style="flex: 1;">
                         <label class="field-label">أقل سعة <span class="req">*</span></label>
-                        <input wire:model="min_capacity" type="number" min="1" class="input" placeholder="1">
-                        @error('min_capacity')
+                        <input wire:model="form.min_capacity" type="number" min="1" class="input" placeholder="1">
+                        @error('form.min_capacity')
                             <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                         @enderror
                     </div>
                     <div style="flex: 1;">
                         <label class="field-label">أقصى سعة <span class="req">*</span></label>
-                        <input wire:model="max_capacity" type="number" min="1" class="input" placeholder="4">
-                        @error('max_capacity')
+                        <input wire:model="form.max_capacity" type="number" min="1" class="input" placeholder="4">
+                        @error('form.max_capacity')
                             <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                         @enderror
                     </div>
@@ -71,21 +66,21 @@ new class extends Component {
 
                 <div class="field">
                     <label class="field-label">حالة الطاولة <span class="req">*</span></label>
-                    <select wire:model="status" class="select">
+                    <select wire:model="form.status" class="select">
                         <option value="Available">متاح</option>
                         <option value="Occupied">مشغول</option>
                         <option value="Reserved">محجوز</option>
                         <option value="Maintenance">صيانة</option>
                     </select>
-                    @error('status')
+                    @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="field">
                     <label class="field-label">ملاحظات (اختياري)</label>
-                    <textarea wire:model="notes" class="textarea" placeholder="اكتب أي ملاحظات خاصة بهذه الطاولة..."></textarea>
-                    @error('notes')
+                    <textarea wire:model="form.notes" class="textarea" placeholder="اكتب أي ملاحظات خاصة بهذه الطاولة..."></textarea>
+                    @error('form.notes')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>

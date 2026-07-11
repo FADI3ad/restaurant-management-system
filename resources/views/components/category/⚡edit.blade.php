@@ -1,45 +1,30 @@
 <?php
 
+use App\Http\Requests\Category\UpdateCategoryRequest;
+use App\Livewire\Forms\CategoryForm;
 use App\Models\Category;
 use App\Services\Category\UpdateCategoryAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
-
+    public CategoryForm $form;
     public $section = '';
-
-    public $name = '';
-    public $section_id = '';
-    public $display_order = 0;
-    public $description = '';
-    public $status = 1;
-
 
     #[On('edit-category-details')]
     public function getCategoryDetails($id)
     {
-        $category = Category::findOrfail($id);
-        $this->category = $category;
-        $this->setData();
-    }
-
-    public function setData()
-    {
-
-        $this->name = $this->category->name;
-        $this->section_id = $this->category->section_id;
-        $this->display_order = $this->category->display_order;
-        $this->description = $this->category->description;
-        $this->status = (int) $this->category->status;
+        $category = Category::findOrFail($id);
+        $this->section = $category->section->name ?? '';
+        $this->form->setData($category);
     }
 
     public function update(UpdateCategoryAction $updateCategory)
     {
-        $validated = $this->validate(\App\Http\Requests\Category\UpdateCategoryRequest::rulesArray($this->category->id ?? null));
+        $validated = $this->form->validate(UpdateCategoryRequest::rulesArray($this->form->category->id ?? null));
 
-
-        $updateCategory($this->category, $validated);
+        $updateCategory($this->form->category, $validated);
+        
         $this->dispatch('close-edit-modal');
         $this->dispatch('category-changed');
     }
@@ -55,43 +40,40 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">اسم الصنف <span class="req">*</span></label>
-                    <input type="text" class="input" id="edit-name" required value="{{ $this->name }}"
-                        wire:model.defer="name">
-                    @error('name')
+                    <input type="text" class="input" id="edit-name" required value="{{ $this->form->name }}"
+                        wire:model.defer="form.name">
+                    @error('form.name')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">القسم</label>
                     <input type="text" class="input" id="edit-section" value="{{ $this->section }}"
-                        wire:model.defer="section">
-                    @error('section')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
-                    @enderror
+                        readonly disabled>
                 </div>
 
                 <div class="field">
                     <label class="field-label">ترتيب العرض</label>
                     <input type="number" class="input" id="edit-order" min="0"
-                        value="{{ $this->display_order }}" wire:model.defer="display_order">
-                    @error('display_order')
+                        value="{{ $this->form->display_order }}" wire:model.defer="form.display_order">
+                    @error('form.display_order')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
-                    <textarea class="textarea" id="edit-description" wire:model.defer="description">{{ $this->description }}</textarea>
-                    @error('description')
+                    <textarea class="textarea" id="edit-description" wire:model.defer="form.description">{{ $this->form->description }}</textarea>
+                    @error('form.description')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
                     <label class="field-label">حالة التنشيط</label>
-                    <select class="select" id="edit-status" wire:model.defer="status">
+                    <select class="select" id="edit-status" wire:model.defer="form.status">
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>
-                    @error('status')
+                    @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>

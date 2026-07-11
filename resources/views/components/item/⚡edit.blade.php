@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Requests\Item\UpdateItemRequest;
+use App\Livewire\Forms\ItemForm;
 use App\Models\Section;
 use App\Models\Category;
 use App\Models\Subcategory;
@@ -9,42 +11,20 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
-    public $item = '';
-
-    public $name = '';
-    public $section_id = '';
-    public $category_id = '';
-    public $subcategory_id = '';
-    public $price = '';
-    public $display_order = 0;
-    public $description = '';
-    public $status = 1;
+    public ItemForm $form;
 
     #[On('edit-item-details')]
     public function getItemDetails($id)
     {
-        $item = Item::findOrfail($id);
-        $this->item = $item;
-        $this->setData();
-    }
-
-    public function setData()
-    {
-        $this->name = $this->item->name;
-        $this->section_id = $this->item->section_id;
-        $this->category_id = $this->item->category_id;
-        $this->subcategory_id = $this->item->subcategory_id;
-        $this->price = $this->item->price;
-        $this->display_order = $this->item->display_order;
-        $this->description = $this->item->description;
-        $this->status = (int) $this->item->status;
+        $item = Item::findOrFail($id);
+        $this->form->setData($item);
     }
 
     public function update(UpdateItemAction $updateItem)
     {
-        $validated = $this->validate(\App\Http\Requests\Item\UpdateItemRequest::rulesArray($this->item->id ?? null));
+        $validated = $this->form->validate(UpdateItemRequest::rulesArray($this->form->item->id ?? null));
 
-        $updateItem($this->item, $validated);
+        $updateItem($this->form->item, $validated);
         $this->dispatch('close-edit-modal');
         $this->dispatch('item-changed');
     }
@@ -81,9 +61,9 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">اسم الوجبة <span class="req">*</span></label>
-                    <input type="text" class="input" id="edit-name" required value="{{ $this->name }}"
-                        wire:model="name">
-                    @error('name')
+                    <input type="text" class="input" id="edit-name" required value="{{ $this->form->name }}"
+                        wire:model="form.name">
+                    @error('form.name')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -96,8 +76,8 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">السعر <span class="req">*</span></label>
                     <input type="number" step="0.01" class="input" id="edit-price" required
-                        value="{{ $this->price }}" wire:model="price">
-                    @error('price')
+                        value="{{ $this->form->price }}" wire:model="form.price">
+                    @error('form.price')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -109,13 +89,13 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">القسم</label>
-                    <select wire:model.live="section_id" class="select" id="edit-section">
-                        <option value="" wire:click="section_id = null">اختر القسم</option>
+                    <select wire:model.live="form.section_id" class="select" id="edit-section">
+                        <option value="" wire:click="$set('form.section_id', null)">اختر القسم</option>
                         @foreach ($this->sections() as $section)
                             <option value="{{ $section->id }}">{{ $section->name }}</option>
                         @endforeach
                     </select>
-                    @error('section_id')
+                    @error('form.section_id')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -125,16 +105,16 @@ new class extends Component {
                             </svg> {{ $message }}</div>
                     @enderror
                 </div>
-                @if ($this->section_id)
+                @if ($this->form->section_id)
                     <div class="field">
                         <label class="field-label">الصنف الرئيسي</label>
-                        <select wire:model.live="category_id" class="select" id="edit-category">
-                            <option value="" wire:click="category_id = null">اختر الصنف الرئيسي</option>
-                            @foreach ($this->categories($this->section_id) as $category)
+                        <select wire:model.live="form.category_id" class="select" id="edit-category">
+                            <option value="" wire:click="$set('form.category_id', null)">اختر الصنف الرئيسي</option>
+                            @foreach ($this->categories($this->form->section_id) as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('form.category_id')
                             <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14"
                                     height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -145,16 +125,16 @@ new class extends Component {
                         @enderror
                     </div>
                 @endif
-                @if ($this->category_id)
+                @if ($this->form->category_id)
                     <div class="field">
                         <label class="field-label">الصنف الفرعي</label>
-                        <select wire:model="subcategory_id" class="select" id="edit-subcategory">
-                            <option value="" wire:click="subcategory_id = null">اختر الصنف الفرعي</option>
-                            @foreach ($this->subcategories($this->category_id) as $subcategory)
+                        <select wire:model="form.subcategory_id" class="select" id="edit-subcategory">
+                            <option value="" wire:click="$set('form.subcategory_id', null)">اختر الصنف الفرعي</option>
+                            @foreach ($this->subcategories($this->form->category_id) as $subcategory)
                                 <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
                             @endforeach
                         </select>
-                        @error('subcategory_id')
+                        @error('form.subcategory_id')
                             <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14"
                                     height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -169,8 +149,8 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">ترتيب العرض</label>
                     <input type="number" class="input" id="edit-order" min="0"
-                        value="{{ $this->display_order }}" wire:model="display_order">
-                    @error('display_order')
+                        value="{{ $this->form->display_order }}" wire:model="form.display_order">
+                    @error('form.display_order')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -182,8 +162,8 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">الوصف</label>
-                    <textarea class="textarea" id="edit-description" wire:model="description">{{ $this->description }}</textarea>
-                    @error('description')
+                    <textarea class="textarea" id="edit-description" wire:model="form.description">{{ $this->form->description }}</textarea>
+                    @error('form.description')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -195,11 +175,11 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">حالة التنشيط</label>
-                    <select class="select" id="edit-status" wire:model="status">
+                    <select class="select" id="edit-status" wire:model="form.status">
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>
-                    @error('status')
+                    @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">

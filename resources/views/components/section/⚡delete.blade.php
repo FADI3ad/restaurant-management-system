@@ -17,8 +17,11 @@ new class extends Component {
     public function delete(DeleteSectionAction $deleteSection)
     {
         $deleteSection($this->section);
+
         $this->dispatch('close-delete-modal');
+
         $this->dispatch('section-changed');
+        
         $this->section = null;
     }
 };

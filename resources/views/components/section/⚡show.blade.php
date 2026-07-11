@@ -1,32 +1,22 @@
 <?php
 
+use App\Livewire\Forms\SectionForm;
 use App\Models\Section;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 new class extends Component {
-    public $section = '';
 
-    public $name = '';
-    public $display_order = 0;
-    public $description = '';
-    public $status = 1;
+    public SectionForm $form;
 
     #[On('show-section-details')]
     public function getSectionDetails($id)
     {
-        $section = Section::findOrfail($id);
-        $this->section = $section;
-        $this->setData();
+        $section = Section::findOrfail($id)->loadCount('categories');
+
+        $this->form->setData($section);
     }
 
-    public function setData()
-    {
-        $this->name = $this->section->name;
-        $this->display_order = $this->section->display_order;
-        $this->description = $this->section->description;
-        $this->status = $this->section->status;
-    }
 };
 ?>
 
@@ -41,24 +31,24 @@ new class extends Component {
             <div class="modal-details-grid">
                 <div class="detail-item">
                     <span class="detail-label">اسم قسم المنيو</span>
-                    <span class="detail-value" id="show-name">{{ $this->name }}</span>
+                    <span class="detail-value" id="show-name">{{ $this->form->name }}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">حالة التنشيط</span>
-                    <span class="detail-value" id="show-status">{{ $this->status ? 'نشط' : 'غير نشط' }}</span>
+                    <span class="detail-value" id="show-status">{{ $this->form->status ? 'نشط' : 'غير نشط' }}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">عدد الأصناف الرئيسية</span>
-                    {{-- <span class="detail-value" id="show-categories">{{ $this->section->categories->count() }}</span> --}}
+                    <span class="detail-value" id="show-categories">{{ $this->form->section->categories_count ?? 0 }}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">ترتيب العرض</span>
-                    <span class="detail-value" id="show-order">{{ $this->display_order }}</span>
+                    <span class="detail-value" id="show-order">{{ $this->form->display_order }}</span>
                 </div>
             </div>
             <div class="field">
                 <label class="field-label">الوصف</label>
-                <p class="modal-desc-text" id="show-description">{{ $this->description }}</p>
+                <p class="modal-desc-text" id="show-description">{{ $this->form->description }}</p>
             </div>
         </div>
         <div class="modal-foot">

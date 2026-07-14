@@ -1709,6 +1709,11 @@ body.has-drawer-open .drawer-backdrop {
     color: var(--info)
 }
 
+.btn--soft-secondary {
+    background: var(--secondary-soft);
+    color: var(--secondary)
+}
+
 .btn--outline-primary {
     background: transparent;
     border-color: var(--primary);
@@ -5976,6 +5981,66 @@ body.has-drawer-open .drawer-backdrop {
 .table-card-actions {
     display: flex;
     gap: 6px
+}
+
+/* ─── SHOW / DETAILS MODAL GRID ─────────────────────────── */
+
+.show-details-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr
+}
+
+.show-detail-item {
+    background: var(--bg-muted);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 12px 14px
+}
+
+.show-detail-item--full {
+    grid-column: span 2
+}
+
+.show-detail-label {
+    align-items: center;
+    color: var(--t-muted);
+    display: flex;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 5px;
+    letter-spacing: .03em;
+    margin-bottom: 5px;
+    text-transform: uppercase
+}
+
+.show-detail-label svg {
+    flex-shrink: 0;
+    height: 13px;
+    width: 13px
+}
+
+.show-detail-value {
+    color: var(--t-base);
+    font-size: 13.5px;
+    font-weight: 600
+}
+
+.show-detail-notes {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.55;
+    white-space: pre-wrap
+}
+
+@media(max-width:480px) {
+    .show-details-grid {
+        grid-template-columns: 1fr
+    }
+
+    .show-detail-item--full {
+        grid-column: span 1
+    }
 }
 
 /* ─── FILTER TOOLBAR (horizontal) ───────────────────────── */

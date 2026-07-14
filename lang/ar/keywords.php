@@ -14,6 +14,7 @@ return [
     "Items" => "عناصر المينيو",
     "Restaurant" => "ادارة المطعم",
     "Tables" => "الطاولات",
+    "Reservations" => "الحجوزات",
     
 
 

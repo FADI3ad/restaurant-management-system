@@ -13,8 +13,8 @@
         <div class="grid">
             <section class="col-12 card">
 
-                <!--Filter System -->
-                <div class="smart-filter-bar">
+                {{-- Filter System --}}
+                {{-- <div class="smart-filter-bar">
                     <div class="filter-search">
                         <div class="input-icon">
                             <span class="ico">
@@ -46,7 +46,7 @@
                             تصفية
                         </button>
                     </div>
-                </div>
+                </div> --}}
 
 
                 <!-- Table -->

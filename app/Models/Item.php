@@ -16,7 +16,7 @@ class Item extends Model
             'status' => 'boolean',
         ];
     }
-
+            
     public function section()
     {
         return $this->belongsTo(Section::class);

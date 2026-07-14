@@ -1,32 +1,38 @@
 <?php
 
-use App\Models\Subcategory;
-use App\Services\Subcategory\DeleteSubcategoryAction;
+use App\Models\Item;
+use App\Services\Item\DeleteItemAction;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
 new class extends Component {
-    public ?Subcategory $subcategory = null;
+    public ?Item $item = null;
 
-    #[On('confirm-subcategory-delete')]
-    public function getSubcategoryForDeletion($id)
+    #[On('confirm-item-delete')]
+    public function getItemForDeletion($id)
     {
-        $this->subcategory = Subcategory::findOrFail($id);
+        $this->item = Item::findOrFail($id);
     }
 
-    public function delete(DeleteSubcategoryAction $deleteSubcategory)
+    public function delete(DeleteItemAction $deleteItem)
     {
-        $deleteSubcategory($this->subcategory);
+        $deleteItem($this->item);
+
         $this->dispatch('close-delete-modal');
-        $this->dispatch('subcategory-changed');
-        $this->subcategory = null;
+
+        $this->dispatch('item-changed');
+
+        $this->item = null;
     }
 };
 ?>
 
-<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
+
+
+<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-sm">
-        <x-modal-head-component title="تأكيد حذف الصنف الفرعي" />
+        <x-modal-head-component title="تأكيد حذف الوجبة" />
 
         <form wire:submit.prevent="delete">
             <div class="modal-body modal-form-stack">
@@ -43,10 +49,9 @@ new class extends Component {
                         </svg>
                     </div>
                     <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
-                        من حذف الصنف الفرعي؟</h4>
+                        من حذف الوجبة؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف الصنف الفرعي <strong
-                            style="color: var(--t-base);">"{{ $this->subcategory?->name }}"</strong>
+                        سيتم حذف الوجبة <strong style="color: var(--t-base);">"{{ $this->item?->name }}"</strong>
                         نهائياً. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>

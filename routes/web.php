@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubcategoryController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('items', ItemController::class);
-    Route::resource('tables', \App\Http\Controllers\TableController::class);
+    Route::resource('tables', TableController::class);
+    Route::resource('reservation', ReservationController::class);
 
 });

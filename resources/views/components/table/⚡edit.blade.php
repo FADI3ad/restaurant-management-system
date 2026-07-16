@@ -74,10 +74,8 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">حالة الطاولة <span class="req">*</span></label>
                     <select wire:model="form.status" class="select">
-                        <option value="Available">متاح (Available)</option>
-                        <option value="Occupied">مشغول (Occupied)</option>
-                        <option value="Reserved">محجوز (Reserved)</option>
-                        <option value="Maintenance">صيانة (Maintenance)</option>
+                        <option value="Available">متاح</option>
+                        <option value="Maintenance">صيانة</option>
                     </select>
                     @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>

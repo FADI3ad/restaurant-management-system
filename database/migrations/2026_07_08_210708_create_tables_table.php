@@ -17,7 +17,8 @@ return new class extends Migration
             $table->enum('type', ['Public', 'Private'])->default('Public');
             $table->integer('min_capacity')->default(1);
             $table->integer('max_capacity');
-            $table->enum('status', ['Available', 'Occupied', 'Reserved'])->default('Available');
+            $table->enum('status', ['Available', 'Maintenance'])->default('Available');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

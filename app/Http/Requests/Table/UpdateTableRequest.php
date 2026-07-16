@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Table;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTableRequest extends FormRequest
@@ -22,7 +21,7 @@ class UpdateTableRequest extends FormRequest
             'type' => 'required|in:Public,Private',
             'min_capacity' => 'required|integer|min:1',
             'max_capacity' => 'required|integer|gte:min_capacity',
-            'status' => 'required|in:Available,Occupied,Reserved,Maintenance',
+            'status' => 'required|in:Available,Maintenance',
             'notes' => 'nullable|string',
         ];
     }

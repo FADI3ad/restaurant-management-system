@@ -68,8 +68,6 @@ new class extends Component {
                     <label class="field-label">حالة الطاولة <span class="req">*</span></label>
                     <select wire:model="form.status" class="select">
                         <option value="Available">متاح</option>
-                        <option value="Occupied">مشغول</option>
-                        <option value="Reserved">محجوز</option>
                         <option value="Maintenance">صيانة</option>
                     </select>
                     @error('form.status')

@@ -29,6 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/reservation-timeline.css') }}" rel="stylesheet" />
 </head>
 
 

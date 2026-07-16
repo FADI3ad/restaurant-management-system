@@ -77,7 +77,7 @@ return [
         ],
 
         "Reservations" => [
-            "route" => "tables.index",
+            "route" => "reservations.index",
             "svg" => '
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>

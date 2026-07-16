@@ -17,7 +17,7 @@
             </section>
         </div>
 
-        <!-- Create Reservation Modal -->
+        {{-- <!-- Create Reservation Modal -->
         <livewire:reservation.create />
 
         <!-- Edit Reservation Modal -->
@@ -27,7 +27,7 @@
         <livewire:reservation.delete />
 
         <!-- Show Reservation Modal -->
-        <livewire:reservation.show />
+        <livewire:reservation.show /> --}}
 
     </main>
 @endsection

@@ -1,0 +1,814 @@
+/* ============================================================
+   Reservation Timeline — reservation-timeline.css
+   ============================================================ */
+
+/* ── Toolbar ─────────────────────────────────────────────── */
+.rsv-toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.rsv-toolbar-start {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+}
+
+.rsv-toolbar-end {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: 8px;
+}
+
+/* Date navigator */
+.rsv-date-nav {
+    align-items: center;
+    display: flex;
+    gap: 4px;
+}
+
+.rsv-date-nav-btn {
+    align-items: center;
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--t-muted);
+    cursor: pointer;
+    display: flex;
+    height: 34px;
+    justify-content: center;
+    transition: all .18s ease;
+    width: 34px;
+}
+
+.rsv-date-nav-btn:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.rsv-date-nav-btn svg {
+    fill: none;
+    height: 14px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 14px;
+}
+
+.rsv-date-label {
+    align-items: center;
+    background: var(--primary-soft);
+    border: 1px solid color-mix(in oklab, var(--primary) 25%, transparent);
+    border-radius: 8px;
+    color: var(--primary);
+    cursor: default;
+    display: flex;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    gap: 6px;
+    padding: 6px 14px;
+    white-space: nowrap;
+}
+
+.rsv-date-label svg {
+    fill: none;
+    height: 13px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 13px;
+}
+
+/* Search */
+.rsv-search-wrap {
+    flex: 1;
+    max-width: 260px;
+    min-width: 160px;
+    position: relative;
+}
+
+.rsv-search-wrap svg {
+    color: var(--t-light);
+    fill: none;
+    height: 13px;
+    left: 10px;
+    pointer-events: none;
+    position: absolute;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+}
+
+[dir="rtl"] .rsv-search-wrap svg {
+    left: auto;
+    right: 10px;
+}
+
+.rsv-search {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--t-base);
+    font-family: inherit;
+    font-size: 13px;
+    outline: 0;
+    padding: 7px 12px 7px 32px;
+    transition: border-color .18s, box-shadow .18s;
+    width: 100%;
+}
+
+[dir="rtl"] .rsv-search {
+    padding: 7px 32px 7px 12px;
+}
+
+.rsv-search::placeholder {
+    color: var(--t-light);
+}
+
+.rsv-search:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+/* Status filter buttons */
+.rsv-filter-group {
+    align-items: center;
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    padding: 3px;
+    gap: 2px;
+}
+
+.rsv-filter-btn {
+    align-items: center;
+    border-radius: 6px;
+    color: var(--t-muted);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 11.5px;
+    font-weight: 600;
+    gap: 5px;
+    padding: 5px 10px;
+    transition: all .18s ease;
+    white-space: nowrap;
+}
+
+.rsv-filter-btn:hover {
+    background: var(--bg-hover);
+    color: var(--t-base);
+}
+
+.rsv-filter-btn.is-active {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    color: var(--t-base);
+}
+
+.rsv-filter-btn .dot {
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    height: 6px;
+    width: 6px;
+}
+
+.rsv-filter-btn.all.is-active    { color: var(--primary); }
+.rsv-filter-btn.confirmed .dot   { background: var(--success); }
+.rsv-filter-btn.pending .dot     { background: var(--warning); }
+.rsv-filter-btn.cancelled .dot   { background: var(--danger); }
+.rsv-filter-btn.seated .dot      { background: var(--info); }
+
+/* Add button */
+.rsv-add-btn {
+    align-items: center;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px var(--primary-ring);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 6px;
+    padding: 8px 14px;
+    transition: all .18s ease;
+    white-space: nowrap;
+}
+
+.rsv-add-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--primary-ring);
+}
+
+.rsv-add-btn svg {
+    fill: none;
+    height: 14px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+    width: 14px;
+}
+
+/* ── Timeline Shell ──────────────────────────────────────── */
+.rsv-shell {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 280px);
+    min-height: 480px;
+    overflow: hidden;
+}
+
+/* Single container that handles BOTH X and Y scrolling */
+.rsv-scroll-container {
+    flex: 1;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.rsv-scroll-container::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+.rsv-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.rsv-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+.rsv-scroll-container::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* ── Time header row ─────────────────────────────────────── */
+.rsv-head {
+    align-items: stretch;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    min-width: calc(160px + 24 * 80px); /* 2080px */
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+.rsv-head-corner {
+    align-items: center;
+    background: var(--bg-muted);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-shrink: 0;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 12px;
+    width: 160px;
+}
+
+[dir="rtl"] .rsv-head-corner {
+    border-left: none;
+    border-right: 1px solid var(--border);
+}
+
+.rsv-head-corner svg {
+    color: var(--t-muted);
+    fill: none;
+    height: 14px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.75;
+    width: 14px;
+}
+
+.rsv-head-corner span {
+    color: var(--t-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.rsv-time-track {
+    display: flex;
+    flex: 1;
+}
+
+.rsv-time-cell {
+    border-left: 1px solid var(--border-soft);
+    color: var(--t-light);
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    padding: 10px 0;
+    text-align: center;
+    width: 80px;
+}
+
+[dir="rtl"] .rsv-time-cell {
+    border-left: none;
+    border-right: 1px solid var(--border-soft);
+}
+
+.rsv-time-cell:first-child {
+    border-left: none;
+}
+
+[dir="rtl"] .rsv-time-cell:first-child {
+    border-right: none;
+}
+
+/* ── Body (rows) ─────────────────────────────────────────── */
+.rsv-body {
+    display: flex;
+    flex-direction: column;
+    min-width: calc(160px + 24 * 80px); /* 2080px */
+}
+
+.rsv-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.rsv-body::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+/* ── Table row ───────────────────────────────────────────── */
+.rsv-row {
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    min-height: 64px;
+    min-width: calc(160px + 24 * 80px); /* 2080px */
+    position: relative;
+    transition: background .14s ease;
+}
+
+.rsv-row:last-child {
+    border-bottom: none;
+}
+
+.rsv-row:hover {
+    background: color-mix(in oklab, var(--bg-hover) 60%, transparent);
+}
+
+/* Table label */
+.rsv-row-label {
+    align-items: center;
+    background: var(--bg-card);
+    border-left: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 3px;
+    justify-content: center;
+    padding: 8px 12px;
+    position: sticky;
+    left: 0;
+    width: 160px;
+    z-index: 2;
+}
+
+[dir="rtl"] .rsv-row-label {
+    border-left: none;
+    border-right: 1px solid var(--border-soft);
+    left: auto;
+    right: 0;
+}
+
+.rsv-row:hover .rsv-row-label {
+    background: var(--bg-hover);
+}
+
+.rsv-table-num {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+.rsv-table-num svg {
+    color: var(--t-muted);
+    fill: none;
+    flex-shrink: 0;
+    height: 14px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.75;
+    width: 14px;
+}
+
+.rsv-table-name {
+    color: var(--t-base);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+}
+
+.rsv-table-meta {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+.rsv-cap-badge {
+    align-items: center;
+    background: var(--bg-muted);
+    border-radius: 999px;
+    color: var(--t-light);
+    display: inline-flex;
+    font-size: 10px;
+    font-weight: 600;
+    gap: 3px;
+    padding: 2px 7px;
+}
+
+.rsv-cap-badge svg {
+    fill: none;
+    height: 9px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 9px;
+}
+
+.rsv-type-tag {
+    background: var(--purple-soft);
+    border-radius: 999px;
+    color: var(--purple);
+    font-size: 9.5px;
+    font-weight: 600;
+    padding: 2px 7px;
+}
+
+.rsv-type-tag.public {
+    background: var(--teal-soft);
+    color: var(--teal);
+}
+
+/* ── Row grid canvas ─────────────────────────────────────── */
+.rsv-row-canvas {
+    min-width: calc(24 * 80px); /* 1920px */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Hour gridlines (vertical) */
+.rsv-row-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent,
+        transparent calc(80px - 1px),
+        var(--border-soft) calc(80px - 1px),
+        var(--border-soft) 80px
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+[dir="rtl"] .rsv-row-canvas::before {
+    background-image: repeating-linear-gradient(
+        to left,
+        transparent,
+        transparent calc(80px - 1px),
+        var(--border-soft) calc(80px - 1px),
+        var(--border-soft) 80px
+    );
+}
+
+/* ── Reservation block ───────────────────────────────────── */
+.rsv-block {
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    height: calc(100% - 14px);
+    justify-content: center;
+    left: 0;
+    min-width: 48px;
+    overflow: hidden;
+    padding: 4px 8px;
+    position: absolute;
+    top: 7px;
+    transition: filter .18s ease, transform .18s ease, box-shadow .18s ease;
+    z-index: 1;
+}
+
+.rsv-block:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px -3px rgba(0,0,0,0.18);
+    z-index: 2;
+}
+
+/* Status color variants */
+.rsv-block.confirmed {
+    background: color-mix(in oklab, var(--success) 18%, transparent);
+    border: 1.5px solid color-mix(in oklab, var(--success) 35%, transparent);
+    box-shadow: 0 0 0 0 var(--success);
+}
+.rsv-block.confirmed .rsv-block-name { color: var(--success); }
+.rsv-block.confirmed .rsv-block-time { color: color-mix(in oklab, var(--success) 70%, var(--t-muted)); }
+.rsv-block.confirmed .rsv-block-dot  { background: var(--success); }
+
+.rsv-block.pending {
+    background: color-mix(in oklab, var(--warning) 16%, transparent);
+    border: 1.5px solid color-mix(in oklab, var(--warning) 35%, transparent);
+}
+.rsv-block.pending .rsv-block-name { color: var(--warning); }
+.rsv-block.pending .rsv-block-time { color: color-mix(in oklab, var(--warning) 70%, var(--t-muted)); }
+.rsv-block.pending .rsv-block-dot  { background: var(--warning); }
+
+.rsv-block.cancelled {
+    background: color-mix(in oklab, var(--danger) 12%, transparent);
+    border: 1.5px dashed color-mix(in oklab, var(--danger) 35%, transparent);
+    opacity: .75;
+}
+.rsv-block.cancelled .rsv-block-name { color: var(--danger); }
+.rsv-block.cancelled .rsv-block-time { color: color-mix(in oklab, var(--danger) 60%, var(--t-muted)); }
+.rsv-block.cancelled .rsv-block-dot  { background: var(--danger); }
+
+.rsv-block.seated {
+    background: color-mix(in oklab, var(--info) 16%, transparent);
+    border: 1.5px solid color-mix(in oklab, var(--info) 35%, transparent);
+}
+.rsv-block.seated .rsv-block-name { color: var(--info); }
+.rsv-block.seated .rsv-block-time { color: color-mix(in oklab, var(--info) 70%, var(--t-muted)); }
+.rsv-block.seated .rsv-block-dot  { background: var(--info); }
+
+/* Block inner content */
+.rsv-block-dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 6px;
+    width: 6px;
+}
+
+.rsv-block-name {
+    font-family: 'Cairo', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    line-height: 1.2;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.rsv-block-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: .03em;
+    line-height: 1;
+    text-align: center;
+}
+
+.rsv-block-guests {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    font-size: 9.5px;
+    font-weight: 600;
+    gap: 3px;
+    opacity: .8;
+}
+
+.rsv-block-guests svg {
+    fill: none;
+    height: 9px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 9px;
+}
+
+/* ── Now indicator ───────────────────────────────────────── */
+.rsv-now-line {
+    background: var(--danger);
+    bottom: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 2px;
+    z-index: 5;
+}
+
+.rsv-now-line::before {
+    background: var(--danger);
+    border-radius: 50%;
+    content: '';
+    height: 8px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 8px;
+}
+
+/* ── Legend ──────────────────────────────────────────────── */
+.rsv-legend {
+    align-items: center;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 12px;
+}
+
+.rsv-legend-list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.rsv-legend-item {
+    align-items: center;
+    display: flex;
+    gap: 6px;
+}
+
+.rsv-legend-dot {
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 8px;
+    width: 8px;
+}
+
+.rsv-legend-dot.confirmed  { background: var(--success); }
+.rsv-legend-dot.pending    { background: var(--warning); }
+.rsv-legend-dot.cancelled  { background: var(--danger);  }
+.rsv-legend-dot.seated     { background: var(--info);    }
+
+.rsv-legend-label {
+    color: var(--t-muted);
+    font-size: 11.5px;
+    font-weight: 500;
+}
+
+.rsv-count-wrap {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+}
+
+.rsv-count-chip {
+    align-items: center;
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    display: inline-flex;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 5px;
+    padding: 3px 10px;
+    color: var(--t-muted);
+}
+
+.rsv-count-chip .n {
+    color: var(--t-base);
+}
+
+/* ── Tooltip ─────────────────────────────────────────────── */
+.rsv-tooltip {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    display: none;
+    left: 50%;
+    min-width: 190px;
+    padding: 12px 14px;
+    pointer-events: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    z-index: 50;
+}
+
+.rsv-block:hover .rsv-tooltip {
+    display: block;
+}
+
+.rsv-tooltip-row {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    padding: 3px 0;
+}
+
+.rsv-tooltip-row + .rsv-tooltip-row {
+    border-top: 1px solid var(--border-soft);
+    margin-top: 4px;
+    padding-top: 7px;
+}
+
+.rsv-tooltip-ico {
+    color: var(--t-muted);
+    fill: none;
+    flex-shrink: 0;
+    height: 13px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 13px;
+}
+
+.rsv-tooltip-key {
+    color: var(--t-light);
+    font-size: 10.5px;
+    min-width: 50px;
+}
+
+.rsv-tooltip-val {
+    color: var(--t-base);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ── Empty state ─────────────────────────────────────────── */
+.rsv-empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    min-height: 200px;
+    padding: 40px;
+    text-align: center;
+}
+
+.rsv-empty-icon {
+    align-items: center;
+    background: var(--bg-muted);
+    border-radius: 16px;
+    color: var(--t-light);
+    display: flex;
+    height: 56px;
+    justify-content: center;
+    width: 56px;
+}
+
+.rsv-empty-icon svg {
+    fill: none;
+    height: 24px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    width: 24px;
+}
+
+.rsv-empty-title {
+    color: var(--t-base);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.rsv-empty-sub {
+    color: var(--t-muted);
+    font-size: 12.5px;
+    max-width: 28ch;
+}

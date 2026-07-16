@@ -20,6 +20,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('items', ItemController::class);
     Route::resource('tables', TableController::class);
-    Route::resource('reservation', ReservationController::class);
+    Route::resource('reservations', ReservationController::class);
 
 });

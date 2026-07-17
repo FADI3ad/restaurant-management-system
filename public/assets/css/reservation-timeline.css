@@ -237,14 +237,14 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 280px);
-    min-height: 480px;
+    height: auto;
+    max-height: calc(100vh - 280px);
     overflow: hidden;
 }
 
 /* Single container that handles BOTH X and Y scrolling */
 .rsv-scroll-container {
-    flex: 1;
+    max-height: calc(100vh - 280px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -515,15 +515,15 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    height: calc(100% - 14px);
+    gap: 3px;
+    height: calc(100% - 8px);
     justify-content: center;
     left: 0;
     min-width: 48px;
     overflow: hidden;
-    padding: 4px 8px;
+    padding: 4px 10px;
     position: absolute;
-    top: 7px;
+    top: 4px;
     transition: filter .18s ease, transform .18s ease, box-shadow .18s ease;
     z-index: 1;
 }
@@ -572,15 +572,23 @@
 
 /* Block inner content */
 .rsv-block-dot {
+    position: absolute;
+    top: 6px;
+    left: 6px;
     border-radius: 50%;
     flex-shrink: 0;
     height: 6px;
     width: 6px;
 }
 
+[dir="rtl"] .rsv-block-dot {
+    left: auto;
+    right: 6px;
+}
+
 .rsv-block-name {
     font-family: 'Cairo', sans-serif;
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 700;
     letter-spacing: -.01em;
     line-height: 1.2;
@@ -593,31 +601,40 @@
 
 .rsv-block-time {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: .03em;
     line-height: 1;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .rsv-block-guests {
     align-items: center;
+    justify-content: center;
     color: inherit;
     display: flex;
-    font-size: 9.5px;
+    font-size: 10.5px;
     font-weight: 600;
     gap: 3px;
     opacity: .8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .rsv-block-guests svg {
     fill: none;
-    height: 9px;
+    height: 11px;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2;
-    width: 9px;
+    width: 11px;
 }
 
 /* ── Now indicator ───────────────────────────────────────── */

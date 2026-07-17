@@ -46,8 +46,8 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">نوع الطاولة <span class="req">*</span></label>
                     <select wire:model="form.type" class="select">
-                        <option value="Public">عام (Public)</option>
-                        <option value="Private">خاص (Private)</option>
+                        <option value="Public">عام</option>
+                        <option value="Private">خاص</option>
                     </select>
                     @error('form.type')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>

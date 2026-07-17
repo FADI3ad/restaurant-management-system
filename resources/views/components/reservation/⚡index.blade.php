@@ -52,7 +52,6 @@ new class extends Component {
         </div>
     </div> --}}
 
-    {{-- ── Timeline Shell ── --}}
     <div class="rsv-shell">
         <div class="rsv-scroll-container">
 
@@ -75,7 +74,7 @@ new class extends Component {
             
             <div class="rsv-body">
 
-                {{-- Row 1 --}}
+                
                 <div class="rsv-row">
                     <div class="rsv-row-label">
                         <div class="rsv-table-num">
@@ -173,248 +172,15 @@ new class extends Component {
                 </div>
 
 
-                {{-- Row 2 --}}
-                <div class="rsv-row">
-                    <div class="rsv-row-label">
-                        <div class="rsv-table-num">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="3" rx="1" />
-                                <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                            </svg>
-                            <span class="rsv-table-name">طاولة #2</span>
-                        </div>
-                        <div class="rsv-table-meta">
-                            <span class="rsv-cap-badge">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                2–4
-                            </span>
-                            <span class="rsv-type-tag public">عام</span>
-                        </div>
-                    </div>
-                    <div class="rsv-row-canvas">
-                        <div class="rsv-block seated" style="left:240px; width:198px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">عمر يوسف</span>
-                            <span class="rsv-block-time">12:30 – 15:00</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                3 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">عمر يوسف</span>
-                                </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الوقت</span>
-                                    <span class="rsv-tooltip-val">12:30 – 15:00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rsv-block cancelled" style="left:640px; width:118px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">نور علي</span>
-                            <span class="rsv-block-time">18:00 – 19:30</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                2 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">نور علي</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Row 3 --}}
-                <div class="rsv-row">
-                    <div class="rsv-row-label">
-                        <div class="rsv-table-num">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="3" rx="1" />
-                                <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                            </svg>
-                            <span class="rsv-table-name">طاولة #3</span>
-                        </div>
-                        <div class="rsv-table-meta">
-                            <span class="rsv-cap-badge">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                6–8
-                            </span>
-                            <span class="rsv-type-tag">خاص</span>
-                        </div>
-                    </div>
-                    <div class="rsv-row-canvas">
-                        <div class="rsv-block confirmed" style="left:80px; width:238px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">مجموعة الشركة</span>
-                            <span class="rsv-block-time">11:00 – 14:00</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                8 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">مجموعة الشركة</span>
-                                </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الوقت</span>
-                                    <span class="rsv-tooltip-val">11:00 – 14:00</span>
-                                </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الأشخاص</span>
-                                    <span class="rsv-tooltip-val">8 أشخاص</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="rsv-block pending" style="left:800px; width:158px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">رانيا حسن</span>
-                            <span class="rsv-block-time">20:00 – 22:00</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                5 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">رانيا حسن</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Row 4 --}}
-                <div class="rsv-row">
-                    <div class="rsv-row-label">
-                        <div class="rsv-table-num">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="3" rx="1" />
-                                <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                            </svg>
-                            <span class="rsv-table-name">طاولة #4</span>
-                        </div>
-                        <div class="rsv-table-meta">
-                            <span class="rsv-cap-badge">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                2–4
-                            </span>
-                            <span class="rsv-type-tag public">عام</span>
-                        </div>
-                    </div>
-                    <div class="rsv-row-canvas">
-                        {{-- empty row --}}
-                    </div>
-                </div>
-
-                {{-- Row 5 --}}
-                <div class="rsv-row">
-                    <div class="rsv-row-label">
-                        <div class="rsv-table-num">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="3" rx="1" />
-                                <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                            </svg>
-                            <span class="rsv-table-name">طاولة #5</span>
-                        </div>
-                        <div class="rsv-table-meta">
-                            <span class="rsv-cap-badge">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                4–6
-                            </span>
-                            <span class="rsv-type-tag">خاص</span>
-                        </div>
-                    </div>
-                    <div class="rsv-row-canvas">
-                        <div class="rsv-block confirmed" style="left:480px; width:198px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">كريم عادل</span>
-                            <span class="rsv-block-time">16:00 – 18:30</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                6 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">كريم عادل</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
+                
 
             </div>{{-- /rsv-body --}}
         </div>{{-- /rsv-scroll-container --}}
     </div>{{-- /rsv-shell --}}
 
     {{-- ── Legend ── --}}
-    <div class="rsv-legend">
+    {{-- <div class="rsv-legend">
         <div class="rsv-legend-list">
             <div class="rsv-legend-item">
                 <span class="rsv-legend-dot confirmed"></span>
@@ -441,6 +207,6 @@ new class extends Component {
                 الطاولات: <span class="n">5</span>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>

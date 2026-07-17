@@ -27,9 +27,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/reservation-timeline.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}?v={{ time() }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/rtl.css') }}?v={{ time() }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/reservation-timeline.css') }}?v={{ time() }}" rel="stylesheet" />
 </head>
 
 

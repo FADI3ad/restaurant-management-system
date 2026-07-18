@@ -40,20 +40,20 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">اسم الصنف <span class="req">*</span></label>
-                    <input type="text" class="input" id="edit-name" required value="{{ $this->form->name }}"
+                    <input type="text" class="input" id="edit-name" value="{{ $this->form->name }}"
                         wire:model.defer="form.name">
                     @error('form.name')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="field-label">القسم</label>
+                    <label class="field-label">القسم <span class="req">*</span></label>
                     <input type="text" class="input" id="edit-section" value="{{ $this->section }}"
-                        readonly disabled>
+                        readonly >
                 </div>
 
                 <div class="field">
-                    <label class="field-label">ترتيب العرض</label>
+                    <label class="field-label">ترتيب العرض <span class="req">*</span></label>
                     <input type="number" class="input" id="edit-order" min="0"
                         value="{{ $this->form->display_order }}" wire:model.defer="form.display_order">
                     @error('form.display_order')

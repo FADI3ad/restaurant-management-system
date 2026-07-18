@@ -16,4 +16,6 @@ return [
     "Tables" => "الطاولات",
     "Reservations" => "الحجوزات",
     "Cashier" => "صفحة الكاشير",
+    "Status" => "الحالة",
+    
 ];

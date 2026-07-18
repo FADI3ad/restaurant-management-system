@@ -285,5 +285,6 @@ return [
         'work'                     => 'العمل',
         'year'                     => 'السنة',
         "display_order"             => "ترتيب العرض",
+        "section_id"                => "القسم",
     ],
 ];

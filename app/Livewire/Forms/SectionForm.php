@@ -29,6 +29,6 @@ class SectionForm extends Form
 
         $this->description = $section->description;
 
-        $this->status = $section->status;
+        $this->status =  $section->status;
     }
 }

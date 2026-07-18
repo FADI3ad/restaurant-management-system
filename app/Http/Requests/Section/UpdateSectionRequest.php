@@ -22,7 +22,7 @@ class UpdateSectionRequest extends FormRequest
         return [
             'name' => 'required|max:255|min:3|unique:sections,name' . ($id ? ',' . $id : ''),
             'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
+            'display_order' => 'required|integer|min:0|unique:sections,display_order' . ($id ? ',' . $id : ''),
             'status' => 'required|boolean',
         ];
     }

@@ -17,6 +17,7 @@ new class extends Component {
         $section = Section::findOrfail($id);
 
         $this->form->setData($section);
+        
     }
 
     public function update(UpdateSectionAction $updateSection)
@@ -42,7 +43,7 @@ new class extends Component {
             <div class="modal-body modal-form-stack">
                 <div class="field">
                     <label class="field-label">اسم قسم المنيو <span class="req">*</span></label>
-                    <input type="text" class="input" id="edit-name" required value="{{ $this->form->name }}"
+                    <input type="text" class="input" id="edit-name" value="{{ $this->form->name }}"
                         wire:model.defer="form.name">
                     @error('form.name')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -55,7 +56,7 @@ new class extends Component {
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="field-label">ترتيب العرض</label>
+                    <label class="field-label">ترتيب العرض <span class="req">*</span></label>
                     <input type="number" class="input" id="edit-order" min="0"
                         value="{{ $this->form->display_order }}" wire:model.defer="form.display_order">
                     @error('form.display_order')
@@ -83,7 +84,8 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">حالة التنشيط</label>
-                    <select class="select" id="edit-status" wire:model.defer="form.status">
+                    <select class="select" id="edit-status" wire:model.defer="form.status" >
+                       
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>

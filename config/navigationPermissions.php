@@ -4,6 +4,7 @@ return [
     'admin' => [
         'Workspace' => [
             'Dashboard',
+            'Cashier',
         ],
 
         'Resources' => [

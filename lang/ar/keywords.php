@@ -15,9 +15,5 @@ return [
     "Restaurant" => "ادارة المطعم",
     "Tables" => "الطاولات",
     "Reservations" => "الحجوزات",
-    
-
-
-
-
+    "Cashier" => "صفحة الكاشير",
 ];

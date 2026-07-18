@@ -13,6 +13,17 @@ return [
             ',
         ],
 
+        "Cashier" => [
+            "route" => "cashier.index",
+            "svg" => '
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <line x1="12" y1="4" x2="12" y2="20"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                </svg>
+            ',
+        ],
+
     ],
 
     "Resources" => [

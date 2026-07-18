@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Livewire\Forms;
+
+use App\Models\Reservation;
+use Livewire\Form;
+
+class ReservationForm extends Form
+{
+    public ?Reservation $reservation = null;
+
+    public ?string $customer_name = null;
+
+    public ?string $customer_phone = null;
+
+    public ?int $number_of_guests = null;
+
+    public ?string $code = null;
+
+    public ?string $start_time = null;
+
+    public ?string $end_time = null;
+
+    public ?string $date = null;
+
+    public string $status = 'Confirmed';
+
+    public ?int $table_id = null;
+
+    public function setData(Reservation $reservation)
+    {
+        $this->reservation = $reservation;
+
+        $this->customer_name = $reservation->customer_name;
+
+        $this->customer_phone = $reservation->customer_phone;
+
+        $this->number_of_guests = $reservation->number_of_guests;
+
+        $this->code = $reservation->code;
+
+        $this->start_time = $reservation->start_time;
+
+        $this->end_time = $reservation->end_time;
+
+        $this->date = $reservation->date;
+
+        $this->status = $reservation->status;
+
+        $this->table_id = $reservation->table_id;
+    }
+}

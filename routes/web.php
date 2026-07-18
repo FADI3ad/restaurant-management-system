@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('items', ItemController::class);
     Route::resource('tables', TableController::class);
     Route::resource('reservations', ReservationController::class);
+    Route::get('/cashier', function () {
+        return view('cashier');
+    })->name('cashier.index');
 });
 
 Route::get('/test-broadcast', function () {

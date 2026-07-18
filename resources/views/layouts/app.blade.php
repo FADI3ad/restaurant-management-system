@@ -30,6 +30,7 @@
     <link href="{{ asset('assets/css/style.css') }}?v={{ time() }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/rtl.css') }}?v={{ time() }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/reservation-timeline.css') }}?v={{ time() }}" rel="stylesheet" />
+    @vite(['resources/js/app.js'])
 </head>
 
 

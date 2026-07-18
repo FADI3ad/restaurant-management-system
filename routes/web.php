@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TimelineChange;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ReservationController;
@@ -21,5 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('items', ItemController::class);
     Route::resource('tables', TableController::class);
     Route::resource('reservations', ReservationController::class);
+});
 
+Route::get('/test-broadcast', function () {
+    TimelineChange::dispatch(new TimelineChange());
+
+    return 'Event Sent';
 });

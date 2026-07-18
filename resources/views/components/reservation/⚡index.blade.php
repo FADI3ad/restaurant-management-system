@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Reservation;
+use App\Models\Table;
 use Livewire\Component;
 
 new class extends Component {
@@ -8,13 +10,22 @@ new class extends Component {
     public function mount()
     {
         $this->timelineTrack = config('timelineTrack');
+
+        $this->tables();
     }
+
+    public function tables()
+    {
+        return Table::with('reservations')->paginate(10);
+    }
+    
 };
 ?>
 
 <div>
-    {{-- ── Toolbar ── --}}
-    {{-- <div class="rsv-toolbar">
+
+    {{--     
+    <div class="rsv-toolbar">
         <div class="rsv-toolbar-start">
 
             <div class="rsv-date-nav">
@@ -52,7 +63,7 @@ new class extends Component {
         </div>
     </div> --}}
 
-    <div class="rsv-shell">
+    <div class="rsv -shell">
         <div class="rsv-scroll-container">
 
             <div class="rsv-head">
@@ -71,115 +82,63 @@ new class extends Component {
             </div>
 
 
-            
+
             <div class="rsv-body">
 
-                
-                <div class="rsv-row">
-                    <div class="rsv-row-label">
-                        <div class="rsv-table-num">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="3" rx="1" />
-                                <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                            </svg>
-                            <span class="rsv-table-name">طاولة #1</span>
-                        </div>
-                        <div class="rsv-table-meta">
-                            <span class="rsv-cap-badge">
+                @foreach ($this->tables() as $table)
+                    <div class="rsv-row">
+                        <div class="rsv-row-label">
+                            <div class="rsv-table-num">
                                 <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
+                                    <rect x="3" y="11" width="18" height="3" rx="1" />
+                                    <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
                                 </svg>
-                                4–6
-                            </span>
-                            <span class="rsv-type-tag">خاص</span>
-                        </div>
-                    </div>
-                    <div class="rsv-row-canvas">
-                        <div class="rsv-now-line" style="left: 160px;"></div>
-                        {{-- Block: 12:00 – 14:00 = offset 160px, width 160px --}}
-                        <div class="rsv-block confirmed" style="left:160px; width:158px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">أحمد خالد</span>
-                            <span class="rsv-block-time">12:00 – 14:00</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                4 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
+                                <span class="rsv-table-name">{{ $table->table_number }}</span>
+                            </div>
+                            <div class="rsv-table-meta">
+                                <span class="rsv-cap-badge">
+                                    <svg viewBox="0 0 24 24">
                                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                                         <circle cx="9" cy="7" r="4" />
                                     </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">أحمد خالد</span>
-                                </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الوقت</span>
-                                    <span class="rsv-tooltip-val">12:00 – 14:00</span>
-                                </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الأشخاص</span>
-                                    <span class="rsv-tooltip-val">4 أشخاص</span>
-                                </div>
+                                    {{ $table->max_capacity }} - {{ $table->min_capacity }}
+                                </span>
+                                <span class="rsv-type-tag">{{ $table->type }}</span>
                             </div>
                         </div>
-                        {{-- Block: 19:00 – 20:30 --}}
-                        <div class="rsv-block pending" style="left:720px; width:118px;">
-                            <span class="rsv-block-dot"></span>
-                            <span class="rsv-block-name">سارة محمد</span>
-                            <span class="rsv-block-time">19:00 – 20:30</span>
-                            <span class="rsv-block-guests">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                </svg>
-                                2 أشخاص
-                            </span>
-                            <div class="rsv-tooltip">
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                        <circle cx="9" cy="7" r="4" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">العميل</span>
-                                    <span class="rsv-tooltip-val">سارة محمد</span>
+
+
+                        <div class="rsv-row-canvas">
+
+                            @foreach ($table->reservations as $reservation)
+                                <div class="rsv-block confirmed" style="left:160px; width:158px;">
+                                    <span class="rsv-block-dot"></span>
+                                    <span class="rsv-block-name">{{ $reservation->customer_name }}</span>
+                                    <span class="rsv-block-time">{{ $reservation->start_time }} – {{ $reservation->end_time }}</span>
+                                    <span class="rsv-block-guests">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                        </svg>
+                                        {{ $reservation->number_of_guests }} أشخاص
+                                    </span>
                                 </div>
-                                <div class="rsv-tooltip-row">
-                                    <svg class="rsv-tooltip-ico" viewBox="0 0 24 24">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <path d="M12 6v6l4 2" />
-                                    </svg>
-                                    <span class="rsv-tooltip-key">الوقت</span>
-                                    <span class="rsv-tooltip-val">19:00 – 20:30</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
+
+
                     </div>
-                </div>
+                @endforeach
 
 
-               
-                
 
-            </div>{{-- /rsv-body --}}
-        </div>{{-- /rsv-scroll-container --}}
-    </div>{{-- /rsv-shell --}}
 
-    {{-- ── Legend ── --}}
+
+
+            </div>
+        </div>
+    </div>
+
     {{-- <div class="rsv-legend">
         <div class="rsv-legend-list">
             <div class="rsv-legend-item">

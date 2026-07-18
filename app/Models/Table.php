@@ -14,4 +14,10 @@ class Table extends Model
         'status',
         'notes',
     ];
+
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
+            $table->string('customer_name');
+            $table->string('customer_phone')->nullable();
             $table->integer('number_of_guests');
-            $table->string('reservation_code')->unique();
-            $table->dateTime('reservation_start_time');
-            $table->dateTime('reservation_end_time');
+            $table->string('code')->unique();
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->date('date');
             $table->enum('status', ['Confirmed', 'Arrived', 'Cancelled' , 'Completed' , 'No_Show'])->default('Confirmed');
-            $table->foreignId('table_id')->constrained()->onDelete('cascade'); // change constrained to foreignId for better compatibility
+            $table->foreignId('table_id')->constrained('tables')->onDelete('cascade'); // change constrained to foreignId for better compatibility
             $table->timestamps();
         });
     }

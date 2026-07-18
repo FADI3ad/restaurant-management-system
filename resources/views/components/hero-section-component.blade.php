@@ -1,4 +1,4 @@
-@props(['title', 'des'])
+@props(['title', 'des' , 'btnText' ])
 <section class="hero">
     <div class="hero-text">
         <h1 class="hero-title">{{ $title }}</h1>
@@ -19,7 +19,7 @@
             <svg viewBox="0 0 24 24">
                 <path d="M12 5v14M5 12h14" />
             </svg>
-            تقرير جديد
+            {{ $btnText }}
         </button>
     </div>
 </section>

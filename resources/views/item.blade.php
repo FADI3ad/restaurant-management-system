@@ -7,7 +7,7 @@
     <main class="content" x-data="{ addOpen: false, showOpen: false, editOpen: false, deleteOpen: false }">
 
 
-        <x-hero-section-component title="إدارة الوجبات" des="إدارة الوجبات وتعديل حالتها وترتيب ظهورها." />
+        <x-hero-section-component title="إدارة الوجبات" des="إدارة الوجبات وتعديل حالتها وترتيب ظهورها."  btnText="إضافة وجبة"/>
 
 
         <div class="grid">

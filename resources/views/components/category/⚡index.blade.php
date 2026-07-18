@@ -54,9 +54,9 @@ new class extends Component {
         <div style="overflow-x: auto; width: 100%;"><table class="table">
             <thead>
                 <tr>
-                    <th>الفئة</th>
+                    <th>الصنف الرئيسي</th>
                     <th>القسم</th>
-                    <th>عدد الوجبات</th>
+                    <th>عدد الاصناف الفرعية</th>
                     <th>الترتيب</th>
                     <th>الحالة</th>
                     <th>العمليات</th>

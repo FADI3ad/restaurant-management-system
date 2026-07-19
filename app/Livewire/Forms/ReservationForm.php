@@ -19,7 +19,7 @@ class ReservationForm extends Form
 
     public ?string $start_time = null;
 
-    public ?string $end_time = null;
+    public ?string $duration = null;
 
     public ?string $date = null;
 
@@ -41,7 +41,7 @@ class ReservationForm extends Form
 
         $this->start_time = $reservation->start_time;
 
-        $this->end_time = $reservation->end_time;
+        $this->duration = $reservation->duration;
 
         $this->date = $reservation->date;
 

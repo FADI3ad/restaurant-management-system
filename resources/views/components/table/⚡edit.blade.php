@@ -34,7 +34,7 @@ new class extends Component {
     <div class="modal-content modal-md">
         <x-modal-head-component title="تعديل الطاولة" />
         <form wire:submit.prevent="update">
-            <div class="modal-body modal-form-stack">
+            <div class="modal-body modal-form-grid">
                 <div class="field">
                     <label class="field-label">رقم/اسم الطاولة <span class="req">*</span></label>
                     <input wire:model="form.table_number" type="text" class="input" placeholder="مثال: 1, A1...">
@@ -54,21 +54,20 @@ new class extends Component {
                     @enderror
                 </div>
 
-                <div class="field" style="display: flex; gap: 1rem;">
-                    <div style="flex: 1;">
-                        <label class="field-label">أقل سعة <span class="req">*</span></label>
-                        <input wire:model="form.min_capacity" type="number" min="1" class="input" placeholder="1">
-                        @error('form.min_capacity')
-                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div style="flex: 1;">
-                        <label class="field-label">أقصى سعة <span class="req">*</span></label>
-                        <input wire:model="form.max_capacity" type="number" min="1" class="input" placeholder="4">
-                        @error('form.max_capacity')
-                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
-                        @enderror
-                    </div>
+                <div class="field">
+                    <label class="field-label">أقل سعة <span class="req">*</span></label>
+                    <input wire:model="form.min_capacity" type="number" min="1" class="input" placeholder="1">
+                    @error('form.min_capacity')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="field">
+                    <label class="field-label">أقصى سعة <span class="req">*</span></label>
+                    <input wire:model="form.max_capacity" type="number" min="1" class="input" placeholder="4">
+                    @error('form.max_capacity')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="field">
@@ -82,7 +81,7 @@ new class extends Component {
                     @enderror
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label class="field-label">ملاحظات (اختياري)</label>
                     <textarea wire:model="form.notes" class="textarea" placeholder="اكتب أي ملاحظات خاصة بهذه الطاولة..."></textarea>
                     @error('form.notes')

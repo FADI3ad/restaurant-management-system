@@ -22,7 +22,7 @@ class StoreReservationRequest extends FormRequest
             'number_of_guests' => 'required|integer|min:1',
             'code' => 'required|string|unique:reservations,code',
             'start_time' => 'required',
-            'end_time' => 'required',
+            'duration' => 'required|in:1,2,3,4,5,6',
             'date' => 'required|date',
             'status' => 'required|in:Confirmed,Arrived,Cancelled,Completed,No_Show',
             'table_id' => 'required|exists:tables,id',

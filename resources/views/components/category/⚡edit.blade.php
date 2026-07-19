@@ -37,8 +37,8 @@ new class extends Component {
         <x-modal-head-component title="تعديل الصنف الرئيسي" />
 
         <form id="form-edit" wire:submit.prevent="update">
-            <div class="modal-body modal-form-stack">
-                <div class="field">
+            <div class="modal-body modal-form-grid">
+                <div class="field span-2">
                     <label class="field-label">اسم الصنف <span class="req">*</span></label>
                     <input type="text" class="input" id="edit-name" value="{{ $this->form->name }}"
                         wire:model.defer="form.name">
@@ -61,19 +61,19 @@ new class extends Component {
                     @enderror
                 </div>
                 <div class="field">
-                    <label class="field-label">الوصف</label>
-                    <textarea class="textarea" id="edit-description" wire:model.defer="form.description">{{ $this->form->description }}</textarea>
-                    @error('form.description')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="field">
                     <label class="field-label">حالة التنشيط</label>
                     <select class="select" id="edit-status" wire:model.defer="form.status">
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>
                     @error('form.status')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="field span-2">
+                    <label class="field-label">الوصف</label>
+                    <textarea class="textarea" id="edit-description" wire:model.defer="form.description">{{ $this->form->description }}</textarea>
+                    @error('form.description')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>

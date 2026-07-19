@@ -34,9 +34,9 @@ new class extends Component {
     <div class="modal-content modal-md">
         <x-modal-head-component title="إضافة حجز جديد" />
         <form id="form-add" wire:submit.prevent="save">
-            <div class="modal-body modal-form-stack">
+            <div class="modal-body modal-form-grid">
 
-                <div class="field">
+                <div class="field span-2">
                     <label class="field-label">اسم العميل <span class="req">*</span></label>
                     <input wire:model="form.customer_name" type="text" class="input"
                         placeholder="مثال: أحمد محمد...">
@@ -130,9 +130,16 @@ new class extends Component {
                 </div>
 
                 <div class="field">
-                    <label class="field-label">وقت النهاية <span class="req">*</span></label>
-                    <input wire:model="form.end_time" type="time" class="input">
-                    @error('form.end_time')
+                    <label class="field-label">مدة الحجز</label>
+                    <select wire:model="form.duration" class="select">
+                        <option value="1">30 minutes</option>
+                        <option value="2">1 hour</option>
+                        <option value="3">1 hour 30 minutes</option>
+                        <option value="4">2 hours</option>
+                        <option value="5">2 hours 30 minutes</option>
+                        <option value="6">3 hours</option>
+                    </select>
+                    @error('form.duration')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -143,7 +150,7 @@ new class extends Component {
                     @enderror
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label class="field-label">حالة الحجز</label>
                     <select wire:model="form.status" class="select">
                         <option value="Confirmed">مؤكد</option>

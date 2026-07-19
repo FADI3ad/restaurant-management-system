@@ -6,12 +6,15 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Carbon\Carbon;
 new class extends Component {
+
     public $timelineTrack;
+
+    public $timeLineDurationWidth; 
 
     public function mount()
     {
         $this->timelineTrack = config('timelineTrack');
-
+        $this->timeLineDurationWidth = config('timelineDurationWidth');
         $this->tables();
     }
 
@@ -26,21 +29,6 @@ new class extends Component {
         $reservationTime = Carbon::parse($time);
 
         $minutes = $timelineStart->diffInMinutes($reservationTime);
-        $pxPerMinute = 80 / 60;
-
-        return $minutes * $pxPerMinute;
-    }
-
-    public function getReservationWidth($start, $end): float
-    {
-        $start = Carbon::parse($start);
-        $end = Carbon::parse($end);
-
-        if ($end->lt($start)) {
-            $end->addDay();
-        }
-
-        $minutes = $start->diffInMinutes($end);
         $pxPerMinute = 80 / 60;
 
         return $minutes * $pxPerMinute;
@@ -149,7 +137,7 @@ new class extends Component {
                         <div class="rsv-row-canvas">
 
                             @foreach ($table->reservations as $reservation)
-                                <div class="rsv-block confirmed" style="left: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->getReservationWidth($reservation->start_time, $reservation->end_time) }}px;">
+                                <div class="rsv-block confirmed" style="left: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->timeLineDurationWidth[$reservation->duration] ?? '80px' }}px;">
                                     <span class="rsv-block-name">{{ $reservation->customer_name }}</span>
                                     <span class="rsv-block-time">{{ $reservation->start_time }} –
                                         {{ $reservation->end_time }}</span>

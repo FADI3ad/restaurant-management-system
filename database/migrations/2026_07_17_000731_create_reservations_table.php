@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('number_of_guests');
             $table->string('code')->unique();
             $table->time('start_time');
-            $table->time('end_time');
+            $table->enum('duration', ['30 minutes', '1 hour', '1 hour 30 minutes', '2 hours' , '2 hours 30 minutes' , '3 hours'])->default('1 hour');
             $table->date('date');
             $table->enum('status', ['Confirmed', 'Arrived', 'Cancelled' , 'Completed' , 'No_Show'])->default('Confirmed');
             $table->foreignId('table_id')->constrained('tables')->onDelete('cascade'); // change constrained to foreignId for better compatibility

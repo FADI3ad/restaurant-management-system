@@ -15,6 +15,7 @@ new class extends Component {
     {
         $this->timelineTrack = config('timelineTrack');
         $this->timeLineDurationWidth = config('timelineDurationWidth');
+        
         $this->tables();
     }
 
@@ -25,11 +26,13 @@ new class extends Component {
 
     public function getReservationLeft($time): float
     {
-        $timelineStart = Carbon::createFromTime(0, 0);
-        $reservationTime = Carbon::parse($time);
+        // نستخدم createFromFormat بـ UTC صريح في الوقتين
+        // عشان نتجنب أي timezone offset ونحسب الدقائق كـ arithmetic بحت
+        $timelineStart   = Carbon::createFromFormat('H:i', '00:00', 'UTC');
+        $reservationTime = Carbon::createFromFormat('H:i', $time,   'UTC');
 
-        $minutes = $timelineStart->diffInMinutes($reservationTime);
-        $pxPerMinute = 80 / 60;
+        $minutes      = $timelineStart->diffInMinutes($reservationTime);
+        $pxPerMinute  = 80 / 60;
 
         return $minutes * $pxPerMinute;
     }
@@ -88,7 +91,7 @@ new class extends Component {
         </div>
     </div> --}}
 
-    <div class="rsv -shell">
+    <div class="rsv-shell">
 
         <div class="rsv-scroll-container">
 
@@ -137,7 +140,7 @@ new class extends Component {
                         <div class="rsv-row-canvas">
 
                             @foreach ($table->reservations as $reservation)
-                                <div class="rsv-block confirmed" style="left: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->timeLineDurationWidth[$reservation->duration] ?? '80px' }}px;">
+                                <div class="rsv-block confirmed" style="right: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->timeLineDurationWidth[$reservation->duration] }};">
                                     <span class="rsv-block-name">{{ $reservation->customer_name }}</span>
                                     <span class="rsv-block-time">{{ $reservation->start_time }} –
                                         {{ $reservation->end_time }}</span>

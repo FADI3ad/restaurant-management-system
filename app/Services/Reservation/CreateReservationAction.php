@@ -8,6 +8,8 @@ class CreateReservationAction
 {
     public function __invoke(array $data): Reservation
     {
-        return Reservation::create($data);
+        $data['code'] = 'RES-' . str_pad(Reservation::max('id') + 1, 6, '0', STR_PAD_LEFT);
+        $reservation = Reservation::create($data);
+        return $reservation;
     }
 }

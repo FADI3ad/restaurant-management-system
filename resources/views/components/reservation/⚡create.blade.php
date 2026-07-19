@@ -68,7 +68,8 @@ new class extends Component {
 
                 <div class="field">
                     <label class="field-label">عدد الأشخاص <span class="req">*</span></label>
-                    <input wire:model="form.number_of_guests" type="number" class="input" placeholder="0" min="1">
+                    <input wire:model="form.number_of_guests" type="number" class="input" placeholder="0"
+                        min="1">
                     @error('form.number_of_guests')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -86,7 +87,8 @@ new class extends Component {
                         <option value="">-- اختر الطاولة --</option>
                         @foreach ($this->tables() as $table)
                             <option value="{{ $table->id }}">
-                                طاولة {{ $table->table_number }} ({{ $table->type }} — {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص)
+                                طاولة {{ $table->table_number }} ({{ $table->type }} —
+                                {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص)
                             </option>
                         @endforeach
                     </select>
@@ -132,12 +134,12 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">مدة الحجز</label>
                     <select wire:model="form.duration" class="select">
-                        <option value="1">30 minutes</option>
-                        <option value="2">1 hour</option>
-                        <option value="3">1 hour 30 minutes</option>
-                        <option value="4">2 hours</option>
-                        <option value="5">2 hours 30 minutes</option>
-                        <option value="6">3 hours</option>
+                        <option value="30">30 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="90">1 hour 30 minutes</option>
+                        <option value="120">2 hours</option>
+                        <option value="150">2 hours 30 minutes</option>
+                        <option value="180">3 hours</option>
                     </select>
                     @error('form.duration')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"

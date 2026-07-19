@@ -26,15 +26,24 @@ new class extends Component {
 
     public function getReservationLeft($time): float
     {
-        // نستخدم createFromFormat بـ UTC صريح في الوقتين
-        // عشان نتجنب أي timezone offset ونحسب الدقائق كـ arithmetic بحت
+
         $timelineStart   = Carbon::createFromFormat('H:i', '00:00', 'UTC');
         $reservationTime = Carbon::createFromFormat('H:i', $time,   'UTC');
 
         $minutes      = $timelineStart->diffInMinutes($reservationTime);
-        $pxPerMinute  = 80 / 60;
+        $pxPerMinute  = 140 / 60; 
 
         return $minutes * $pxPerMinute;
+    }
+
+    public function makeShowEvent($id)
+    {
+        $this->dispatch('show-reservation', id: $id);
+    }
+
+    public function makeEditEvent($id)
+    {
+        $this->dispatch('load-reservation-edit', id: $id);
     }
 
     public function makeDeleteEvent($id)
@@ -52,7 +61,7 @@ new class extends Component {
 
 <div>
 
-    {{--     
+        
     <div class="rsv-toolbar">
         <div class="rsv-toolbar-start">
 
@@ -83,13 +92,7 @@ new class extends Component {
             </div>
         </div>
 
-        <div class="rsv-toolbar-end">
-            <button type="button" class="rsv-add-btn">
-                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                حجز جديد
-            </button>
-        </div>
-    </div> --}}
+    </div>
 
     <div class="rsv-shell">
 
@@ -140,7 +143,9 @@ new class extends Component {
                         <div class="rsv-row-canvas">
 
                             @foreach ($table->reservations as $reservation)
-                                <div class="rsv-block confirmed" style="right: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->timeLineDurationWidth[$reservation->duration] }};">
+                                <div class="rsv-block confirmed"
+                                    style="right: {{ $this->getReservationLeft($reservation->start_time) }}px; width: {{ $this->timeLineDurationWidth[$reservation->duration] }};"
+                                    @click="await $wire.makeShowEvent({{ $reservation->id }}); showOpen = true;">
                                     <span class="rsv-block-name">{{ $reservation->customer_name }}</span>
                                     <span class="rsv-block-time">{{ $reservation->start_time }} –
                                         {{ $reservation->end_time }}</span>
@@ -151,6 +156,16 @@ new class extends Component {
                                         </svg>
                                         {{ $reservation->number_of_guests }} أشخاص
                                     </span>
+                                    {{-- زر التعديل --}}
+                                    <button type="button" class="rsv-block-edit-btn"
+                                        title="تعديل الحجز"
+                                        @click.stop="await $wire.makeEditEvent({{ $reservation->id }}); editOpen = true;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                    </button>
+                                    {{-- زر الحذف --}}
                                     <button type="button" class="rsv-block-delete-btn"
                                         title="حذف الحجز"
                                         @click.stop="await $wire.makeDeleteEvent({{ $reservation->id }}); deleteOpen = true;">

@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Requests\Reservation\StoreReservationRequest;
+use App\Http\Requests\Reservation\UpdateReservationRequest;
 use App\Livewire\Forms\ReservationForm;
 use App\Models\Table;
-use App\Services\Reservation\CreateReservationAction;
+use App\Services\Reservation\UpdateReservationAction;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 new class extends Component {
     public ReservationForm $form;
@@ -14,13 +15,20 @@ new class extends Component {
         return Table::orderBy('table_number')->get();
     }
 
-    public function save(CreateReservationAction $createReservation)
+    #[On('load-reservation-edit')]
+    public function loadReservation($id)
     {
-        $validated = $this->form->validate(StoreReservationRequest::rulesArray());
+        $reservation = \App\Models\Reservation::findOrFail($id);
+        $this->form->setData($reservation);
+    }
 
-        $createReservation($validated);
+    public function save(UpdateReservationAction $updateReservation)
+    {
+        $validated = $this->form->validate(UpdateReservationRequest::rulesArray());
 
-        $this->dispatch('close-add-modal');
+        $updateReservation($this->form->reservation, $validated);
+
+        $this->dispatch('close-edit-modal');
 
         $this->dispatch('reservation-changed');
 
@@ -29,11 +37,11 @@ new class extends Component {
 };
 ?>
 
-<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false;"
+<div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false"
     x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
-        <x-modal-head-component title="إضافة حجز جديد" />
-        <form id="form-add" wire:submit.prevent="save">
+        <x-modal-head-component title="تعديل الحجز" />
+        <form id="form-edit" wire:submit.prevent="save">
             <div class="modal-body modal-form-grid">
 
                 <div class="field span-2">
@@ -68,8 +76,7 @@ new class extends Component {
 
                 <div class="field">
                     <label class="field-label">عدد الأشخاص <span class="req">*</span></label>
-                    <input wire:model="form.number_of_guests" type="number" class="input" placeholder="0"
-                        min="1">
+                    <input wire:model="form.number_of_guests" type="number" class="input" placeholder="0" min="1">
                     @error('form.number_of_guests')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -134,12 +141,12 @@ new class extends Component {
                 <div class="field">
                     <label class="field-label">مدة الحجز</label>
                     <select wire:model="form.duration" class="select">
-                        <option value="30">30 minutes</option>
-                        <option value="60">1 hour</option>
-                        <option value="90">1 hour 30 minutes</option>
-                        <option value="120">2 hours</option>
-                        <option value="150">2 hours 30 minutes</option>
-                        <option value="180">3 hours</option>
+                        <option value="30">30 دقيقة</option>
+                        <option value="60">ساعة</option>
+                        <option value="90">ساعة ونص</option>
+                        <option value="120">ساعتين</option>
+                        <option value="150">ساعتين ونص</option>
+                        <option value="180">3 ساعات</option>
                     </select>
                     @error('form.duration')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -157,6 +164,9 @@ new class extends Component {
                     <select wire:model="form.status" class="select">
                         <option value="Confirmed">مؤكد</option>
                         <option value="Arrived">وصل</option>
+                        <option value="Cancelled">ملغي</option>
+                        <option value="Completed">مكتمل</option>
+                        <option value="No_Show">لم يحضر</option>
                     </select>
                     @error('form.status')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -171,11 +181,11 @@ new class extends Component {
 
             </div>
             <div class="modal-foot">
-                <button type="button" class="btn btn--ghost" @click="addOpen = false">
+                <button type="button" class="btn btn--ghost" @click="editOpen = false">
                     إلغاء
                 </button>
-                <button type="submit" class="btn btn--primary" @close-add-modal.window="addOpen = false">
-                    حفظ
+                <button type="submit" class="btn btn--primary" @close-edit-modal.window="editOpen = false">
+                    حفظ التعديلات
                 </button>
             </div>
         </form>

@@ -1,0 +1,27 @@
+.spinner {
+    animation: spin .7s linear infinite;
+    border: 2.5px solid var(--bg-muted);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    display: inline-block;
+    height: 22px;
+    width: 22px
+}
+
+.spinner.sm {
+    border-width: 2px;
+    height: 14px;
+    width: 14px
+}
+
+.spinner.lg {
+    border-width: 3px;
+    height: 36px;
+    width: 36px
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(1turn)
+    }
+}

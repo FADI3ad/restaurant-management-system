@@ -1,0 +1,118 @@
+.alert {
+    align-items: start;
+    background: var(--bg-muted);
+    border-left: 3px solid var(--t-muted);
+    border-radius: 10px;
+    color: var(--t-base);
+    display: grid;
+    font-size: 13px;
+    gap: 12px;
+    grid-template-columns: 24px 1fr auto;
+    line-height: 1.5;
+    padding: 14px 16px
+}
+
+.alert+.alert {
+    margin-top: 10px
+}
+
+.alert .ico {
+    border-radius: 6px;
+    color: var(--t-muted);
+    display: grid;
+    flex-shrink: 0;
+    height: 20px;
+    place-items: center;
+    width: 20px
+}
+
+.alert .ico svg {
+    fill: none;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2;
+    width: 14px
+}
+
+.alert .body {
+    min-width: 0
+}
+
+.alert .title {
+    color: var(--t-base);
+    font-weight: 600;
+    margin-bottom: 2px
+}
+
+.alert .close {
+    border-radius: 5px;
+    color: var(--t-light);
+    display: grid;
+    height: 22px;
+    place-items: center;
+    transition: background .16s, color .16s;
+    width: 22px
+}
+
+.alert .close:hover {
+    background: var(--bg-hover);
+    color: var(--t-base)
+}
+
+.alert .close svg {
+    fill: none;
+    height: 12px;
+    stroke: currentColor;
+    stroke-width: 2;
+    width: 12px
+}
+
+.alert.success {
+    background: var(--success-soft);
+    border-left-color: var(--success)
+}
+
+.alert.success .ico {
+    background: color-mix(in oklab, var(--success) 14%, transparent);
+    color: var(--success)
+}
+
+.alert.danger {
+    background: var(--danger-soft);
+    border-left-color: var(--danger)
+}
+
+.alert.danger .ico {
+    background: color-mix(in oklab, var(--danger) 14%, transparent);
+    color: var(--danger)
+}
+
+.alert.warning {
+    background: var(--warning-soft);
+    border-left-color: var(--warning)
+}
+
+.alert.warning .ico {
+    background: color-mix(in oklab, var(--warning) 14%, transparent);
+    color: var(--warning)
+}
+
+.alert.info {
+    background: var(--info-soft);
+    border-left-color: var(--info)
+}
+
+.alert.info .ico {
+    background: color-mix(in oklab, var(--info) 14%, transparent);
+    color: var(--info)
+}
+
+.alert.primary {
+    background: var(--primary-soft);
+    border-left-color: var(--primary)
+}
+
+.alert.primary .ico {
+    background: color-mix(in oklab, var(--primary) 14%, transparent);
+    color: var(--primary)
+}

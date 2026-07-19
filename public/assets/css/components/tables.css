@@ -1,0 +1,119 @@
+.table-scroll {
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch
+}
+
+.table-scroll::-webkit-scrollbar {
+    height: 4px
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--border);
+    color: var(--t-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding: 14px 16px;
+    text-align: left;
+    text-transform: uppercase
+}
+
+.table tbody td {
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 14px;
+    padding: 14px 16px;
+    vertical-align: middle
+}
+
+.table tbody tr:last-child td {
+    border-bottom: 0
+}
+
+.table tbody tr {
+    transition: background-color .16s ease
+}
+
+.table tbody tr:hover td {
+    background: var(--bg-hover)
+}
+
+.table .cell-name {
+    color: var(--t-base);
+    font-weight: 600
+}
+
+.table .cell-date {
+    color: var(--t-muted);
+    font-size: 12px
+}
+
+.table .cell-price {
+    color: var(--t-base);
+    font-weight: 600;
+    text-align: right
+}
+
+.table .cell-price.pos {
+    color: var(--success)
+}
+
+.table .cell-price.neg {
+    color: var(--danger)
+}
+
+.tag {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    line-height: 1;
+    padding: 3px 9px
+}
+
+.tag.t-new {
+    background: var(--purple-soft);
+    color: var(--purple)
+}
+
+.tag.t-used {
+    background: var(--orange-soft);
+    color: var(--orange)
+}
+
+.tag.t-old {
+    background: var(--warning-soft);
+    color: var(--warning)
+}
+
+.tag.t-unavail {
+    background: var(--danger-soft);
+    color: var(--danger)
+}
+
+.tag.t-active {
+    background: var(--success-soft);
+    color: var(--success)
+}
+
+.tag.t-inactive {
+    background: var(--danger-soft);
+    color: var(--danger)
+}
+
+.tag.t-info {
+    background: var(--info-soft);
+    color: var(--info)
+}

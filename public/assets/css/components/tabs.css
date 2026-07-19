@@ -1,0 +1,63 @@
+.tabs {
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px
+}
+
+.tab {
+    border-bottom: 2px solid transparent;
+    color: var(--t-muted);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 14px;
+    position: relative;
+    top: 1px;
+    transition: color .16s, border-color .16s
+}
+
+.tab:hover {
+    color: var(--t-base)
+}
+
+.tab.is-active {
+    border-bottom-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600
+}
+
+.tab .badge {
+    margin-left: 6px
+}
+
+.tabs.pills {
+    background: var(--bg-muted);
+    border-bottom: 0;
+    border-radius: 9px;
+    display: inline-flex;
+    padding: 3px
+}
+
+.tabs.pills .tab {
+    border-bottom: 0;
+    border-radius: 7px;
+    font-size: 12.5px;
+    padding: 7px 12px;
+    top: 0
+}
+
+.tabs.pills .tab.is-active {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-sm);
+    color: var(--t-base)
+}
+
+.tab-panel {
+    display: none
+}
+
+.tab-panel.is-active {
+    animation: rise-in .32s ease both;
+    display: block
+}

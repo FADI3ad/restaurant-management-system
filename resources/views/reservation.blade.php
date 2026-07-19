@@ -19,11 +19,11 @@
             </section>
         </div>
 
-        {{-- <!-- Edit Reservation Modal -->
+        <!-- Edit Reservation Modal -->
         <livewire:reservation.edit />
 
         <!-- Show Reservation Modal -->
-        <livewire:reservation.show /> --}}
+        <livewire:reservation.show />
 
         <!-- Create Reservation Modal -->
         <livewire:reservation.create />

@@ -1,0 +1,360 @@
+.form-grid {
+    display: grid;
+    gap: 18px 22px;
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+.form-grid .span-2 {
+    grid-column: span 2
+}
+
+@media(max-width:720px) {
+    .form-grid {
+        grid-template-columns: 1fr
+    }
+
+    .form-grid .span-2 {
+        grid-column: span 1
+    }
+}
+
+.field {
+    flex-direction: column;
+    min-width: 0
+}
+
+.field,
+.field-label {
+    display: flex;
+    gap: 6px
+}
+
+.field-label {
+    align-items: center;
+    color: var(--t-base);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -.005em
+}
+
+.field-label .req {
+    color: var(--danger)
+}
+
+.field-help {
+    color: var(--t-muted);
+    font-size: 11.5px;
+    line-height: 1.45
+}
+
+.field-error {
+    align-items: center;
+    color: var(--danger);
+    display: flex;
+    font-size: 11.5px;
+    gap: 4px
+}
+
+.input,
+.select,
+.textarea {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--t-base);
+    font-family: inherit;
+    font-size: 13px;
+    outline: 0;
+    padding: 9px 12px;
+    transition: border-color .18s, box-shadow .18s, background .18s;
+    width: 100%
+}
+
+.input::-moz-placeholder,
+.textarea::-moz-placeholder {
+    color: var(--t-light)
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: var(--t-light)
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft)
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled {
+    background: var(--bg-muted);
+    color: var(--t-light);
+    cursor: not-allowed
+}
+
+.input.is-invalid,
+.select.is-invalid,
+.textarea.is-invalid {
+    border-color: var(--danger)
+}
+
+.input.is-invalid:focus,
+.select.is-invalid:focus,
+.textarea.is-invalid:focus {
+    box-shadow: 0 0 0 3px var(--danger-soft)
+}
+
+.textarea {
+    line-height: 1.5;
+    min-height: 96px;
+    resize: vertical
+}
+
+.select {
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27%2364748B%27 stroke-width=%272%27><path d=%27m6 9 6 6 6-6%27/></svg>");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    padding-right: 32px
+}
+
+.input-icon {
+    position: relative
+}
+
+.input-icon .ico {
+    color: var(--t-light);
+    height: 14px;
+    left: 11px;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px
+}
+
+.input-icon .ico svg {
+    fill: none;
+    height: 100%;
+    stroke: currentColor;
+    stroke-width: 2;
+    width: 100%
+}
+
+.input-icon .input {
+    padding-left: 34px
+}
+
+.input-group {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    transition: border-color .18s, box-shadow .18s
+}
+
+.input-group:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft)
+}
+
+.input-group .addon {
+    background: var(--bg-muted);
+    border-right: 1px solid var(--border);
+    color: var(--t-muted);
+    display: grid;
+    font-family: JetBrains Mono, monospace;
+    font-size: 12px;
+    padding: 0 12px;
+    place-items: center
+}
+
+.input-group .input {
+    background: transparent;
+    border: 0;
+    border-radius: 0
+}
+
+.input-group .input:focus {
+    box-shadow: none
+}
+
+.check {
+    align-items: center;
+    color: var(--t-base);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    gap: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.check input {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute
+}
+
+.check .box {
+    background: var(--bg-card);
+    border: 1.5px solid var(--t-light);
+    border-radius: 5px;
+    display: grid;
+    flex-shrink: 0;
+    height: 16px;
+    place-items: center;
+    transition: all .16s;
+    width: 16px
+}
+
+.check input:checked+.box {
+    background: var(--primary);
+    border-color: var(--primary)
+}
+
+.check input:checked+.box:after {
+    border: solid #fff;
+    border-width: 0 1.8px 1.8px 0;
+    content: "";
+    height: 8px;
+    transform: rotate(45deg) translate(-1px, -1px);
+    width: 4px
+}
+
+.check.radio .box {
+    border-radius: 50%
+}
+
+.check.radio input:checked+.box:after {
+    background: #fff;
+    border: 0;
+    border-radius: 50%;
+    height: 7px;
+    transform: none;
+    width: 7px
+}
+
+.check:hover .box {
+    border-color: var(--primary)
+}
+
+.check input:disabled+.box {
+    cursor: not-allowed;
+    opacity: .5
+}
+
+.switch {
+    align-items: center;
+    color: var(--t-base);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    gap: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none
+}
+
+.switch input {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute
+}
+
+.switch .track {
+    background: var(--bg-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    flex-shrink: 0;
+    height: 20px;
+    position: relative;
+    transition: background .2s;
+    width: 34px
+}
+
+.switch .track:after {
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    content: "";
+    height: 14px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    transition: transform .2s cubic-bezier(.2, .7, .2, 1);
+    width: 14px
+}
+
+.switch input:checked+.track {
+    background: var(--primary);
+    border-color: var(--primary)
+}
+
+.switch input:checked+.track:after {
+    transform: translateX(14px)
+}
+
+.form-actions {
+    align-items: center;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 18px
+}
+
+.form-actions .spacer {
+    flex: 1
+}
+
+
+.order-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge-order {
+    background: var(--bg-hover);
+    border: 1px solid var(--border);
+    color: var(--t-base);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.order-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+@media(max-width:480px) {
+
+    .wx-forecast {
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .form-actions {
+        align-items: stretch;
+        flex-direction: column
+    }
+
+    .form-actions .btn {
+        justify-content: center;
+        width: 100%
+    }
+
+}

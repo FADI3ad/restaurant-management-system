@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Requests\Reservation;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateReservationRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public static function rulesArray(): array
+    {
+        return [
+            'customer_name'    => 'required|string|max:255|min:3',
+            'customer_phone'   => 'required|string|max:255',
+            'number_of_guests' => 'required|integer|min:1',
+            'start_time'       => 'required',
+            'duration'         => 'required|in:30,60,90,120,150,180',
+            'date'             => 'required|date',
+            'status'           => 'required|in:Confirmed,Arrived,Cancelled,Completed,No_Show',
+            'table_id'         => 'required|exists:tables,id',
+        ];
+    }
+
+    public function rules(): array
+    {
+        return self::rulesArray();
+    }
+}

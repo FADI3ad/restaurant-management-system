@@ -12,7 +12,7 @@ new class extends Component {
 
     public function tables()
     {
-        return Table::orderBy('table_number')->get();
+        return Table::orderBy('number')->get();
     }
 
     #[On('load-reservation-edit')]
@@ -94,7 +94,7 @@ new class extends Component {
                         <option value="">-- اختر الطاولة --</option>
                         @foreach ($this->tables() as $table)
                             <option value="{{ $table->id }}">
-                                طاولة {{ $table->table_number }} ({{ $table->type }} —
+                                طاولة {{ $table->number }} ({{ $table->type }}{{ $table->location ? ' — ' . $table->location : '' }} —
                                 {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص)
                             </option>
                         @endforeach

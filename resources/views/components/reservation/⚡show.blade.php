@@ -106,7 +106,7 @@ new class extends Component {
                         </div>
                         <div class="rsv-show-field">
                             <span class="rsv-show-label">الطاولة</span>
-                            <span class="rsv-show-value">طاولة {{ $this->reservation->table?->table_number }}</span>
+                            <span class="rsv-show-value">طاولة {{ $this->reservation->table?->number }} {{ $this->reservation->table?->location ? '(' . $this->reservation->table->location . ')' : '' }}</span>
                         </div>
                     </div>
                 </div>

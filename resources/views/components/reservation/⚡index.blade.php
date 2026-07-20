@@ -125,7 +125,12 @@ new class extends Component {
                                     <rect x="3" y="11" width="18" height="3" rx="1" />
                                     <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
                                 </svg>
-                                <span class="rsv-table-name">{{ $table->table_number }}</span>
+                                <span class="rsv-table-name">{{ $table->number }}</span>
+                                @if($table->location)
+                                    <span class="rsv-table-location" style="font-size: 11px; color: var(--t-muted); margin-inline-start: 4px;">
+                                        ({{ $table->location }})
+                                    </span>
+                                @endif
                             </div>
                             <div class="rsv-table-meta">
                                 <span class="rsv-cap-badge">

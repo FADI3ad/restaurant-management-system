@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
- 
+
     public function up(): void
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('table_number')->unique();
+            $table->string('number')->unique();
             $table->enum('type', ['Public', 'Private'])->default('Public'); // convert enum to string for better compatibility
-            $table->integer('min_capacity')->default(1); 
-            $table->integer('max_capacity');
+            $table->unsignedTinyInteger('min_capacity');
+            $table->unsignedTinyInteger('max_capacity');
+            $table->string('location')->nullable();
             $table->enum('status', ['Available', 'Maintenance'])->default('Available'); // convert enum to string for better compatibility
             $table->text('notes')->nullable();
             $table->timestamps();

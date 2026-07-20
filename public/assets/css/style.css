@@ -5832,20 +5832,11 @@ body.has-drawer-open .drawer-backdrop {
     border-bottom-color: color-mix(in oklab, var(--success) 20%, transparent)
 }
 
-.table-card-header--occupied {
-    background: var(--danger-soft);
-    border-bottom-color: color-mix(in oklab, var(--danger) 20%, transparent)
-}
-
-.table-card-header--reserved {
-    background: var(--warning-soft);
-    border-bottom-color: color-mix(in oklab, var(--warning) 20%, transparent)
-}
-
 .table-card-header--maintenance {
-    background: var(--secondary-soft);
-    border-bottom-color: color-mix(in oklab, var(--secondary) 20%, transparent)
+    background: var(--danger-soft);
+    border-bottom-color: color-mix(in oklab, var(--danger) 40%, transparent)
 }
+
 
 .table-card-header-icon {
     align-items: center;

@@ -46,10 +46,6 @@
                     </div>
                 </div> --}}
 
-
-
-
-                
                 <!-- Table Index -->
                 <livewire:table.index />
             </section>

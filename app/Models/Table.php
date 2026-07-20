@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     protected $fillable = [
-        'table_number',
+        'number',
         'type',
         'min_capacity',
         'max_capacity',
+        'location',
         'status',
         'notes',
     ];

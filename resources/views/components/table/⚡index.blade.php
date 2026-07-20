@@ -17,7 +17,7 @@ new class extends Component {
     #[Computed]
     public function tables()
     {
-        return Table::orderBy('table_number')->paginate(15);
+        return Table::orderBy('number')->paginate(15);
     }
 
     #[On('table-changed')]
@@ -57,25 +57,38 @@ new class extends Component {
                             <path d="M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path>
                         </svg>
                     </div>
-                    <span class="table-card-header-title">طاولة #{{ $table->table_number }}</span>
+                    <span class="table-card-header-title">طاولة #{{ $table->number }}</span>
+                    @if ($table->type === 'Private')
+                        <div class="table-private-star" 
+                             style="margin-inline-start: auto; color: var(--warning, #fbbf24); display: flex; align-items: center; justify-content: center;" 
+                             title="طاولة خاصة">
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            </svg>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="table-card-body">
                     <div class="table-card-info">
-                        <div class="table-card-name">{{ $table->type === 'Private' ? 'خاص' : 'عام' }}</div>
+                        <div class="table-card-name">
+                            {{ $table->type === 'Private' ? 'خاص' : 'عام' }}
+                            @if ($table->location)
+                                <span
+                                    style="font-size: 12px; color: var(--t-muted); font-weight: normal; margin-inline-start: 6px;">
+                                    ({{ $table->location }})
+                                </span>
+                            @endif
+                        </div>
                         <div class="table-card-sub">
                             <span>{{ $table->min_capacity }} – {{ $table->max_capacity }} أشخاص</span>
                         </div>
                     </div>
                     @if ($table->status === 'Available')
                         <span class="tag t-active">متاح</span>
-                    @elseif($table->status === 'Occupied')
-                        <span class="tag t-inactive">مشغول</span>
-                    @elseif($table->status === 'Reserved')
-                        <span class="tag t-old">محجوز</span>
-                    @else
+                    @elseif($table->status === 'Maintenance')
                         <span class="tag"
-                            style="background:var(--secondary-soft); color:var(--secondary);">صيانة</span>
+                            style="background:var(--danger-soft); color:var(--secondary);">صيانة</span>
                     @endif
                 </div>
 

@@ -19,7 +19,7 @@ new class extends Component {
 
         $guests = $this->form->number_of_guests;
 
-        $tables = Table::query()
+        return Table::query()
             ->where('status', 'Available')
             ->where('min_capacity', '<=', $guests)
             ->where('max_capacity', '>=', $guests)
@@ -172,7 +172,7 @@ new class extends Component {
                             <option value="">-- اختر الطاولة --</option>
                             @foreach ($this->tables() as $table)
                                 <option value="{{ $table->id }}">
-                                    طاولة {{ $table->table_number }} ({{ $table->type }} —
+                                    طاولة {{ $table->number }} ({{ $table->type }}{{ $table->location ? ' — ' . $table->location : '' }} —
                                     {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص)
                                 </option>
                             @endforeach

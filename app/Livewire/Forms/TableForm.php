@@ -9,13 +9,15 @@ class TableForm extends Form
 {
     public ?Table $table = null;
 
-    public ?string $table_number = null;
+    public ?string $number = null;
 
     public ?string $type = null;
 
     public ?int $min_capacity = null;
 
     public ?int $max_capacity = null;
+
+    public ?string $location = null;
 
     public ?string $status = null;
 
@@ -25,7 +27,7 @@ class TableForm extends Form
     {
         $this->table = $table;
 
-        $this->table_number = $table->table_number;
+        $this->number = $table->number;
 
         $this->type = $table->type;
 
@@ -36,5 +38,7 @@ class TableForm extends Form
         $this->status = $table->status;
 
         $this->notes = $table->notes;
+
+        $this->location = $table->location;
     }
 }

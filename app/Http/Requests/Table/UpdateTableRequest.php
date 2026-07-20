@@ -17,10 +17,11 @@ class UpdateTableRequest extends FormRequest
     public static function rulesArray($id = null)
     {
         return [
-            'table_number' => 'required|string|max:255|unique:tables,table_number,' . $id,
+            'number' => 'required|string|max:255|unique:tables,number,' . $id,
             'type' => 'required|in:Public,Private',
             'min_capacity' => 'required|integer|min:1',
             'max_capacity' => 'required|integer|gte:min_capacity',
+            'location' => 'required|string|max:255',
             'status' => 'required|in:Available,Maintenance',
             'notes' => 'nullable|string',
         ];

@@ -48,7 +48,7 @@ new class extends Component {
                     <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
                         من حذف هذه الطاولة؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف طاولة رقم <strong style="color: var(--t-base);">"{{ $this->table?->table_number }}"</strong>
+                        سيتم حذف طاولة رقم <strong style="color: var(--t-base);">"{{ $this->table?->number }}"</strong>
                         نهائياً. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>

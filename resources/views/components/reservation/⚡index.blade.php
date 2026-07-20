@@ -6,16 +6,15 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Carbon\Carbon;
 new class extends Component {
-
     public $timelineTrack;
 
-    public $timeLineDurationWidth; 
+    public $timeLineDurationWidth;
 
     public function mount()
     {
         $this->timelineTrack = config('timelineTrack');
         $this->timeLineDurationWidth = config('timelineDurationWidth');
-        
+
         $this->tables();
     }
 
@@ -26,12 +25,11 @@ new class extends Component {
 
     public function getReservationLeft($time): float
     {
+        $timelineStart = Carbon::createFromFormat('H:i', '00:00', 'UTC');
+        $reservationTime = Carbon::createFromFormat('H:i', $time, 'UTC');
 
-        $timelineStart   = Carbon::createFromFormat('H:i', '00:00', 'UTC');
-        $reservationTime = Carbon::createFromFormat('H:i', $time,   'UTC');
-
-        $minutes      = $timelineStart->diffInMinutes($reservationTime);
-        $pxPerMinute  = 140 / 60; 
+        $minutes = $timelineStart->diffInMinutes($reservationTime);
+        $pxPerMinute = 140 / 60;
 
         return $minutes * $pxPerMinute;
     }
@@ -61,25 +59,35 @@ new class extends Component {
 
 <div>
 
-        
+
     <div class="rsv-toolbar">
         <div class="rsv-toolbar-start">
 
             <div class="rsv-date-nav">
                 <button type="button" class="rsv-date-nav-btn" title="اليوم السابق">
-                    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
                 </button>
                 <div class="rsv-date-label">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
+                    </svg>
                     الأربعاء، 16 يوليو 2025
                 </div>
                 <button type="button" class="rsv-date-nav-btn" title="اليوم التالي">
-                    <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
                 </button>
             </div>
 
             <div class="rsv-search-wrap">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
                 <input type="text" class="rsv-search" placeholder="بحث عن حجز أو عميل...">
             </div>
 
@@ -126,11 +134,7 @@ new class extends Component {
                                     <path d="M5 14v5M19 14v5M5 8V5a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
                                 </svg>
                                 <span class="rsv-table-name">{{ $table->number }}</span>
-                                @if($table->location)
-                                    <span class="rsv-table-location" style="font-size: 11px; color: var(--t-muted); margin-inline-start: 4px;">
-                                        ({{ $table->location }})
-                                    </span>
-                                @endif
+
                             </div>
                             <div class="rsv-table-meta">
                                 <span class="rsv-cap-badge">
@@ -162,21 +166,23 @@ new class extends Component {
                                         {{ $reservation->number_of_guests }} أشخاص
                                     </span>
                                     {{-- زر التعديل --}}
-                                    <button type="button" class="rsv-block-edit-btn"
-                                        title="تعديل الحجز"
+                                    <button type="button" class="rsv-block-edit-btn" title="تعديل الحجز"
                                         @click.stop="await $wire.makeEditEvent({{ $reservation->id }}); editOpen = true;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                         </svg>
                                     </button>
                                     {{-- زر الحذف --}}
-                                    <button type="button" class="rsv-block-delete-btn"
-                                        title="حذف الحجز"
+                                    <button type="button" class="rsv-block-delete-btn" title="حذف الحجز"
                                         @click.stop="await $wire.makeDeleteEvent({{ $reservation->id }}); deleteOpen = true;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                            </path>
                                         </svg>
                                     </button>
                                 </div>

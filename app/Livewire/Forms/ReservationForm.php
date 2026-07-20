@@ -7,6 +7,7 @@ use Livewire\Form;
 
 class ReservationForm extends Form
 {
+
     public ?Reservation $reservation = null;
 
     public ?string $customer_name = null;
@@ -15,13 +16,13 @@ class ReservationForm extends Form
 
     public ?int $number_of_guests = null;
 
-    public ?string $code = null;
-
     public ?string $start_time = null;
 
     public ?string $duration = null;
 
     public ?string $date = null;
+
+    public ?string $notes = null;
 
     public string $status = 'Confirmed';
 
@@ -37,8 +38,6 @@ class ReservationForm extends Form
 
         $this->number_of_guests = $reservation->number_of_guests;
 
-        $this->code = $reservation->code;
-
         $this->start_time = $reservation->start_time;
 
         $this->duration = $reservation->duration;
@@ -48,5 +47,7 @@ class ReservationForm extends Form
         $this->status = $reservation->status;
 
         $this->table_id = $reservation->table_id;
+
+        $this->notes = $reservation->notes;
     }
 }

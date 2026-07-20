@@ -4,6 +4,7 @@ use App\Http\Requests\Reservation\StoreReservationRequest;
 use App\Livewire\Forms\ReservationForm;
 use App\Models\Table;
 use App\Services\Reservation\CreateReservationAction;
+use Carbon\Carbon;
 use Livewire\Component;
 
 new class extends Component {
@@ -12,21 +13,17 @@ new class extends Component {
     public function tables()
     {
         $date = $this->form->date;
-
         $start = $this->form->start_time;
-
-        $end = Carbon\Carbon::parse($start)->addMinutes($this->form->duration)->format('H:i:s');
-
-        $guests = $this->form->number_of_guests;
+        $end = Carbon::parse($start)->addMinutes((int) $this->form->duration)->format('H:i:s');
 
         return Table::query()
             ->where('status', 'Available')
-            ->where('min_capacity', '<=', $guests)
-            ->where('max_capacity', '>=', $guests)
+            ->where('min_capacity', '<=', $this->form->number_of_guests)
+            ->where('max_capacity', '>=', $this->form->number_of_guests)
             ->whereDoesntHave('reservations', function ($query) use ($date, $start, $end) {
                 $query
                     ->whereDate('date', $date)
-                    ->whereIn('status', ['Confirmed', 'Arrived'])
+                    ->whereIn('status', ['Confirmed', 'Checked_In'])
                     ->whereRaw('start_time < ? AND ADDTIME(start_time, SEC_TO_TIME(duration * 60)) > ?', [$end, $start]);
             })
             ->get();
@@ -100,23 +97,6 @@ new class extends Component {
                 </div>
 
                 <div class="field">
-                    <label class="field-label">نوع الطاولة <span class="req">*</span></label>
-                    <select wire:model.live="form.type" class="select">
-                        <option value="Public">عام</option>
-                        <option value="Private">خاص</option>
-                    </select>
-                    @error('form.type')
-                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg> {{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="field">
                     <label class="field-label">تاريخ الحجز <span class="req">*</span></label>
                     <input wire:model.live="form.date" type="date" class="input">
                     @error('form.date')
@@ -145,14 +125,15 @@ new class extends Component {
                 </div>
 
                 <div class="field">
-                    <label class="field-label">مدة الحجز</label>
+                    <label class="field-label">مدة الحجز <span class="req">*</span></label>
                     <select wire:model.live="form.duration" class="select">
-                        <option value="30">30 minutes</option>
-                        <option value="60">1 hour</option>
-                        <option value="90">1 hour 30 minutes</option>
-                        <option value="120">2 hours</option>
-                        <option value="150">2 hours 30 minutes</option>
-                        <option value="180">3 hours</option>
+                        <option value="">-- اختر المدة --</option>
+                        <option value="30">30 دقيقة</option>
+                        <option value="60">ساعة</option>
+                        <option value="90">ساعة ونص</option>
+                        <option value="120">ساعتين</option>
+                        <option value="150">ساعتين ونص</option>
+                        <option value="180">3 ساعات</option>
                     </select>
                     @error('form.duration')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -165,15 +146,16 @@ new class extends Component {
                     @enderror
                 </div>
 
-                @if ($this->form->date)
+                @if ($this->form->date && $this->form->start_time && $this->form->duration && $this->form->number_of_guests)
                     <div class="field span-2">
                         <label class="field-label">الطاولات المتاحة<span class="req">*</span></label>
                         <select wire:model.live="form.table_id" class="select">
                             <option value="">-- اختر الطاولة --</option>
                             @foreach ($this->tables() as $table)
                                 <option value="{{ $table->id }}">
-                                    طاولة {{ $table->number }} ({{ $table->type }}{{ $table->location ? ' — ' . $table->location : '' }} —
-                                    {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص)
+                                    طاولة {{ $table->number }}
+                                    {{ $table->location ? '(' . $table->location . ')' : '' }} —
+                                    {{ $table->min_capacity }}-{{ $table->max_capacity }} شخص
                                 </option>
                             @endforeach
                         </select>
@@ -193,9 +175,23 @@ new class extends Component {
                     <label class="field-label">حالة الحجز</label>
                     <select wire:model.live="form.status" class="select">
                         <option value="Confirmed">مؤكد</option>
-                        <option value="Arrived">وصل</option>
+                        <option value="Checked_In">وصل</option>
                     </select>
                     @error('form.status')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg> {{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="field span-2">
+                    <label class="field-label">ملاحظات</label>
+                    <textarea wire:model.live="form.notes" class="textarea" placeholder="اكتب أي ملاحظات خاصة بهذا الحجز..."></textarea>
+                    @error('form.notes')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">

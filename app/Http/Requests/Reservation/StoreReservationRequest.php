@@ -17,14 +17,15 @@ class StoreReservationRequest extends FormRequest
     public static function rulesArray(): array
     {
         return [
-            'customer_name' => 'required|string|max:255|min:3',
-            'customer_phone' => 'required|string|max:255',
+            'customer_name'    => 'required|string|max:255|min:3',
+            'customer_phone'   => 'required|string|max:255',
             'number_of_guests' => 'required|integer|min:1',
-            'start_time' => 'required',
-            'duration' => 'required|in:30,60,90,120,150,180',
-            'date' => 'required|date',
-            'status' => 'required|in:Confirmed,Arrived,Cancelled,Completed,No_Show',
-            'table_id' => 'required|exists:tables,id',
+            'start_time'       => 'required',
+            'duration'         => 'required|in:30,60,90,120,150,180',
+            'date'             => 'required|date|after_or_equal:today',
+            'status'           => 'required|in:Confirmed,Checked_In,Cancelled,Completed,No_Show',
+            'notes'            => 'nullable|string|max:1000',
+            'table_id'         => 'required|exists:tables,id',
         ];
     }
 

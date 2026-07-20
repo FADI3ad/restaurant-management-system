@@ -44,7 +44,7 @@
     display: flex;
     height: 34px;
     justify-content: center;
-    transition: all .18s ease;
+    transition: all 0.18s ease;
     width: 34px;
 }
 
@@ -72,7 +72,7 @@
     color: var(--primary);
     cursor: default;
     display: flex;
-    font-family: 'Cairo', sans-serif;
+    font-family: "Cairo", sans-serif;
     font-size: 13px;
     font-weight: 700;
     gap: 6px;
@@ -128,7 +128,9 @@
     font-size: 13px;
     outline: 0;
     padding: 7px 12px 7px 32px;
-    transition: border-color .18s, box-shadow .18s;
+    transition:
+        border-color 0.18s,
+        box-shadow 0.18s;
     width: 100%;
 }
 
@@ -167,7 +169,7 @@
     font-weight: 600;
     gap: 5px;
     padding: 5px 10px;
-    transition: all .18s ease;
+    transition: all 0.18s ease;
     white-space: nowrap;
 }
 
@@ -190,11 +192,21 @@
     width: 6px;
 }
 
-.rsv-filter-btn.all.is-active    { color: var(--primary); }
-.rsv-filter-btn.confirmed .dot   { background: var(--success); }
-.rsv-filter-btn.pending .dot     { background: var(--warning); }
-.rsv-filter-btn.cancelled .dot   { background: var(--danger); }
-.rsv-filter-btn.seated .dot      { background: var(--info); }
+.rsv-filter-btn.all.is-active {
+    color: var(--primary);
+}
+.rsv-filter-btn.confirmed .dot {
+    background: var(--success);
+}
+.rsv-filter-btn.pending .dot {
+    background: var(--warning);
+}
+.rsv-filter-btn.cancelled .dot {
+    background: var(--danger);
+}
+.rsv-filter-btn.seated .dot {
+    background: var(--info);
+}
 
 /* Add button */
 .rsv-add-btn {
@@ -211,7 +223,7 @@
     font-weight: 600;
     gap: 6px;
     padding: 8px 14px;
-    transition: all .18s ease;
+    transition: all 0.18s ease;
     white-space: nowrap;
 }
 
@@ -322,7 +334,7 @@
     color: var(--t-muted);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
@@ -335,10 +347,10 @@
     border-left: 1px solid var(--border-soft);
     color: var(--t-light);
     flex-shrink: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     padding: 10px 0 10px 5px;
     text-align: left;
     width: 70px;
@@ -396,7 +408,7 @@
     min-height: 78px;
     min-width: calc(160px + 48 * 70px); /* 3520px */
     position: relative;
-    transition: background .14s ease;
+    transition: background 0.14s ease;
 }
 
 .rsv-row:last-child {
@@ -457,7 +469,7 @@
     color: var(--t-base);
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
 }
 
 .rsv-table-meta {
@@ -511,7 +523,7 @@
 
 /* Half-hour gridlines: solid every 140px (hour), dashed every 70px (half-hour) */
 .rsv-row-canvas::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background-image:
@@ -525,12 +537,13 @@
         ),
         /* خطوط نص الساعة (منقطة) */
         repeating-linear-gradient(
-            to right,
-            transparent,
-            transparent calc(70px - 1px),
-            color-mix(in oklab, var(--border-soft) 50%, transparent) calc(70px - 1px),
-            color-mix(in oklab, var(--border-soft) 50%, transparent) 70px
-        );
+                to right,
+                transparent,
+                transparent calc(70px - 1px),
+                color-mix(in oklab, var(--border-soft) 50%, transparent)
+                    calc(70px - 1px),
+                color-mix(in oklab, var(--border-soft) 50%, transparent) 70px
+            );
     pointer-events: none;
     z-index: 0;
 }
@@ -548,7 +561,8 @@
             to left,
             transparent,
             transparent calc(70px - 1px),
-            color-mix(in oklab, var(--border-soft) 50%, transparent) calc(70px - 1px),
+            color-mix(in oklab, var(--border-soft) 50%, transparent)
+                calc(70px - 1px),
             color-mix(in oklab, var(--border-soft) 50%, transparent) 70px
         );
 }
@@ -569,14 +583,17 @@
     padding: 8px 12px;
     position: absolute;
     top: 6px;
-    transition: filter .18s ease, transform .18s ease, box-shadow .18s ease;
+    transition:
+        filter 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
     z-index: 1;
 }
 
 .rsv-block:hover {
     filter: brightness(1.06);
     transform: translateY(-1px);
-    box-shadow: 0 4px 14px -3px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.18);
     z-index: 2;
     overflow: visible;
 }
@@ -598,7 +615,9 @@
     position: absolute;
     right: -6px;
     top: -6px;
-    transition: opacity .15s ease, transform .15s ease;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
     width: 20px;
     z-index: 10;
 }
@@ -639,7 +658,9 @@
     position: absolute;
     left: -6px;
     top: -6px;
-    transition: opacity .15s ease, transform .15s ease;
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
     width: 20px;
     z-index: 10;
 }
@@ -663,40 +684,63 @@
     transform: scale(1.15);
 }
 
-
 .rsv-block.confirmed {
     background: color-mix(in oklab, var(--success) 18%, transparent);
     border: 1.5px solid color-mix(in oklab, var(--success) 35%, transparent);
     box-shadow: 0 0 0 0 var(--success);
 }
-.rsv-block.confirmed .rsv-block-name { color: var(--success); }
-.rsv-block.confirmed .rsv-block-time { color: color-mix(in oklab, var(--success) 70%, var(--t-muted)); }
-.rsv-block.confirmed .rsv-block-dot  { background: var(--success); }
+.rsv-block.confirmed .rsv-block-name {
+    color: var(--success);
+}
+.rsv-block.confirmed .rsv-block-time {
+    color: color-mix(in oklab, var(--success) 70%, var(--t-muted));
+}
+.rsv-block.confirmed .rsv-block-dot {
+    background: var(--success);
+}
 
 .rsv-block.pending {
     background: color-mix(in oklab, var(--warning) 16%, transparent);
     border: 1.5px solid color-mix(in oklab, var(--warning) 35%, transparent);
 }
-.rsv-block.pending .rsv-block-name { color: var(--warning); }
-.rsv-block.pending .rsv-block-time { color: color-mix(in oklab, var(--warning) 70%, var(--t-muted)); }
-.rsv-block.pending .rsv-block-dot  { background: var(--warning); }
+.rsv-block.pending .rsv-block-name {
+    color: var(--warning);
+}
+.rsv-block.pending .rsv-block-time {
+    color: color-mix(in oklab, var(--warning) 70%, var(--t-muted));
+}
+.rsv-block.pending .rsv-block-dot {
+    background: var(--warning);
+}
 
 .rsv-block.cancelled {
     background: color-mix(in oklab, var(--danger) 12%, transparent);
     border: 1.5px dashed color-mix(in oklab, var(--danger) 35%, transparent);
-    opacity: .75;
+    opacity: 0.75;
 }
-.rsv-block.cancelled .rsv-block-name { color: var(--danger); }
-.rsv-block.cancelled .rsv-block-time { color: color-mix(in oklab, var(--danger) 60%, var(--t-muted)); }
-.rsv-block.cancelled .rsv-block-dot  { background: var(--danger); }
+.rsv-block.cancelled .rsv-block-name {
+    color: var(--danger);
+}
+.rsv-block.cancelled .rsv-block-time {
+    color: color-mix(in oklab, var(--danger) 60%, var(--t-muted));
+}
+.rsv-block.cancelled .rsv-block-dot {
+    background: var(--danger);
+}
 
 .rsv-block.seated {
     background: color-mix(in oklab, var(--info) 16%, transparent);
     border: 1.5px solid color-mix(in oklab, var(--info) 35%, transparent);
 }
-.rsv-block.seated .rsv-block-name { color: var(--info); }
-.rsv-block.seated .rsv-block-time { color: color-mix(in oklab, var(--info) 70%, var(--t-muted)); }
-.rsv-block.seated .rsv-block-dot  { background: var(--info); }
+.rsv-block.seated .rsv-block-name {
+    color: var(--info);
+}
+.rsv-block.seated .rsv-block-time {
+    color: color-mix(in oklab, var(--info) 70%, var(--t-muted));
+}
+.rsv-block.seated .rsv-block-dot {
+    background: var(--info);
+}
 
 /* Block inner content */
 .rsv-block-dot {
@@ -715,10 +759,10 @@
 }
 
 .rsv-block-name {
-    font-family: 'Cairo', sans-serif;
+    font-family: "Cairo", sans-serif;
     font-size: 13.5px;
     font-weight: 800;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     line-height: 1.25;
     overflow: hidden;
     text-align: center;
@@ -728,10 +772,10 @@
 }
 
 .rsv-block-time {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: .03em;
+    letter-spacing: 0.03em;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
@@ -749,7 +793,7 @@
     font-size: 11px;
     font-weight: 700;
     gap: 4px;
-    opacity: .85;
+    opacity: 0.85;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -780,7 +824,7 @@
 .rsv-now-line::before {
     background: var(--danger);
     border-radius: 50%;
-    content: '';
+    content: "";
     height: 8px;
     left: 50%;
     position: absolute;
@@ -821,10 +865,18 @@
     width: 8px;
 }
 
-.rsv-legend-dot.confirmed  { background: var(--success); }
-.rsv-legend-dot.pending    { background: var(--warning); }
-.rsv-legend-dot.cancelled  { background: var(--danger);  }
-.rsv-legend-dot.seated     { background: var(--info);    }
+.rsv-legend-dot.confirmed {
+    background: var(--success);
+}
+.rsv-legend-dot.pending {
+    background: var(--warning);
+}
+.rsv-legend-dot.cancelled {
+    background: var(--danger);
+}
+.rsv-legend-dot.seated {
+    background: var(--info);
+}
 
 .rsv-legend-label {
     color: var(--t-muted);
@@ -844,7 +896,7 @@
     border: 1px solid var(--border);
     border-radius: 20px;
     display: inline-flex;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     font-weight: 600;
     gap: 5px;
@@ -977,11 +1029,11 @@
     align-items: center;
     color: var(--t-muted);
     display: flex;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 13px;
     font-weight: 600;
     gap: 8px;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
 }
 
 .rsv-show-code svg {
@@ -1000,15 +1052,30 @@
     border-radius: 20px;
     font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: .03em;
+    letter-spacing: 0.03em;
     padding: 4px 12px;
 }
 
-.rsv-show-status.rsv-status--confirmed  { background: color-mix(in oklab, var(--success) 15%, transparent); color: var(--success); }
-.rsv-show-status.rsv-status--arrived    { background: color-mix(in oklab, var(--info) 15%, transparent);    color: var(--info);    }
-.rsv-show-status.rsv-status--cancelled  { background: color-mix(in oklab, var(--danger) 15%, transparent);  color: var(--danger);  }
-.rsv-show-status.rsv-status--completed  { background: color-mix(in oklab, var(--primary) 15%, transparent); color: var(--primary); }
-.rsv-show-status.rsv-status--no_show    { background: color-mix(in oklab, var(--warning) 15%, transparent); color: var(--warning); }
+.rsv-show-status.rsv-status--confirmed {
+    background: color-mix(in oklab, var(--success) 15%, transparent);
+    color: var(--success);
+}
+.rsv-show-status.rsv-status--arrived {
+    background: color-mix(in oklab, var(--info) 15%, transparent);
+    color: var(--info);
+}
+.rsv-show-status.rsv-status--cancelled {
+    background: color-mix(in oklab, var(--danger) 15%, transparent);
+    color: var(--danger);
+}
+.rsv-show-status.rsv-status--completed {
+    background: color-mix(in oklab, var(--primary) 15%, transparent);
+    color: var(--primary);
+}
+.rsv-show-status.rsv-status--no_show {
+    background: color-mix(in oklab, var(--warning) 15%, transparent);
+    color: var(--warning);
+}
 
 /* Sections */
 .rsv-show-section {
@@ -1026,7 +1093,7 @@
     font-size: 11.5px;
     font-weight: 700;
     gap: 8px;
-    letter-spacing: .04em;
+    letter-spacing: 0.04em;
     padding: 9px 14px;
     text-transform: uppercase;
 }
@@ -1066,7 +1133,7 @@
     border-right: 1px solid var(--border-soft);
 }
 
-.rsv-show-field:nth-last-child(-n+2) {
+.rsv-show-field:nth-last-child(-n + 2) {
     border-bottom: none;
 }
 
@@ -1086,7 +1153,7 @@
     color: var(--t-light);
     font-size: 10.5px;
     font-weight: 600;
-    letter-spacing: .03em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
 }
 
@@ -1113,7 +1180,7 @@
 .rsv-show-empty svg {
     fill: none;
     height: 36px;
-    opacity: .4;
+    opacity: 0.4;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;

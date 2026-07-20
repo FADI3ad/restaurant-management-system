@@ -140,15 +140,6 @@ new class extends Component {
 
         <div class="modal-foot">
             <button type="button" class="btn btn--ghost" @click="showOpen = false">إغلاق</button>
-            <button type="button" class="btn btn--primary"
-                @click="showOpen = false; await $wire.$parent.makeEditEvent({{ $this->table?->id }}); editOpen = true;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    style="width:15px;height:15px;margin-inline-end:6px;">
-                    <path d="M12 20h9" />
-                    <path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z" />
-                </svg>
-                تعديل
-            </button>
         </div>
     </div>
 </div>

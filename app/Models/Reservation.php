@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     protected $fillable = [
+        'number',
         'customer_name',
         'customer_phone',
         'number_of_guests',
-        'code',
         'start_time',
         'duration',
         'date',
+        'notes',
         'status',
         'table_id',
     ];
@@ -32,5 +33,10 @@ class Reservation extends Model
         return \Carbon\Carbon::createFromFormat('H:i', $this->start_time, 'UTC')
             ->addMinutes((int) ($this->duration ?? 60))
             ->format('H:i');
+    }
+
+    public function table()
+    {
+        return $this->belongsTo(Table::class);
     }
 }

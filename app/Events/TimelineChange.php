@@ -15,7 +15,7 @@ class TimelineChange implements ShouldBroadcastNow
 
     public function __construct()
     {
-
+        
     }
 
     public function broadcastOn(): array

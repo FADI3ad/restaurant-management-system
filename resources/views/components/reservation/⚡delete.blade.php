@@ -1,9 +1,10 @@
 <?php
 
+use App\Events\TimelineChange;
 use App\Models\Reservation;
 use App\Services\Reservation\DeleteReservationAction;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 new class extends Component {
     public ?Reservation $reservation = null;
@@ -23,6 +24,8 @@ new class extends Component {
         $this->dispatch('reservation-changed');
 
         $this->reservation = null;
+
+        TimelineChange::dispatch();
     }
 };
 ?>

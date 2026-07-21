@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TimelineChange;
 use App\Http\Requests\Reservation\StoreReservationRequest;
 use App\Livewire\Forms\ReservationForm;
 use App\Models\Table;
@@ -40,6 +41,8 @@ new class extends Component {
         $this->dispatch('reservation-changed');
 
         $this->form->reset();
+
+        TimelineChange::dispatch();
     }
 };
 ?>

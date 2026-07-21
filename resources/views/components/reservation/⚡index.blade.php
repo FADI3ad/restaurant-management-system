@@ -20,7 +20,11 @@ new class extends Component {
 
     public function tables()
     {
-        return Table::with('reservations')->paginate(10);
+        return Table::whereHas('reservations', function ($query) {
+            $query->where('status', '!=', 'Cancelled');
+        })
+            ->orderBy('number')
+            ->paginate(12);
     }
 
     public function getReservationLeft($time): float
@@ -52,7 +56,7 @@ new class extends Component {
     #[On('reservation-changed')]
     public function refreshTimeline()
     {
-        // re-render triggers tables() automatically
+        $this->tables();
     }
 };
 ?>

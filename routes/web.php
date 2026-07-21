@@ -27,8 +27,3 @@ Route::middleware(['auth'])->group(function () {
     })->name('cashier.index');
 });
 
-Route::get('/test-broadcast', function () {
-    TimelineChange::dispatch(new TimelineChange());
-
-    return 'Event Sent';
-});

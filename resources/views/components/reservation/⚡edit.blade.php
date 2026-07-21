@@ -6,6 +6,7 @@ use App\Models\Table;
 use App\Services\Reservation\UpdateReservationAction;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use App\Events\TimelineChange;
 
 new class extends Component {
     public ReservationForm $form;
@@ -33,6 +34,8 @@ new class extends Component {
         $this->dispatch('reservation-changed');
 
         $this->form->reset();
+
+        TimelineChange::dispatch();
     }
 };
 ?>

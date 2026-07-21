@@ -7,11 +7,12 @@ return [
             'Cashier',
         ],
 
-        'Resources' => [
+        'Menu Management' => [
             'Sections',
             'Categories',
             'Subcategories',
             'Items',
+            'Offers'
         ],
 
         'Restaurant' => [

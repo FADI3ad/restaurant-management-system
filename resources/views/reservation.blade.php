@@ -3,7 +3,7 @@
 @section('shell-class', 'shell')
 @section('main-class', 'main')
 @section('content')
-    <main class="content" x-data="{ addOpen: false, editOpen: false, deleteOpen: false, showOpen: false }">
+    <main class="content" x-data="{ addOpen: false, editOpen: false, deleteOpen: false, showOpen: false, orderOpen: false }">
 
         <x-hero-section-component title="إدارة الحجوزات"
             des="تابع حجوزات الطاولات، وأضف حجوزات جديدة، وأدر حالتها بكل سهولة." 
@@ -30,6 +30,9 @@
 
         <!-- Delete Reservation Modal -->
         <livewire:reservation.delete />
+
+        <!-- Order Now Modal -->
+        <livewire:reservation.order />
 
     </main>
 @endsection

@@ -7,7 +7,7 @@ declare(strict_types=1);
 return [
     "Workspace" => "مساحة العمل",
     "Dashboard" => "لوحة التحكم",
-    "Resources" => "ادارة المينيو",
+    "Menu Management" => "ادارة المينيو",
     "Sections" => "اقسام المينيو",
     "Categories" => "الاصناف الرئيسية",
     "Subcategories" => "الاصناف الفرعية",
@@ -17,5 +17,6 @@ return [
     "Reservations" => "الحجوزات",
     "Cashier" => "صفحة الكاشير",
     "Status" => "الحالة",
+    "Offers" => "العروض",
     
 ];

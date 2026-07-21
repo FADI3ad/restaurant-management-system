@@ -2,7 +2,7 @@
 
 <div class="modal-head">
     <h3 class="modal-title">{{ $title }}</h3>
-    <span class="modal-close" @click="addOpen = false; showOpen = false ; editOpen = false; deleteOpen = false">
+    <span class="modal-close" @click="addOpen = false; showOpen = false ; editOpen = false; deleteOpen = false; orderOpen = false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
             stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>

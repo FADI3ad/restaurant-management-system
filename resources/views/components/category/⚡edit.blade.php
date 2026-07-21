@@ -3,19 +3,18 @@
 use App\Http\Requests\Category\UpdateCategoryRequest;
 use App\Livewire\Forms\CategoryForm;
 use App\Models\Category;
+use App\Models\Section;
 use App\Services\Category\UpdateCategoryAction;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
     public CategoryForm $form;
-    public $section = '';
 
     #[On('edit-category-details')]
     public function getCategoryDetails($id)
     {
         $category = Category::findOrFail($id);
-        $this->section = $category->section->name ?? '';
         $this->form->setData($category);
     }
 
@@ -24,13 +23,17 @@ new class extends Component {
         $validated = $this->form->validate(UpdateCategoryRequest::rulesArray($this->form->category->id ?? null));
 
         $updateCategory($this->form->category, $validated);
-        
+
         $this->dispatch('close-edit-modal');
         $this->dispatch('category-changed');
     }
+
+    public function sections()
+    {
+        return Section::orderBy('display_order')->get();
+    }
 };
 ?>
-
 
 <div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false">
     <div class="modal-content modal-md">
@@ -48,8 +51,15 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">القسم <span class="req">*</span></label>
-                    <input type="text" class="input" id="edit-section" value="{{ $this->section }}"
-                        readonly >
+                    <select class="select" id="edit-section" wire:model.defer="form.section_id">
+                        <option value="">اختر القسم</option>
+                        @foreach ($this->sections() as $section)
+                            <option value="{{ $section->id }}">{{ $section->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('form.section_id')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="field">

@@ -33,7 +33,7 @@ class SubcategoryForm extends Form
 
         $this->status = $subcategory->status;
 
-        $this->section_id = $subcategory->section_id;
+        $this->section_id = $subcategory->category?->section_id;
 
         $this->category_id = $subcategory->category_id;
     }

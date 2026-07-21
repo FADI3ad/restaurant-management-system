@@ -8,7 +8,6 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component {
-    
     public SectionForm $form;
 
     #[On('edit-section-details')]
@@ -17,7 +16,6 @@ new class extends Component {
         $section = Section::findOrfail($id);
 
         $this->form->setData($section);
-        
     }
 
     public function update(UpdateSectionAction $updateSection)
@@ -25,7 +23,7 @@ new class extends Component {
         $validated = $this->form->validate(UpdateSectionRequest::rulesArray($this->form->section->id ?? null));
 
         $updateSection($this->form->section, $validated);
-        
+
         $this->dispatch('close-edit-modal');
 
         $this->dispatch('section-changed');
@@ -71,7 +69,7 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">حالة التنشيط</label>
-                    <select class="select" id="edit-status" wire:model.defer="form.status" >
+                    <select class="select" wire:model.defer="form.status">
                         <option value="1">نشط</option>
                         <option value="0">غير نشط</option>
                     </select>

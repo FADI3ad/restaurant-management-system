@@ -9,7 +9,7 @@ use Livewire\Component;
 
 new class extends Component {
     public SubcategoryForm $form;
-    
+
     public function save(CreateSubcategoryAction $createSubcategory)
     {
         $validated = $this->form->validate(StoreSubcategoryRequest::rulesArray());
@@ -23,19 +23,25 @@ new class extends Component {
 
     public function sections()
     {
-        return Section::all();
+        return Section::where('status', true)->orderBy('display_order')->get();
     }
 
-    public function categories($id)
+    public function categories($sectionId = null)
     {
-       return Category::where('section_id', $id)->get();
+        return Category::query()
+            ->when($sectionId, function ($q) use ($sectionId) {
+                $q->where('section_id', $sectionId);
+            })
+            ->where('status', true)
+            ->orderBy('display_order')
+            ->get();
     }
-}
+};
 ?>
 
 <div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
     <div class="modal-content modal-md">
-        <x-modal-head-component title="إضافة صنف رئيسي فرعية جديدة" />
+        <x-modal-head-component title="إضافة صنف فرعي جديد" />
         <form id="form-add" wire:submit.prevent="save">
             <div class="modal-body modal-form-grid">
                 <div class="field span-2">
@@ -47,8 +53,8 @@ new class extends Component {
                 </div>
                 <div class="field">
                     <label class="field-label">القسم</label>
-                    <select wire:model.live="form.section_id" class="select" >
-                        <option value="" wire:click="$set('form.section_id', null)">اختر القسم</option>
+                    <select wire:model.live="form.section_id" class="select" wire:change="$set('form.category_id', null)">
+                        <option value="">اختر القسم</option>
                         @foreach ($this->sections() as $section)
                             <option value="{{ $section->id }}">{{ $section->name }}</option>
                         @endforeach
@@ -57,25 +63,22 @@ new class extends Component {
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
-                @if ($this->form->section_id)
-                    <div class="field">
-                        <label class="field-label">الصنف الرئيسي</label>
-                        <select wire:model="form.category_id" class="select" >
-                            <option value="" wire:click="$set('form.category_id', null)">اختر الصنف الرئيسي</option>
-                            @foreach ($this->categories($this->form->section_id) as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('form.category_id')
-                            <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
-                        @enderror
-                    </div>
-                @endif
+                <div class="field">
+                    <label class="field-label">الصنف الرئيسي <span class="req">*</span></label>
+                    <select wire:model="form.category_id" class="select">
+                        <option value="">اختر الصنف الرئيسي</option>
+                        @foreach ($this->categories($this->form->section_id) as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('form.category_id')
+                        <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="field">
-                    <label class="field-label">ترتيب العرض</label>
-                    <input wire:model="form.display_order" type="number" class="input" placeholder="0" min="0"
-                        value="0">
+                    <label class="field-label">ترتيب العرض <span class="req">*</span></label>
+                    <input wire:model="form.display_order" type="number" class="input" placeholder="0" min="0">
                     @error('form.display_order')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
@@ -92,7 +95,7 @@ new class extends Component {
                 </div>
                 <div class="field span-2">
                     <label class="field-label">الوصف</label>
-                    <textarea wire:model="form.description" class="textarea" placeholder="اكتب وصفاً للفئة الفرعية..."></textarea>
+                    <textarea wire:model="form.description" class="textarea" placeholder="اكتب وصفاً للصنف الفرعي..."></textarea>
                     @error('form.description')
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror

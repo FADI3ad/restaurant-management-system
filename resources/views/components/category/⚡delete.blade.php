@@ -24,11 +24,10 @@ new class extends Component {
 };
 ?>
 
-
-
-<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
+<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-sm">
-        <x-modal-head-component title="تأكيد حذف الفئة" />
+        <x-modal-head-component title="تأكيد حذف الصنف الرئيسي" />
 
         <form wire:submit.prevent="delete">
             <div class="modal-body modal-form-stack">
@@ -44,11 +43,10 @@ new class extends Component {
                             <line x1="12" y1="17" x2="12.01" y2="17"></line>
                         </svg>
                     </div>
-                    <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد
-                        من حذف الفئة؟</h4>
+                    <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد من حذف الصنف الرئيسي؟</h4>
                     <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
-                        سيتم حذف الفئة <strong style="color: var(--t-base);">"{{ $this->category?->name }}"</strong>
-                        نهائياً. جميع الوجبات التابعة لها قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
+                        سيتم حذف الصنف الرئيسي <strong style="color: var(--t-base);">"{{ $this->category?->name }}"</strong>
+                        نهائياً. جميع الأصناف الفرعية والوجبات التابعة له قد تتأثر. هذا الإجراء لا يمكن التراجع عنه!
                     </p>
                 </div>
             </div>

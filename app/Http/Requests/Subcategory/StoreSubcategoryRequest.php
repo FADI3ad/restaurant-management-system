@@ -20,9 +20,9 @@ class StoreSubcategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|min:3|unique:subcategories,name',
-            'section_id' =>'required|exists:sections,id',
+            'section_id' => 'nullable|exists:sections,id',
             'description' => 'nullable|max:1000',
-            'display_order' => 'nullable|integer|min:0',
+            'display_order' => 'required|integer|min:0',
             'status' => 'required|boolean',
             'category_id' => 'required|exists:categories,id',
         ];

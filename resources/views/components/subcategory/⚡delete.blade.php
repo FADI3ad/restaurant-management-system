@@ -19,12 +19,13 @@ new class extends Component {
         $deleteSubcategory($this->subcategory);
         $this->dispatch('close-delete-modal');
         $this->dispatch('subcategory-changed');
-        $this->subcategory = null;
+        $this->section = null;
     }
 };
 ?>
 
-<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false">
+<div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-sm">
         <x-modal-head-component title="تأكيد حذف الصنف الفرعي" />
 

@@ -12,6 +12,7 @@ return [
             'Categories',
             'Subcategories',
             'Items',
+            'FullMenu',
             'Offers'
         ],
 

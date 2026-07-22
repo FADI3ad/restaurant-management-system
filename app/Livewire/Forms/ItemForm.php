@@ -25,6 +25,8 @@ class ItemForm extends Form
 
     public ?int $subcategory_id = null;
 
+    public $image = null;
+
     public function setData(Item $item)
     {
         $this->item = $item;
@@ -37,12 +39,18 @@ class ItemForm extends Form
 
         $this->description = $item->description;
 
-        $this->status = $item->status;
-
-        $this->section_id = $item->section_id;
-
-        $this->category_id = $item->category_id;
+        $this->status = (bool) $item->status;
 
         $this->subcategory_id = $item->subcategory_id;
+
+        $item->loadMissing('subcategory.category');
+        if ($item->subcategory) {
+            $this->category_id = $item->subcategory->category_id;
+            if ($item->subcategory->category) {
+                $this->section_id = $item->subcategory->category->section_id;
+            }
+        }
+        
+        $this->image = null;
     }
 }

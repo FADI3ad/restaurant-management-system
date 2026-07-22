@@ -12,7 +12,7 @@ new class extends Component {
     #[On('show-item-details')]
     public function getItemDetails($id)
     {
-        $item = Item::with('subcategory')->findOrFail($id);
+        $item = Item::with('subcategory.category')->findOrFail($id);
 
         $this->form->setData($item);
     }
@@ -20,14 +20,17 @@ new class extends Component {
 };
 ?>
 
-
-
 <div id="modal-show" class="modal-overlay is-active" x-show="showOpen" x-cloak @click.self="showOpen = false"
     x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
         <x-modal-head-component title="تفاصيل الوجبة" />
 
         <div class="modal-body modal-form-stack">
+            @if($this->form->item?->image)
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <img src="{{ asset('storage/' . $this->form->item->image) }}" alt="{{ $this->form->name }}" style="max-height: 180px; border-radius: 12px; object-fit: cover; border: 1px solid var(--b-card);">
+                </div>
+            @endif
             <div class="modal-details-grid">
                 <div class="detail-item">
                     <span class="detail-label">اسم الوجبة</span>
@@ -35,11 +38,15 @@ new class extends Component {
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">السعر</span>
-                    <span class="detail-value" id="show-price">{{ $this->form->price ? number_format($this->form->price, 2) : '-' }}</span>
+                    <span class="detail-value" id="show-price">{{ $this->form->price ? number_format($this->form->price, 2) . ' ر.س' : '-' }}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">الصنف الفرعي</span>
                     <span class="detail-value" id="show-subcategory">{{ $this->form->item?->subcategory?->name ?? '-' }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">الصنف الرئيسي</span>
+                    <span class="detail-value" id="show-category">{{ $this->form->item?->subcategory?->category?->name ?? '-' }}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">ترتيب العرض</span>
@@ -52,7 +59,7 @@ new class extends Component {
             </div>
             <div class="field">
                 <label class="field-label">الوصف</label>
-                <p class="modal-desc-text" id="show-description">{{ $this->form->description }}</p>
+                <p class="modal-desc-text" id="show-description">{{ $this->form->description ?? 'لا يوجد وصف.' }}</p>
             </div>
         </div>
         <div class="modal-foot">

@@ -17,16 +17,6 @@ class Item extends Model
         ];
     }
             
-    public function section()
-    {
-        return $this->belongsTo(Section::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);

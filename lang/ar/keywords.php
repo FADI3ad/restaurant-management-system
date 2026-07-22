@@ -12,6 +12,7 @@ return [
     "Categories" => "الاصناف الرئيسية",
     "Subcategories" => "الاصناف الفرعية",
     "Items" => "عناصر المينيو",
+    "FullMenu" => "عرض المينيو الكامل",
     "Restaurant" => "ادارة المطعم",
     "Tables" => "الطاولات",
     "Reservations" => "الحجوزات",

@@ -7,23 +7,29 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
 #[Guarded(['id'])]
-#[Table('items')]
-class Item extends Model
+#[Table('orders')]
+class Order extends Model
 {
     protected function casts(): array
     {
         return [
-            'status' => 'boolean',
+            'total_amount' => 'decimal:2',
         ];
     }
-            
-    public function subcategory()
+
+    public function reservation()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Reservation::class);
     }
 
-    public function orderItems()
+    public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function recalcTotal(): void
+    {
+        $this->total_amount = $this->items()->sum('subtotal');
+        $this->save();
     }
 }

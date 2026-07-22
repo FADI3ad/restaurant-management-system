@@ -4,6 +4,7 @@ use App\Events\TimelineChange;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubcategoryController;
@@ -17,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('home');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
     Route::resource('sections', SectionController::class);
     Route::resource('categories', CategoryController::class);

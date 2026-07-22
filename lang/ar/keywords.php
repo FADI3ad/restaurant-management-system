@@ -16,6 +16,7 @@ return [
     "Restaurant" => "ادارة المطعم",
     "Tables" => "الطاولات",
     "Reservations" => "الحجوزات",
+    "Orders" => "طلبات اليوم",
     "Cashier" => "صفحة الكاشير",
     "Status" => "الحالة",
     "Offers" => "العروض",

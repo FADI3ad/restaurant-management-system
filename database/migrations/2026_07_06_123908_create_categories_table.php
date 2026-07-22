@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->foreignId('section_id')->constrained()->cascadeOnDelete();
             $table->unique(['section_id', 'name']);
+            $table->unique(['section_id', 'display_order']);
             $table->timestamps();
         });
     }

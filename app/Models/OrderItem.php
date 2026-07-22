@@ -7,23 +7,23 @@ use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
 #[Guarded(['id'])]
-#[Table('items')]
-class Item extends Model
+#[Table('order_items')]
+class OrderItem extends Model
 {
     protected function casts(): array
     {
         return [
-            'status' => 'boolean',
+            'unit_price' => 'decimal:2',
+            'subtotal' => 'decimal:2',
         ];
     }
-            
-    public function subcategory()
+    public function order()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function orderItems()
+    public function item()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsTo(Item::class);
     }
 }

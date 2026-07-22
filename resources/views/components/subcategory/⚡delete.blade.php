@@ -19,7 +19,7 @@ new class extends Component {
         $deleteSubcategory($this->subcategory);
         $this->dispatch('close-delete-modal');
         $this->dispatch('subcategory-changed');
-        $this->section = null;
+        $this->subcategory = null;
     }
 };
 ?>

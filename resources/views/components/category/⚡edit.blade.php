@@ -20,7 +20,7 @@ new class extends Component {
 
     public function update(UpdateCategoryAction $updateCategory)
     {
-        $validated = $this->form->validate(UpdateCategoryRequest::rulesArray($this->form->category->id ?? null));
+        $validated = $this->form->validate(UpdateCategoryRequest::rulesArray($this->form->category->id ?? null, $this->form->section_id));
 
         $updateCategory($this->form->category, $validated);
 
@@ -35,7 +35,8 @@ new class extends Component {
 };
 ?>
 
-<div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false">
+<div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
         <x-modal-head-component title="تعديل الصنف الرئيسي" />
 

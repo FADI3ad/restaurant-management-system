@@ -39,7 +39,8 @@ new class extends Component {
 };
 ?>
 
-<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false">
+<div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
         <x-modal-head-component title="إضافة صنف فرعي جديد" />
         <form id="form-add" wire:submit.prevent="save">

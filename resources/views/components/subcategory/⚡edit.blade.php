@@ -46,7 +46,8 @@ new class extends Component {
 };
 ?>
 
-<div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false">
+<div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false"
+    x-transition.opacity.duration.200ms>
     <div class="modal-content modal-md">
         <x-modal-head-component title="تعديل الصنف الفرعي" />
 

@@ -1842,3 +1842,49 @@
     pointer-events: none;
 }
 
+/* ── Order modal extras (real menu) ──────────────────────── */
+
+/* Item image in card */
+.order-menu-card-img {
+    width: 100%;
+    height: 72px;
+    overflow: hidden;
+    background: var(--bg-muted);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.order-menu-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.order-menu-card:hover .order-menu-card-img img {
+    transform: scale(1.05);
+}
+
+/* Category/subcategory tag */
+.order-menu-card-cat {
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+}
+
+/* Save success badge */
+.order-saved-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--success-soft);
+    color: var(--success);
+    border: 1px solid var(--success);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    margin: 8px 12px 0;
+}
+

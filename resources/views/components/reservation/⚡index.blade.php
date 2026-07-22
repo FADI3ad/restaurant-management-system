@@ -53,6 +53,11 @@ new class extends Component {
         $this->dispatch('confirm-reservation-delete', $id);
     }
 
+    public function makeOrderEvent(int $id): void
+    {
+        $this->dispatch('load-order', reservationId: $id);
+    }
+
     #[On('reservation-changed')]
     public function refreshTimeline()
     {
@@ -171,7 +176,7 @@ new class extends Component {
                                     </span>
                                     {{-- زر الطلب --}}
                                     <button type="button" class="rsv-block-order-btn" title="طلب وجبات"
-                                        @click.stop="orderOpen = true;">
+                                        @click.stop="await $wire.makeOrderEvent({{ $reservation->id }}); orderOpen = true;">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />

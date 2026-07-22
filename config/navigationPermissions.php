@@ -17,6 +17,7 @@ return [
         ],
 
         'Restaurant' => [
+            'Orders',
             'Tables',
             'Reservations',
         ],

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Table;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Reservation extends Model
 {
@@ -18,6 +20,13 @@ class Reservation extends Model
         'status',
         'table_id',
     ];
+    protected function casts(): array
+    {
+        return [
+            'number_of_guests' => 'integer',
+            'duration' => 'integer',
+        ];
+    }
 
     public function getStartTimeAttribute($value)
     {
@@ -38,5 +47,10 @@ class Reservation extends Model
     public function table()
     {
         return $this->belongsTo(Table::class);
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
     }
 }

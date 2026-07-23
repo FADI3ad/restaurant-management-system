@@ -555,7 +555,7 @@
             transparent,
             transparent calc(140px - 1px),
             var(--border-soft) calc(140px - 1px),
-            var(--border-soft) 140px
+            var(--border-soft) 140px    
         ),
         repeating-linear-gradient(
             to left,

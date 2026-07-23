@@ -12,7 +12,7 @@
 
 
     <!-- Main Container -->
-    <div class="pos-container">
+    <div class="pos-container anim-fade-up">
         
         <!-- RIGHT COLUMN: Menu & Items -->
         <div class="pos-menu-side">

@@ -5,6 +5,7 @@ return [
         'Workspace' => [
             'Dashboard',
             'Cashier',
+            'Settings',
         ],
 
         'Menu Management' => [

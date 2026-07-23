@@ -4,7 +4,7 @@
 @section('main-class', 'main')
 @section('content')
     <main class="content">
-        <section class="hero">
+        <section class="hero anim-fade-up">
             <div class="hero-text">
                 <span class="eyebrow" id="heroDate"></span>
                 <h1 class="hero-title">
@@ -35,7 +35,7 @@
         </section>
         {{-- <x-hero-section-component title="" des="" /> --}}
 
-        <section class="kpi-grid" aria-label="Key metrics">
+        <section class="kpi-grid anim-stagger" aria-label="Key metrics">
 
             <x-home-article-card-component />
 

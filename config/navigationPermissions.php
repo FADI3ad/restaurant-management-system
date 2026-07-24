@@ -5,7 +5,6 @@ return [
         'Workspace' => [
             'Dashboard',
             'Cashier',
-            'Settings',
         ],
 
         'Menu Management' => [
@@ -21,6 +20,18 @@ return [
             'Orders',
             'Tables',
             'Reservations',
+        ],
+
+        'Finance' => [
+            'Expenses',
+        ],
+
+        'Users' => [
+            'Users',
+        ],
+
+        'System' => [
+            'Settings',
         ],
     ],
 ];

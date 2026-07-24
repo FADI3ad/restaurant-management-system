@@ -9,7 +9,9 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
+    Route::resource('users', UserController::class);
+    Route::resource('expenses', ExpenseController::class);
     Route::resource('sections', SectionController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);

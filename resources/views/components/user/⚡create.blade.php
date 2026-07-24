@@ -12,7 +12,7 @@ new class extends Component {
     {
         $validated = $this->form->validate(StoreUserRequest::rulesArray());
 
-        $createUser($validated['form']);
+        $createUser($validated);
 
         $this->dispatch('close-add-modal');
         $this->dispatch('user-changed');

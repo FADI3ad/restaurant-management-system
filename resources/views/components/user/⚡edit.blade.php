@@ -24,7 +24,7 @@ new class extends Component {
 
         $validated = $this->form->validate(UpdateUserRequest::rulesArray($this->form->user->id));
 
-        $updateUser($this->form->user, $validated['form']);
+        $updateUser($this->form->user, $validated);
 
         $this->dispatch('close-edit-modal');
         $this->dispatch('user-changed');

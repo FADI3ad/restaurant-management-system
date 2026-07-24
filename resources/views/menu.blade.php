@@ -678,7 +678,7 @@
                                 <div class="menu-items-grid">
                                     @forelse($subcategory->items as $item)
                                         <div class="item-card-box" 
-                                            x-show="matchesSearch('{{ addslashes($item->name) }}', '{{ addslashes($item->description ?? '') }}', '{{ addslashes($subcategory->name) }}', '{{ addslashes($category->name) }}', '{{ addslashes($section->name) }}')">
+                                            x-show="matchesSearch({{ json_encode($item->name) }}, {{ json_encode($item->description ?? '') }}, {{ json_encode($subcategory->name) }}, {{ json_encode($category->name) }}, {{ json_encode($section->name) }})">
                                             
                                             <div class="item-img-container">
                                                 @if($item->image)

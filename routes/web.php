@@ -10,6 +10,8 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\CashierController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,15 +27,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('users', UserController::class);
     Route::resource('expenses', ExpenseController::class);
+    Route::resource('offers', OfferController::class);
     Route::resource('sections', SectionController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('items', ItemController::class);
     Route::resource('tables', TableController::class);
     Route::resource('reservations', ReservationController::class);
-    Route::get('/cashier', function () {
-        return view('cashier');
-    })->name('cashier.index');
+    Route::get('/cashier', [CashierController::class, 'index'])->name('cashier.index');
+    Route::post('/cashier/orders', [CashierController::class, 'store'])->name('cashier.store');
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');

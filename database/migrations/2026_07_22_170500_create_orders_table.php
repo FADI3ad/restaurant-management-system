@@ -11,9 +11,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
+            $table->string('customer_phone')->nullable();
+            $table->enum('type', ['takeaway', 'dinein', 'delivery'])->default('takeaway');
+            $table->string('payment_method')->default('cash');
             $table->text('notes')->nullable();
             $table->string('status')->default('pending');
+            $table->decimal('subtotal', 10, 2)->default(0);
+            $table->decimal('tax', 10, 2)->default(0);
+            $table->decimal('discount', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2)->default(0);
             $table->timestamps();
         });

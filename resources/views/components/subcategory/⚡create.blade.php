@@ -52,9 +52,9 @@ new class extends Component {
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
-                <div class="field">
+                <div class="field" wire:key="create-section-field">
                     <label class="field-label">القسم</label>
-                    <select wire:model.live="form.section_id" class="select" wire:change="$set('form.category_id', null)">
+                    <select id="create-section" wire:model.live="form.section_id" class="select" wire:change="$set('form.category_id', null)">
                         <option value="">اختر القسم</option>
                         @foreach ($this->sections() as $section)
                             <option value="{{ $section->id }}">{{ $section->name }}</option>
@@ -64,9 +64,9 @@ new class extends Component {
                         <div class="field-error"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> {{ $message }}</div>
                     @enderror
                 </div>
-                <div class="field">
+                <div class="field" wire:key="create-category-field">
                     <label class="field-label">الصنف الرئيسي <span class="req">*</span></label>
-                    <select wire:model="form.category_id" class="select">
+                    <select id="create-category" wire:model="form.category_id" class="select">
                         <option value="">اختر الصنف الرئيسي</option>
                         @foreach ($this->categories($this->form->section_id) as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

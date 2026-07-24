@@ -32,8 +32,10 @@
     <link href="{{ asset('assets/css/rtl.css') }}?v={{ time() }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/reservation-timeline.css') }}?v={{ time() }}" rel="stylesheet" />
     @vite(['resources/js/app.js'])
+    @livewireStyles
 
     <style>
+        [x-cloak] { display: none !important; }
         :root[data-theme="light"] {
             @if(setting('primary_color'))
                 --primary: {{ setting('primary_color') }} !important;
@@ -86,7 +88,7 @@
             @include('parts.footer')
         </div>
     </div>
-
+    @livewireScripts
 </body>
 
 </html>

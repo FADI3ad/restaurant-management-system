@@ -13,13 +13,11 @@ class Order extends Model
     protected function casts(): array
     {
         return [
+            'subtotal'     => 'decimal:2',
+            'tax'          => 'decimal:2',
+            'discount'     => 'decimal:2',
             'total_amount' => 'decimal:2',
         ];
-    }
-
-    public function reservation()
-    {
-        return $this->belongsTo(Reservation::class);
     }
 
     public function items()
@@ -29,7 +27,20 @@ class Order extends Model
 
     public function recalcTotal(): void
     {
-        $this->total_amount = $this->items()->sum('subtotal');
+        $this->subtotal     = $this->items()->sum('subtotal');
+        $this->tax          = round($this->subtotal * 0.15, 2);
+        $this->total_amount = $this->subtotal + $this->tax - $this->discount;
         $this->save();
+    }
+
+    public static function generateNumber(): string
+    {
+        $prefix = 'ORD-' . now()->format('ymd');
+        $last   = static::where('number', 'like', $prefix . '-%')
+                        ->orderByDesc('id')
+                        ->value('number');
+
+        $seq = $last ? ((int) substr($last, -3)) + 1 : 1;
+        return $prefix . '-' . str_pad($seq, 3, '0', STR_PAD_LEFT);
     }
 }

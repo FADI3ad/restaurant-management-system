@@ -202,7 +202,7 @@
                                 <td style="padding: 14px 12px; text-align: center;">
                                     <div style="display: flex; justify-content: center; gap: 8px;">
                                         <button 
-                                            @click="editOpen = true; editData = { id: {{ $expense->id }}, title: '{{ addslashes($expense->title) }}', category: '{{ $expense->category }}', amount: '{{ $expense->amount }}', expense_date: '{{ \Carbon\Carbon::parse($expense->expense_date)->format('Y-m-d') }}', notes: '{{ addslashes($expense->notes ?? '') }}' }"
+                                            @click="editOpen = true; editData = { id: {{ $expense->id }}, title: {{ json_encode($expense->title) }}, category: {{ json_encode($expense->category) }}, amount: {{ json_encode($expense->amount) }}, expense_date: {{ json_encode(\Carbon\Carbon::parse($expense->expense_date)->format('Y-m-d')) }}, notes: {{ json_encode($expense->notes ?? '') }} }"
                                             class="btn btn--ghost" 
                                             style="padding: 6px 10px; border-radius: 6px; font-size: 0.85rem;"
                                             title="تعديل"
@@ -210,7 +210,7 @@
                                             ✏️
                                         </button>
                                         <button 
-                                            @click="deleteOpen = true; deleteData = { id: {{ $expense->id }}, title: '{{ addslashes($expense->title) }}' }"
+                                            @click="deleteOpen = true; deleteData = { id: {{ $expense->id }}, title: {{ json_encode($expense->title) }} }"
                                             class="btn btn--ghost" 
                                             style="padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; color: #ef4444;"
                                             title="حذف"
@@ -239,130 +239,130 @@
     </div>
 
     <!-- Modal Add Expense -->
-    <div x-show="addOpen" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px;" x-cloak>
-        <div @click.away="addOpen = false" style="background: var(--bg-card, #fff); color: var(--text-color); width: 100%; max-width: 540px; border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border-color, #eee);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color, #eee); padding-bottom: 12px;">
-                <h3 style="font-size: 1.2rem; font-weight: 700; margin: 0;">تسجيل مصروف جديد</h3>
-                <button @click="addOpen = false" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">&times;</button>
-            </div>
-
+    <div id="modal-add" class="modal-overlay is-active" x-show="addOpen" x-cloak @click.self="addOpen = false;"
+        x-transition.opacity.duration.200ms>
+        <div class="modal-content modal-md">
+            <x-modal-head-component title="تسجيل مصروف جديد" />
             <form method="POST" action="{{ route('expenses.store') }}">
                 @csrf
-                <div style="display: flex; flex-direction: column; gap: 16px;">
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">عنوان المصروف <span style="color:red;">*</span></label>
-                        <input type="text" name="title" required placeholder="مثال: فاتورة كهرباء الفرع الرئيسي" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
+                <div class="modal-body modal-form-grid">
+                    <div class="field span-2">
+                        <label class="field-label">عنوان المصروف <span class="req">*</span></label>
+                        <input type="text" name="title" required class="input" placeholder="مثال: فاتورة كهرباء الفرع الرئيسي">
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                        <div>
-                            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">نوع / فئة المصروف <span style="color:red;">*</span></label>
-                            <select name="category" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
-                                <option value="electricity">⚡ كهرباء</option>
-                                <option value="water">💧 مياه</option>
-                                <option value="gas">🔥 غاز</option>
-                                <option value="rent">🏢 إيجار</option>
-                                <option value="maintenance">🛠️ صيانة</option>
-                                <option value="supplies">📦 مستلزمات وتشغيل</option>
-                                <option value="salaries">💼 رواتب وأجور</option>
-                                <option value="other">📌 أخرى</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">المبلغ (ج.م) <span style="color:red;">*</span></label>
-                            <input type="number" step="0.01" min="0.01" name="amount" required placeholder="0.00" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
-                        </div>
+                    <div class="field">
+                        <label class="field-label">نوع / فئة المصروف <span class="req">*</span></label>
+                        <select name="category" required class="select">
+                            <option value="electricity">⚡ كهرباء</option>
+                            <option value="water">💧 مياه</option>
+                            <option value="gas">🔥 غاز</option>
+                            <option value="rent">🏢 إيجار</option>
+                            <option value="maintenance">🛠️ صيانة</option>
+                            <option value="supplies">📦 مستلزمات وتشغيل</option>
+                            <option value="salaries">💼 رواتب وأجور</option>
+                            <option value="other">📌 أخرى</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="field-label">المبلغ (ج.م) <span class="req">*</span></label>
+                        <input type="number" step="0.01" min="0.01" name="amount" required class="input" placeholder="0.00">
                     </div>
 
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">تاريخ الصرف <span style="color:red;">*</span></label>
-                        <input type="date" name="expense_date" required value="{{ date('Y-m-d') }}" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
+                    <div class="field span-2">
+                        <label class="field-label">تاريخ الصرف <span class="req">*</span></label>
+                        <input type="date" name="expense_date" required value="{{ date('Y-m-d') }}" class="input">
                     </div>
 
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">ملاحظات إضافية</label>
-                        <textarea name="notes" rows="3" placeholder="أدخل أي التفاصيل أو تفاصيل القراءة الخاصة بالعداد..." style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);"></textarea>
+                    <div class="field span-2">
+                        <label class="field-label">ملاحظات إضافية</label>
+                        <textarea name="notes" rows="3" class="textarea" placeholder="أدخل أي التفاصيل أو تفاصيل القراءة الخاصة بالعداد..."></textarea>
                     </div>
-
-                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px;">
-                        <button type="button" @click="addOpen = false" class="btn btn--ghost">إلغاء</button>
-                        <button type="submit" class="btn btn--primary">حفظ المصروف</button>
-                    </div>
+                </div>
+                <div class="modal-foot">
+                    <button type="button" @click="addOpen = false" class="btn btn--ghost">إلغاء</button>
+                    <button type="submit" class="btn btn--primary">حفظ المصروف</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Modal Edit Expense -->
-    <div x-show="editOpen" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px;" x-cloak>
-        <div @click.away="editOpen = false" style="background: var(--bg-card, #fff); color: var(--text-color); width: 100%; max-width: 540px; border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border-color, #eee);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color, #eee); padding-bottom: 12px;">
-                <h3 style="font-size: 1.2rem; font-weight: 700; margin: 0;">تعديل بيانات المصروف</h3>
-                <button @click="editOpen = false" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-muted);">&times;</button>
-            </div>
-
+    <div id="modal-edit" class="modal-overlay is-active" x-show="editOpen" x-cloak @click.self="editOpen = false"
+        x-transition.opacity.duration.200ms>
+        <div class="modal-content modal-md">
+            <x-modal-head-component title="تعديل بيانات المصروف" />
             <form :action="'/expenses/' + editData.id" method="POST">
                 @csrf
                 @method('PUT')
-                <div style="display: flex; flex-direction: column; gap: 16px;">
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">عنوان المصروف</label>
-                        <input type="text" name="title" x-model="editData.title" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
+                <div class="modal-body modal-form-grid">
+                    <div class="field span-2">
+                        <label class="field-label">عنوان المصروف <span class="req">*</span></label>
+                        <input type="text" name="title" x-model="editData.title" required class="input">
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                        <div>
-                            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">نوع / فئة المصروف</label>
-                            <select name="category" x-model="editData.category" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
-                                <option value="electricity">⚡ كهرباء</option>
-                                <option value="water">💧 مياه</option>
-                                <option value="gas">🔥 غاز</option>
-                                <option value="rent">🏢 إيجار</option>
-                                <option value="maintenance">🛠️ صيانة</option>
-                                <option value="supplies">📦 مستلزمات وتشغيل</option>
-                                <option value="salaries">💼 رواتب وأجور</option>
-                                <option value="other">📌 أخرى</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">المبلغ (ج.م)</label>
-                            <input type="number" step="0.01" min="0.01" name="amount" x-model="editData.amount" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
-                        </div>
+                    <div class="field">
+                        <label class="field-label">نوع / فئة المصروف <span class="req">*</span></label>
+                        <select name="category" x-model="editData.category" required class="select">
+                            <option value="electricity">⚡ كهرباء</option>
+                            <option value="water">💧 مياه</option>
+                            <option value="gas">🔥 غاز</option>
+                            <option value="rent">🏢 إيجار</option>
+                            <option value="maintenance">🛠️ صيانة</option>
+                            <option value="supplies">📦 مستلزمات وتشغيل</option>
+                            <option value="salaries">💼 رواتب وأجور</option>
+                            <option value="other">📌 أخرى</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="field-label">المبلغ (ج.م) <span class="req">*</span></label>
+                        <input type="number" step="0.01" min="0.01" name="amount" x-model="editData.amount" required class="input">
                     </div>
 
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">تاريخ الصرف</label>
-                        <input type="date" name="expense_date" x-model="editData.expense_date" required style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);">
+                    <div class="field span-2">
+                        <label class="field-label">تاريخ الصرف <span class="req">*</span></label>
+                        <input type="date" name="expense_date" x-model="editData.expense_date" required class="input">
                     </div>
 
-                    <div>
-                        <label style="display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px;">ملاحظات إضافية</label>
-                        <textarea name="notes" x-model="editData.notes" rows="3" style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-color, #ccc); background: var(--bg-surface-1, #fff); color: var(--text-color);"></textarea>
+                    <div class="field span-2">
+                        <label class="field-label">ملاحظات إضافية</label>
+                        <textarea name="notes" x-model="editData.notes" rows="3" class="textarea"></textarea>
                     </div>
-
-                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px;">
-                        <button type="button" @click="editOpen = false" class="btn btn--ghost">إلغاء</button>
-                        <button type="submit" class="btn btn--primary">حفظ التغييرات</button>
-                    </div>
+                </div>
+                <div class="modal-foot">
+                    <button type="button" @click="editOpen = false" class="btn btn--ghost">إلغاء</button>
+                    <button type="submit" class="btn btn--primary">حفظ التغييرات</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Modal Delete Expense -->
-    <div x-show="deleteOpen" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; display: flex; align-items: center; justify-content: center; padding: 16px;" x-cloak>
-        <div @click.away="deleteOpen = false" style="background: var(--bg-card, #fff); color: var(--text-color); width: 100%; max-width: 440px; border-radius: 16px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 1px solid var(--border-color, #eee); text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 12px;">⚠️</div>
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">تأكيد حذف المصروف</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">
-                هل أنت تأكد من رغبتك في حذف المصروف <strong x-text="deleteData.title"></strong>؟ لا يمكن التراجع عن هذا الإجراء.
-            </p>
+    <div id="modal-delete" class="modal-overlay is-active" x-show="deleteOpen" x-cloak @click.self="deleteOpen = false"
+        x-transition.opacity.duration.200ms>
+        <div class="modal-content modal-sm">
+            <x-modal-head-component title="تأكيد حذف المصروف" />
             <form :action="'/expenses/' + deleteData.id" method="POST">
                 @csrf
                 @method('DELETE')
-                <div style="display: flex; justify-content: center; gap: 12px;">
-                    <button type="button" @click="deleteOpen = false" class="btn btn--ghost">إلغاء</button>
-                    <button type="submit" class="btn" style="background: #ef4444; color: white;">نعم، تأكيد الحذف</button>
+                <div class="modal-body modal-form-stack">
+                    <div style="text-align: center; padding: 10px 0;">
+                        <div style="background: var(--danger-soft); color: var(--danger); width: 64px; height: 64px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <h4 style="margin: 0 0 8px; color: var(--t-base); font-size: 16px; font-weight: 700;">هل أنت متأكد من حذف المصروف؟</h4>
+                        <p style="margin: 0; color: var(--t-light); font-size: 14px; line-height: 1.5;">
+                            هل أنت متأكد من رغبتك في حذف المصروف <strong style="color: var(--t-base);" x-text="deleteData.title"></strong>؟ لا يمكن التراجع عن هذا الإجراء.
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-foot">
+                    <button type="button" class="btn btn--ghost" @click="deleteOpen = false;">إلغاء</button>
+                    <button type="submit" class="btn btn--danger">تأكيد الحذف</button>
                 </div>
             </form>
         </div>

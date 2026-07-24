@@ -25,6 +25,10 @@ class MenuController extends Controller
             ->orderBy('display_order')
             ->get();
 
-        return view('menu', compact('sections'));
+        return response()->json([
+            'success' => true,
+            'data' => $sections,
+            'message' => 'Operation successful'
+        ]);
     }
 }

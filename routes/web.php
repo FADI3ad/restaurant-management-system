@@ -22,22 +22,56 @@ Route::middleware(['auth'])->group(function () {
         return view('home');
     })->name('home');
 
-    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/menu', function () {
+        return view('menu');
+    })->name('menu.index');
 
-    Route::resource('users', UserController::class);
-    Route::resource('expenses', ExpenseController::class);
-    Route::resource('offers', OfferController::class);
-    Route::resource('sections', SectionController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('subcategories', SubcategoryController::class);
-    Route::resource('items', ItemController::class);
-    Route::resource('tables', TableController::class);
-    Route::resource('reservations', ReservationController::class);
-    Route::get('/cashier', [CashierController::class, 'index'])->name('cashier.index');
-    Route::post('/cashier/orders', [CashierController::class, 'store'])->name('cashier.store');
+    Route::get('/orders', function () {
+        return view('orders');
+    })->name('orders.index');
 
-    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::get('/cashier', function () {
+        return view('cashier');
+    })->name('cashier.index');
+
+    Route::get('/settings', function () {
+        return view('settings.index');
+    })->name('settings.index');
+
+    Route::get('/users', function () {
+        return view('user');
+    })->name('users.index');
+
+    Route::get('/expenses', function () {
+        return view('expenses');
+    })->name('expenses.index');
+
+    Route::get('/offers', function () {
+        return view('offers');
+    })->name('offers.index');
+
+    Route::get('/sections', function () {
+        return view('section');
+    })->name('sections.index');
+
+    Route::get('/categories', function () {
+        return view('category');
+    })->name('categories.index');
+
+    Route::get('/subcategories', function () {
+        return view('subcategory');
+    })->name('subcategories.index');
+
+    Route::get('/items', function () {
+        return view('item');
+    })->name('items.index');
+
+    Route::get('/tables', function () {
+        return view('table');
+    })->name('tables.index');
+
+    Route::get('/reservations', function () {
+        return view('reservation');
+    })->name('reservations.index');
 });
 

@@ -13,7 +13,6 @@ class CashierController extends Controller
 {
     public function index()
     {
-        // جلب كل الـ sections مع البنية الكاملة للمينيو
         $sections = Section::where('status', true)
             ->with(['categories' => function ($cQuery) {
                 $cQuery->where('status', true)
@@ -31,12 +30,18 @@ class CashierController extends Controller
             ->orderBy('display_order')
             ->get(['id', 'name']);
 
-        // قائمة مسطحة بكل الـ items للبحث السريع في Alpine.js
         $allItems = Item::where('status', true)
             ->select('id', 'name', 'price', 'description', 'subcategory_id')
             ->get();
 
-        return view('cashier', compact('sections', 'allItems'));
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'sections' => $sections,
+                'allItems' => $allItems,
+            ],
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function store(Request $request)
@@ -57,7 +62,6 @@ class CashierController extends Controller
             $paymentMethod = $request->payment_method;
             $phone         = $request->customer_phone;
 
-            // احسب الـ subtotal
             $itemIds    = collect($cart)->pluck('id');
             $dbItems    = Item::whereIn('id', $itemIds)->get()->keyBy('id');
             $subtotal   = 0;
@@ -70,7 +74,6 @@ class CashierController extends Controller
             $tax         = round($subtotal * 0.15, 2);
             $totalAmount = $subtotal + $tax - $discount;
 
-            // إنشاء الأوردر
             $order = Order::create([
                 'number'         => Order::generateNumber(),
                 'customer_phone' => $phone,
@@ -83,7 +86,6 @@ class CashierController extends Controller
                 'total_amount'   => $totalAmount,
             ]);
 
-            // إنشاء الـ order items
             foreach ($cart as $cartItem) {
                 $item     = $dbItems[$cartItem['id']];
                 $qty      = (int) $cartItem['qty'];
@@ -102,16 +104,17 @@ class CashierController extends Controller
 
             return response()->json([
                 'success'      => true,
-                'order_number' => $order->number,
-                'total'        => $order->total_amount,
-            ]);
+                'data' => [
+                    'order_number' => $order->number,
+                    'total'        => $order->total_amount,
+                    'order'        => $order->load('items.item'),
+                ],
+                'message' => 'تم حفظ الطلب بنجاح'
+            ], 201);
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return response()->json([
-                'success' => false,
-                'message' => 'حدث خطأ أثناء حفظ الطلب: ' . $e->getMessage(),
-            ], 500);
+            throw $e;
         }
     }
 }

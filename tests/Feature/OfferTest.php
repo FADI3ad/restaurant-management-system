@@ -66,15 +66,23 @@ class OfferTest extends TestCase
 
     public function test_guest_cannot_access_offers()
     {
-        $response = $this->get(route('offers.index'));
-        $response->assertRedirect('/login');
+        $response = $this->getJson(route('offers.index'));
+        $response->assertStatus(401);
     }
 
     public function test_admin_can_access_offers()
     {
-        $response = $this->actingAs($this->user)->get(route('offers.index'));
+        $response = $this->actingAs($this->user, 'sanctum')->getJson(route('offers.index'));
         $response->assertStatus(200);
-        $response->assertViewIs('offers');
+        $response->assertJsonStructure([
+            'success',
+            'data' => [
+                'offers',
+                'items',
+                'stats',
+            ],
+            'message',
+        ]);
     }
 
     public function test_admin_can_create_offer_with_items()
@@ -87,10 +95,13 @@ class OfferTest extends TestCase
             'item_ids' => [$this->item1->id, $this->item2->id],
         ];
 
-        $response = $this->actingAs($this->user)->post(route('offers.store'), $postData);
+        $response = $this->actingAs($this->user, 'sanctum')->postJson(route('offers.store'), $postData);
 
-        $response->assertRedirect(route('offers.index'));
-        $response->assertSessionHas('success', 'تم إضافة العرض بنجاح.');
+        $response->assertStatus(201);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'تم إضافة العرض بنجاح',
+        ]);
 
         $this->assertDatabaseHas('offers', [
             'name' => 'Weekend Special',
@@ -121,10 +132,13 @@ class OfferTest extends TestCase
             'item_ids' => [$this->item2->id],
         ];
 
-        $response = $this->actingAs($this->user)->put(route('offers.update', $offer), $putData);
+        $response = $this->actingAs($this->user, 'sanctum')->putJson(route('offers.update', $offer), $putData);
 
-        $response->assertRedirect(route('offers.index'));
-        $response->assertSessionHas('success', 'تم تعديل العرض بنجاح.');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'تم تعديل العرض بنجاح',
+        ]);
 
         $this->assertDatabaseHas('offers', [
             'id' => $offer->id,
@@ -149,10 +163,13 @@ class OfferTest extends TestCase
         ]);
         $offer->items()->sync([$this->item1->id]);
 
-        $response = $this->actingAs($this->user)->delete(route('offers.destroy', $offer));
+        $response = $this->actingAs($this->user, 'sanctum')->deleteJson(route('offers.destroy', $offer));
 
-        $response->assertRedirect(route('offers.index'));
-        $response->assertSessionHas('success', 'تم حذف العرض بنجاح.');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'success' => true,
+            'message' => 'تم حذف العرض بنجاح',
+        ]);
 
         $this->assertDatabaseMissing('offers', [
             'id' => $offer->id,

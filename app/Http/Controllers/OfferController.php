@@ -10,13 +10,8 @@ class OfferController extends Controller
 {
     public function index()
     {
-        $offers = Offer::with('items')
-            ->orderBy('id', 'desc')
-            ->paginate(15);
-
-        $items = Item::where('status', true)
-            ->orderBy('name')
-            ->get();
+        $offers = Offer::with('items')->orderBy('id', 'desc')->get();
+        $items = Item::where('status', true)->orderBy('name')->get();
 
         // Calculate KPI Stats
         $stats = [
@@ -25,7 +20,15 @@ class OfferController extends Controller
             'average_discount' => Offer::avg('discount_price') ?: 0,
         ];
 
-        return view('offers', compact('offers', 'items', 'stats'));
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'offers' => $offers,
+                'items' => $items,
+                'stats' => $stats,
+            ],
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function store(Request $request)
@@ -50,7 +53,20 @@ class OfferController extends Controller
 
         $offer->items()->sync($validated['item_ids']);
 
-        return redirect()->route('offers.index')->with('success', 'تم إضافة العرض بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => $offer->load('items'),
+            'message' => 'تم إضافة العرض بنجاح'
+        ], 201);
+    }
+
+    public function show(Offer $offer)
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $offer->load('items'),
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function update(Request $request, Offer $offer)
@@ -75,13 +91,21 @@ class OfferController extends Controller
 
         $offer->items()->sync($validated['item_ids']);
 
-        return redirect()->route('offers.index')->with('success', 'تم تعديل العرض بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => $offer->load('items'),
+            'message' => 'تم تعديل العرض بنجاح'
+        ]);
     }
 
     public function destroy(Offer $offer)
     {
         $offer->delete();
 
-        return redirect()->route('offers.index')->with('success', 'تم حذف العرض بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => null,
+            'message' => 'تم حذف العرض بنجاح'
+        ]);
     }
 }

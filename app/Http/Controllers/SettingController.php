@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -21,7 +20,11 @@ class SettingController extends Controller
             'font_family' => Setting::get('font_family', 'Cairo'),
         ];
 
-        return view('settings.index', compact('settings'));
+        return response()->json([
+            'success' => true,
+            'data' => $settings,
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function update(Request $request)
@@ -41,13 +44,14 @@ class SettingController extends Controller
         Setting::set('restaurant_tagline', $request->input('restaurant_tagline'));
         Setting::set('primary_color', $request->input('primary_color'));
         Setting::set('primary_dark_color', $request->input('primary_dark_color'));
-        if ($request->filled('bg_sidebar_light')) {
+        
+        if ($request->has('bg_sidebar_light')) {
             Setting::set('bg_sidebar_light', $request->input('bg_sidebar_light'));
         }
-        if ($request->filled('bg_sidebar_dark')) {
+        if ($request->has('bg_sidebar_dark')) {
             Setting::set('bg_sidebar_dark', $request->input('bg_sidebar_dark'));
         }
-        if ($request->filled('font_family')) {
+        if ($request->has('font_family')) {
             Setting::set('font_family', $request->input('font_family'));
         }
 
@@ -56,6 +60,21 @@ class SettingController extends Controller
             Setting::set('restaurant_logo', '/storage/' . $path);
         }
 
-        return redirect()->back()->with('success', 'تم حفظ الإعدادات وستايل الموقع بنجاح!');
+        $settings = [
+            'restaurant_name' => Setting::get('restaurant_name'),
+            'restaurant_tagline' => Setting::get('restaurant_tagline'),
+            'restaurant_logo' => Setting::get('restaurant_logo'),
+            'primary_color' => Setting::get('primary_color'),
+            'primary_dark_color' => Setting::get('primary_dark_color'),
+            'bg_sidebar_light' => Setting::get('bg_sidebar_light'),
+            'bg_sidebar_dark' => Setting::get('bg_sidebar_dark'),
+            'font_family' => Setting::get('font_family'),
+        ];
+
+        return response()->json([
+            'success' => true,
+            'data' => $settings,
+            'message' => 'تم حفظ الإعدادات بنجاح'
+        ]);
     }
 }

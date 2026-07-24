@@ -38,8 +38,7 @@ class ExpenseController extends Controller
         }
 
         $filteredTotal = (clone $query)->sum('amount');
-
-        $expenses = $query->orderBy('expense_date', 'desc')->orderBy('id', 'desc')->paginate(15)->withQueryString();
+        $expenses = $query->orderBy('expense_date', 'desc')->orderBy('id', 'desc')->get();
 
         // Calculate KPI Summaries
         $stats = [
@@ -52,7 +51,14 @@ class ExpenseController extends Controller
             'filtered_total' => $filteredTotal,
         ];
 
-        return view('expenses', compact('expenses', 'stats', 'period', 'category', 'startDate', 'endDate'));
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'expenses' => $expenses,
+                'stats' => $stats,
+            ],
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function store(Request $request)
@@ -67,9 +73,22 @@ class ExpenseController extends Controller
 
         $validated['user_id'] = auth()->id();
 
-        Expense::create($validated);
+        $expense = Expense::create($validated);
 
-        return redirect()->route('expenses.index')->with('success', 'تم إضافة المصروف بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => $expense,
+            'message' => 'تم إضافة المصروف بنجاح'
+        ], 201);
+    }
+
+    public function show(Expense $expense)
+    {
+        return response()->json([
+            'success' => true,
+            'data' => $expense->load('user'),
+            'message' => 'Operation successful'
+        ]);
     }
 
     public function update(Request $request, Expense $expense)
@@ -84,13 +103,21 @@ class ExpenseController extends Controller
 
         $expense->update($validated);
 
-        return redirect()->route('expenses.index')->with('success', 'تم تعديل المصروف بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => $expense->fresh(),
+            'message' => 'تم تعديل المصروف بنجاح'
+        ]);
     }
 
     public function destroy(Expense $expense)
     {
         $expense->delete();
 
-        return redirect()->route('expenses.index')->with('success', 'تم حذف المصروف بنجاح.');
+        return response()->json([
+            'success' => true,
+            'data' => null,
+            'message' => 'تم حذف المصروف بنجاح'
+        ]);
     }
 }
